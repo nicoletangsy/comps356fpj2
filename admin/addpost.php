@@ -120,7 +120,7 @@
 							<fieldset>
 							<legend>Post Details</legend>
 					    <form onsubmit="return up()" action="InCheck.php" method="POST" enctype="multipart/form-data">
-                        <label for="Id"><span>Id <span class="required">*</span></span><input type="text" class="input-field" name="Id" value="" /></label>
+                        <label for="Type"><span>Type <span class="required">*</span></span><input type="text" class="input-field" name="Id" value="" /></label>
                         <label for="Title"><span>Title <span class="required">*</span></span><textarea name="Title" class="textarea-field "></textarea></label>
 						<label for="Content"><span>Content <span class="required">*</span></span><textarea  name="Content" class="textarea-field aaa" style="height=250px"></textarea></label>
 						<label for="Introduction"><span>Introduction <span class="required">*</span></span><textarea name="Introduction" class="textarea-field"></textarea></label>
