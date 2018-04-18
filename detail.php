@@ -16,8 +16,8 @@ session_start();
     $comment->execute();
     $posts = $postCom->fetchAll();
     $comments = $comment->fetchAll();
-    $result = $sth->fetchAll();
-    $myDateTime = new DateTime($result[0]['DateTime'], new DateTimeZone('GMT'));
+    $result = $sth->fetch();
+    $myDateTime = new DateTime($result['DateTime'], new DateTimeZone('GMT'));
 	$myDateTime->setTimezone(new DateTimeZone('Asia/Hong_Kong')); 
 ?>
 <!DOCTYPE html>
@@ -125,10 +125,10 @@ session_start();
 	<div id="page" class="container">
 		<div id="content">
 			<div class="title">
-				<h2><?=$result[0]['Title']?></h2>
-				<span class="byline"><?=$myDateTime->format('Y-m-d H:i');?></span> <i class="am-icon-thumbs-up" id="postLike" onclick="like(<?=$_GET['id']?>,'Post')">  <?=$result["0"]["likeNo"]?></i></p></div>
-			<p><img src="data:image/png;base64,<?=base64_encode( $result[0]['Image'] )?>" alt="" class="image image-full" /> </p>
-			<p><?=$result[0]['Content']?></p>
+				<h2><?=$result['Title']?></h2>
+				<span class="byline"><?=$myDateTime->format('Y-m-d H:i');?></span> <i class="am-icon-thumbs-up" id="postLike" onclick="like(<?=$_GET['id']?>,'Post')">  <?=$result["likeNo"]?></i></p></div>
+			<p><img src="<?=$result['Image']?>" alt="" class="image image-full" /> </p>
+			<p><?=$result['Content']?></p>
 			<p style="color:black;border-bottom:1px solid rgba(34,36,38,.15);">Comment</p>
 			<article class="am-comment">
   
