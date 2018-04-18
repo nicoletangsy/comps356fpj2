@@ -12,5 +12,6 @@ CREATE TABLE members (
     email VARCHAR(65) NOT NULL,
 	description VARCHAR(150) DEFAULT "", 
 	avatar_base64 LONGTEXT, 
-    PRIMARY KEY (id)
+    PRIMARY KEY (id), 
+	UNIQUE (username)
 );

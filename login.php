@@ -16,7 +16,7 @@
 			} else if ($password == $result['password']){
 				header("Location: index.html");
 				session_start();
-				$_SESSION['username'] = $row['uesrname'];
+				$_SESSION['username'] = $result['uesrname'];
 			}
 		}
 	  } catch(PDOException $e)

@@ -2,7 +2,7 @@
   require_once ("database.php");
   //$conn = connectDB();
   
-  if (isset($_POST['username'])&&isset($_POST['password'])&&isset($_POST['cpassword'])&&isset($_POST['fname'])&&isset($_POST['lname'])&&isset($_POST['email'])) 
+  if (isset($_POST['username'])&&isset($_POST['password'])&&isset($_POST['cpassword'])&&isset($_POST['fname'])&&isset($_POST['lname'])&&isset($_POST['email'])&&isset($_POST['question'])&&isset($_POST['answer'])) 
   { 
 	$username = $_POST['username'];
 	$password = $_POST['password'];
@@ -10,7 +10,9 @@
 	$fname = $_POST['fname'];
 	$lname = $_POST['lname'];
 	$email = $_POST['email'];
-	
+	$question = $_POST['question'];
+	$answer = $_POST['answer'];
+
 	//validation
 	if(strlen($username) < 4 || strlen($username) > 16) {
 		die("Your username should be between 4 and 16 characters! <br><br>Return to <a href=\"register.html\">Register</a>.");
@@ -35,7 +37,7 @@
 		} 
 
 		//insert new member into members
-		$sql = "insert into members (username, password, firstname, lastname, email) values ('".$username."', '".$password."', '".$fname."', '".$lname."', '".$email."')";
+		$sql = "insert into members (username, password, firstname, lastname, email, question, answer) values ('".$username."', '".$password."', '".$fname."', '".$lname."', '".$email."', '".$question."', '".$answer."')";
 		$conn->exec($sql);
 		echo "New record created successfully";
 	}
