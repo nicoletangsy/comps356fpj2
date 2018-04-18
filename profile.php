@@ -8,11 +8,7 @@
 	$religious = $_POST['religious'];
 	$selfintro = $_POST['selfintro'];
 	try{
-
-	$sql = "INSERT INTO profile (url,gender,month,religious,selfintro)
-	VALUES ('".$url."','".$gender."','".$bday."','".$religious."','".$selfintro."')";
-
-
+	$sql = "insert into profile values ('".$url."','".$gender."','".$bday."','".$religious."','".$selfintro."')";
 	$conn->exec($sql);
     echo "New record created successfully";
     header("Refresh:1,url=profile.html");
