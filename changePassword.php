@@ -12,7 +12,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
   <meta name="author" content="">
-  <title>Cellfish &mdash; Profile</title>
+  <title>Cellfish &mdash; Change Password</title>
   <!-- Bootstrap core CSS-->
   <link href="admin/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <!-- Custom fonts for this template-->
@@ -100,51 +100,28 @@
 			echo "<br><br><br><br>";
 			?>
 			<div class="card card-register mx-auto mt-5">
-      <div class="card-header"><?php echo "User: ".$result['username']; ?></div>
+      <div class="card-header">Change Password</div>
       <div class="card-body">
-        <form action="editProfile.php">
-		<div class="text-center">
-            <img src="<?php if (($result['avatar_base64']=='') || ($result['avatar_base64']=='data:image/;base64,')) { echo "user.png";} else
-				{ echo $result['avatar_base64'];}?>" height=240 weight=24></img><br>
-
+        <form action="#" method="POST" enctype="multipart/form-data">
+		<div class="form-group">
+            <label for="exampleCurrentPassword">Current Password</label>
+            <input class="form-control" id="exampleCurrentPassword" name="currentPassword" type="password">
         </div>
 		<div class="form-group">
-            <label>First name: </label>
-			<label><?php echo $result['firstName']; ?></label>
-        </div>
-		<div class="form-group">
-            <label>Last name: </label>
-			<label><?php echo $result['lastName']; ?></label>
-        </div>
-		<div class="form-group">
-            <label>Gender: </label>
-			<label><?php if ($result['gender']=='M') {echo "Male";} else
-					if ($result['gender']=='F') {echo "Female";} else 
-					if ($result['gender']=='O') {echo "Other";}else 
-						{echo "Not Set";}
-			?></label>
-        </div>
-		<div class="form-group">
-            <label>Birthday: </label>
-			<label><?php if (!($result['birthday']=='')) {echo $result['birthday'];} else
-				{echo "Not Set";}
-			?></label>
-        </div>
-		<div class="form-group">
-            <label>Email Address: </label>
-			<label><?php if (!($result['email']=='')) {echo $result['email'];} else
-				{echo "Not Set";}
-			?></label>
-        </div>
-		<div class="form-group">
-            <label>Self-Introduction: </label>
-			<label><?php if (!($result['description']=='')) {echo $result['description'];} else
-				{echo "This user does not have any introduction.";}
-			?></label>
-        </div>
-          <input class="btn btn-primary btn-block" type="submit" value = "Edit Profile">
+            <div class="form-row">
+              <div class="col-md-6">
+                <label for="exampleInputPassword1">New Password</label>
+                <input class="form-control" id="exampleInputPassword1" name="password" type="password" placeholder="8-16 characters contains only a-z, A-Z, 0-9">
+              </div>
+              <div class="col-md-6">
+                <label for="exampleConfirmPassword">Confirm password</label>
+                <input class="form-control" id="exampleConfirmPassword" name="cpassword" type="password" placeholder="Confirm password">
+              </div>
+            </div>
+          </div>
+          <input class="btn btn-primary btn-block" type="submit" value = "Comfirm Change Password">
         </form>
-      </div>
+		</div>
 		<?php }
 	  } catch(PDOException $e)
 		{
@@ -157,7 +134,30 @@
 	<br><br><br><p style="margin: auto;width: 50%;padding: 10px;"><font color="FFFFFF">You must <a href="login.html">Login</a> first!</font></p><br><br><br><br><br><br>
 	<?php
   }
-
+  if (isset($_POST['currentPassword'])&&isset($_POST['password'])&&isset($_POST['cpassword'])) {
+	  try {
+		$current = $_POST['currentPassword'];
+		$password = $_POST['password'];
+		$cpassword = $_POST['cpassword'];
+		if(strlen($password) < 8 || strlen($password) > 16) {
+			echo "Your password should be between 8 and 16 characters!";
+		}
+		if ($current==$result['password']) {
+			if ($password == $cpassword) {
+				$sql = "update members set password = '".$password."' where username ='".$username."'";
+				$conn->exec($sql);
+				echo "Password changed successfully!";
+			} else{
+				die("The new Passwords do not match, Please retry!   <br><br>Return to the <a href=\"changePassword.php\">Previous</a> Page.");
+			}
+		} else {
+			die("Your current password is not correct, Please retry!   <br><br>Return to the <a href=\"changePassword.php\">Previous</a> Page.");
+		}
+	  } catch(PDOException $e)
+    {
+      echo $sql . "<br>" . $e->getMessage();
+    }
+  }
 ?>
     
     </div>

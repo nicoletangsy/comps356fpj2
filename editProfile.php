@@ -12,7 +12,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
   <meta name="author" content="">
-  <title>Cellfish &mdash; Profile</title>
+  <title>Cellfish &mdash; Edit Profile</title>
   <!-- Bootstrap core CSS-->
   <link href="admin/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <!-- Custom fonts for this template-->
@@ -102,49 +102,58 @@
 			<div class="card card-register mx-auto mt-5">
       <div class="card-header"><?php echo "User: ".$result['username']; ?></div>
       <div class="card-body">
-        <form action="editProfile.php">
+        <form action="saveProfile.php" method="POST" enctype="multipart/form-data">
 		<div class="text-center">
+		<div class="form-group">
+            <label for="exampleUsername">Profile Picture:</label><br>
             <img src="<?php if (($result['avatar_base64']=='') || ($result['avatar_base64']=='data:image/;base64,')) { echo "user.png";} else
-				{ echo $result['avatar_base64'];}?>" height=240 weight=24></img><br>
-
+				{ echo $result['avatar_base64'];}?>" height=240 weight=24></img>
+				<input class="form-control" name="image" type="file">
         </div>
 		<div class="form-group">
-            <label>First name: </label>
-			<label><?php echo $result['firstName']; ?></label>
-        </div>
-		<div class="form-group">
-            <label>Last name: </label>
-			<label><?php echo $result['lastName']; ?></label>
-        </div>
-		<div class="form-group">
-            <label>Gender: </label>
-			<label><?php if ($result['gender']=='M') {echo "Male";} else
-					if ($result['gender']=='F') {echo "Female";} else 
-					if ($result['gender']=='O') {echo "Other";}else 
-						{echo "Not Set";}
-			?></label>
-        </div>
-		<div class="form-group">
-            <label>Birthday: </label>
-			<label><?php if (!($result['birthday']=='')) {echo $result['birthday'];} else
+            <label for="fisrtname">First Name</label>
+            <input id="fisrtname" class="form-control" name="firstname" placeholder="<?php if (!($result['firstName']=='')) {echo $result['firstName'];} else
 				{echo "Not Set";}
-			?></label>
+			?>" value="<?php if (!($result['firstName']=='')) {echo $result['firstName'];} else
+				{echo "";}
+			?>">
         </div>
 		<div class="form-group">
-            <label>Email Address: </label>
-			<label><?php if (!($result['email']=='')) {echo $result['email'];} else
+            <label for="lastname">Last Name</label>
+            <input id="lastname" class="form-control" name="lastname" placeholder="<?php if (!($result['lastName']=='')) {echo $result['lastName'];} else
 				{echo "Not Set";}
-			?></label>
+			?>" value="<?php if (!($result['lastName']=='')) {echo $result['lastName'];} else
+				{echo "";}
+			?>">
         </div>
 		<div class="form-group">
-            <label>Self-Introduction: </label>
-			<label><?php if (!($result['description']=='')) {echo $result['description'];} else
-				{echo "This user does not have any introduction.";}
-			?></label>
+            <label for="exampleUsername">Gender</label>
+            <input type="radio" name="gender" value="M" <?php if ($result['gender']=="M")echo "checked"; ?>> Male
+			<input type="radio" name="gender" value="F" <?php if ($result['gender']=="F")echo "checked"; ?>> Female
+			<input type="radio" name="gender" value="O" <?php if ($result['gender']=="O")echo "checked"; ?>> Other
         </div>
-          <input class="btn btn-primary btn-block" type="submit" value = "Edit Profile">
+		<div class="form-group">
+            <label for="birthday">Birthday</label>
+			<input id="birthday" type="date" name="bday" value="<?php if (!($result['birthday']=='')) {echo $result['birthday'];} else
+				{echo "";}
+			?>">
+        </div>
+		<div class="form-group">
+            <label for="exampleUsername">Email Address: </label>
+            <input class="form-control" id="exampleInputEmail1" type="email" name="email" aria-describedby="emailHelp" placeholder="<?php {echo $result['email'];}?>" value="<?php {echo $result['email'];}?>">
+        </div>
+		<div class="form-group">
+            <label for="intro">Self-Introduction: </label>
+			<textarea class="form-control" id="intro" name="intro" placeholder="Not more than 150 characters"><?php {echo $result['description'];}?></textarea>
+        </div>
+          <input class="btn btn-primary btn-block" type="submit" value = "Save Profile">
         </form>
-      </div>
+		</div>
+		<form action="changePassword.php">
+		<div class="form-group">
+			<input class="btn btn-primary btn-block" type="submit" value = "Change Password">
+		</div>
+		</form>
 		<?php }
 	  } catch(PDOException $e)
 		{

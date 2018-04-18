@@ -14,7 +14,7 @@
 			if($result['username'] == null){
 				echo "<br>This Username \"".$username."\" does not exist! 	<br>Please <a href=register.html>Register</a>.";
 			} else if ($password == $result['password']){
-				header("Location: index.html");
+				header("Location: index.php");
 				session_start();
 				$_SESSION['username'] = $result['uesrname'];
 			}
