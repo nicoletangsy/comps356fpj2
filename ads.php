@@ -1,4 +1,8 @@
 <?php
+require_once("database.php");
+session_start();
+?>
+<?php
 	require_once('database.php');
 	$id = $_GET["id"];
 	$sth = $conn->prepare("SELECT Title,Content,Image,DateTime,likeNo FROM Post where Id=$id ORDER BY likeNo desc");

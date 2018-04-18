@@ -14,9 +14,11 @@
 			if($result['username'] == null){
 				echo "<br>This Username \"".$username."\" does not exist! 	<br>Please <a href=register.html>Register</a>.";
 			} else if ($password == $result['password']){
-				header("Location: index.php");
 				session_start();
-				$_SESSION['username'] = $result['uesrname'];
+				$_SESSION['username'] = $result['username'];
+				header("Location: index.php");
+			} else {
+				echo "Incorrect Password! <br>Go to the  <a href=login.html>Previous</a> Page.";
 			}
 		}
 	  } catch(PDOException $e)

@@ -1,6 +1,6 @@
 <?php
+require_once("database.php");
 session_start();
-$_SESSION['username'] = "nict";
 ?>
 
 <!DOCTYPE html>
