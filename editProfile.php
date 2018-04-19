@@ -119,7 +119,7 @@
       <div class="card-header"><?php echo "User: ".$result['username']; ?></div>
       <div class="card-body">
         <form action="saveProfile.php" method="POST" enctype="multipart/form-data">
-		<div class="text-center">
+		
 		<div class="form-group">
             <label for="exampleUsername">Profile Picture:</label><br>
             <img src="<?php if (($result['avatar_base64']=='') || ($result['avatar_base64']=='data:image/;base64,')) { echo "user.png";} else
@@ -164,12 +164,12 @@
         </div>
           <input class="btn btn-primary btn-block" type="submit" value = "Save Profile">
         </form>
-		</div>
+		
 		<form action="changePassword.php">
 		<div class="form-group">
 			<input class="btn btn-primary btn-block" type="submit" value = "Change Password">
 		</div>
-		</form>
+		</form></div>
 		<?php }
 	  } catch(PDOException $e)
 		{

@@ -131,7 +131,7 @@
 								</div>
 							</div>
 							<div class="fh5co-h-row-2 fh5co-reversed to-animate-2">
-								<div class="fh5co-v-col-2 fh5co-bg-img" style="background-image: url(data:image/jpeg;base64,<?=base64_encode( $result[2]['Image'] )?>)"></div>
+								<div class="fh5co-v-col-2 fh5co-bg-img" style="background-image: url(<?=$result[2]['Image']?>)"></div>
 								<div class="fh5co-v-col-2 fh5co-text arrow-right">
 									<h2><?=$result[2]['Title'] ?></h2>
 									<p><?=$result[2]['Introduction'] ?></p>
@@ -141,14 +141,7 @@
 						</div>
 
 						<div class="fh5co-v-half">
-							<div class="fh5co-h-row-2 fh5co-reversed to-animate-2">
-								<div class="fh5co-v-col-2 fh5co-bg-img" style="background-image: url(<?=$result[3]['Image']?>></div>
-								<div class="fh5co-v-col-2 fh5co-text arrow-right">
-									<h2><?=$result[3]['Title'] ?></h2>
-									<p><?=$result[3]['Introduction'] ?></p>
-									<a href="detail.php?id=<?=$result[3]['Id']?>"><input type="submit" class="am-btn am-btn-secondary" value="More Details"></a>
-								</div>
-							</div>
+
 							<div class="fh5co-h-row-2 to-animate-2">
 								<div class="fh5co-v-col-2 fh5co-bg-img" style="background-image: url(<?=$result[4]['Image']?>)"></div>
 								<div class="fh5co-v-col-2 fh5co-text arrow-left">

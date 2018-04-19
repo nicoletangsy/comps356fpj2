@@ -164,10 +164,10 @@
 				$conn->exec($sql);
 				echo "Password changed successfully!";
 			} else{
-				die("The new Passwords do not match, Please retry!   <br><br>Return to the <a href=\"changePassword.php\">Previous</a> Page.");
+				echo("The new Passwords do not match, Please retry!   <br><br>Return to the <a href=\"changePassword.php\">Previous</a> Page.");
 			}
 		} else {
-			die("Your current password is not correct, Please retry!   <br><br>Return to the <a href=\"changePassword.php\">Previous</a> Page.");
+			echo("Your current password is not correct, Please retry!   <br><br>Return to the <a href=\"changePassword.php\">Previous</a> Page.");
 		}
 	  } catch(PDOException $e)
     {

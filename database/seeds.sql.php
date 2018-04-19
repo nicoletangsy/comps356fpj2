@@ -11,8 +11,10 @@ function read_as_dataurl($path)
     return 'data:' . mime_content_type($path) . ';base64,' . $data;
 }
 
+$image1 = read_as_dataurl(__DIR__ . '/assets/image1.jpg');
 $image2 = read_as_dataurl(__DIR__ . '/assets/image2.jpg');
 $image3 = read_as_dataurl(__DIR__ . '/assets/image3.jpg');
+$image4 = read_as_dataurl(__DIR__ . '/assets/image4.jpg');
 $image5 = read_as_dataurl(__DIR__ . '/assets/image5.jpg');
 $image8 = read_as_dataurl(__DIR__ . '/assets/image8.jpg');
 $image9 = read_as_dataurl(__DIR__ . '/assets/image9.jpg');
