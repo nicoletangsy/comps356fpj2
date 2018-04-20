@@ -46,6 +46,7 @@ INSERT INTO `Liked` (`Id`, `LikeIP`, `LikeId`, `Type`) VALUES
 (25, '202.40.157.7', 16, 'Comment');
 
 INSERT INTO members (username, password, email, question, answer) VALUES 
+('admin', 'admin', 'admin@cellfish.com', 'admin', 'admin'), 
 ('user', 'password', '123@abc.com', '1', 'dog'), 
 ('test', 'newpassword', 'abc@123.com', '5', 'no');
 
@@ -80,5 +81,8 @@ INSERT INTO `SubComment` (`Id`, `IP`, `Content`, `DateTime`, `comment_Id`) VALUE
 (11, '202.40.157.7', '43424342', '2017-11-28 08:15:12', 5),
 (14, '123.15.20.110', 'Totally agree!', '2017-11-30 09:09:48', 16),
 (16, '202.125.234.10', 'totally agree!', '2017-12-07 09:48:12', 19);
+
+INSERT INTO board (content, post_user, post_date) VALUES
+('Welcome to Cellfish Discuss Board!\nYou can leave your dailylife experience about Cellfish!', 'admin', '2017-11-23 00:00:00');
 
 ";

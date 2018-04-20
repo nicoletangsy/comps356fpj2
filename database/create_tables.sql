@@ -81,6 +81,28 @@ CREATE TABLE members (
 	UNIQUE (username)
 );
 
+-- create table for holding discuss board's comment
+CREATE TABLE board (
+    id INT UNSIGNED NOT NULL AUTO_INCREMENT, 
+	content LONGTEXT NOT NULL,
+	post_user VARCHAR(20) NOT NULL,
+	post_date VARCHAR(30) NOT NULL, 
+	avatar_base64 LONGTEXT, 
+	PRIMARY KEY (id), 
+	FOREIGN KEY (post_user) references members(username)
+);
+
+-- create table for holding replys in discuss board, reply content with a maximun length of 255 characters
+CREATE TABLE replyboard (
+	id INT UNSIGNED NOT NULL AUTO_INCREMENT, 
+	content TINYTEXT NOT NULL,
+	post_user VARCHAR(20) NOT NULL,
+	post_date VARCHAR(30) NOT NULL, 
+	reply_to INT UNSIGNED NOT NULL,
+	PRIMARY KEY (id), 
+	FOREIGN KEY (post_user) references members(username), 
+	FOREIGN KEY (reply_to) references board(id)
+);
 
 
 
