@@ -94,7 +94,7 @@ session_start();
 				<td>
 					<img src="<?php if (($row['avatar_base64']=='') || ($row['avatar_base64']=='data:image/;base64,')) { echo "user.png";} else
 				{ echo $row['avatar_base64'];}?>" height=120 width=120></img><br>
-					User: <a href="profile.php"><?php echo $row['post_user'];?></a>
+					User: <a href="profile.php?username=<?php echo $row['post_user'];?>"><?php echo $row['post_user'];?></a>
 				</td>
 					<td>
 					<?php 
@@ -125,7 +125,7 @@ session_start();
 				<td>
 					<img src="<?php if (($row2['avatar_base64']=='') || ($row2['avatar_base64']=='data:image/;base64,')) { echo "user.png";} else
 				{ echo $row2['avatar_base64'];}?>" height=120 width=120></img><br>
-					User: <a href="profile.php"><?php echo $row2['post_user'];?></a>
+					User: <a href="profile.php?username=<?php echo $row2['post_user'];?>"><?php echo $row2['post_user'];?></a>
 				</td>
 					<td>
 					<?php 
@@ -146,7 +146,7 @@ session_start();
 						?>
 						<tr>
 						<td></td>
-						<td><a href="profile.php"><?php echo $row3['reply_user'];?></a>'s reply: <?php echo $row3['reply_content'];?><br>
+						<td><a href="profile.php?username=<?php echo $row3['reply_user'];?>"><?php echo $row3['reply_user'];?></a>'s reply: <?php echo $row3['reply_content'];?><br>
 						Replied At: <?php echo $row3['reply_date']?>
 						</td>
 						</tr>

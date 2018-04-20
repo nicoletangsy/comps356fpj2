@@ -68,7 +68,11 @@ session_start();
   <?php
   if (isset($_SESSION['username'])) {
 	  try{
-		$username = $_SESSION['username'];
+		if (isset($_GET['username'])) {
+			$username = $_GET['username'];
+		} else {
+			$username = $_SESSION['username'];
+		}
 		$sql = "select * from members where username = '".$username."'";
 		$stat = $conn->prepare($sql);
 		$stat->execute();
@@ -119,7 +123,8 @@ session_start();
 				{echo "This user does not have any introduction.";}
 			?></label>
         </div>
-          <input class="btn btn-primary btn-block" type="submit" value = "Edit Profile">
+		<?php if (isset($_SESSION['username']) && $_SESSION['username']== $result['username']) {?>
+		<input class="btn btn-primary btn-block" type="submit" value = "Edit Profile"><?php }?>
         </form>
       </div>
 		<?php }
@@ -131,7 +136,7 @@ session_start();
 	
   ?>
     <?php }  else {?>
-	<br><br><br><p style="margin: auto;width: 50%;padding: 10px;"><font color="FFFFFF">You must <a href="login.html">Login</a> first!</font></p><br><br><br><br><br><br>
+	<br><br><br><p style="margin: auto;width: 50%;padding: 10px;"><font color="FFFFFF">You must <a href="login.php">Login</a> first!</font></p><br><br><br><br><br><br>
 	<?php
   }
 
