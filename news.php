@@ -57,7 +57,7 @@
 
 	</head>
 	<body>
-
+		<script src="js/JasonsFunctions.js"></script>
 	<div id="fh5co-container">
 		<div class="js-sticky">
 			<div class="fh5co-main-nav">
@@ -72,14 +72,15 @@
 					<div class="fh5co-menu-2">
 						<a href="news.php" data-nav-section="features">News</a>
 						<a href="games.php" data-nav-section="menu">Game</a>
+						<a href="" data-nav-section="nothing" onclick="popWindow()">Survey</a>
 					</div>
 				</div>
-				
+
 			</div>
 		</div>
 
-		
-		
+
+
 
 
         <div id="fh5co-featured" data-section="features">
@@ -87,7 +88,7 @@
 				<div class="row text-center fh5co-heading row-padded">
 					<div class="col-md-8 col-md-offset-2">
 						<h2 class="heading to-animate">Hot News of Cellfish</h2>
-						
+
 					</div>
 				</div>
 				<div class="row">
@@ -169,8 +170,8 @@
 	    							$postC->execute();
 	    							$posts = $postC->fetchAll();
 									for($i=0;$i<count($posts);$i++){
-										
-									
+
+
 								?>
 								<li>
 									<div class="fh5co-food-desc">
@@ -197,8 +198,8 @@
 	    							$postC->execute();
 	    							$posts = $postC->fetchAll();
 									for($i=0;$i<count($posts);$i++){
-										
-									
+
+
 								?>
 								<li>
 									<div class="fh5co-food-desc">
@@ -225,8 +226,8 @@
 	    							$postC->execute();
 	    							$posts = $postC->fetchAll();
 									for($i=0;$i<count($posts);$i++){
-										
-									
+
+
 								?>
 								<li>
 									<div class="fh5co-food-desc">
@@ -253,8 +254,8 @@
 	    							$postC->execute();
 	    							$posts = $postC->fetchAll();
 									for($i=0;$i<count($posts);$i++){
-										
-									
+
+
 								?>
 								<li>
 									<div class="fh5co-food-desc">
@@ -275,7 +276,7 @@
 				</div>
 			</div>
 
-		
+
 	</div>
 	<div id="fh5co-footer">
 		<div class="container">
@@ -299,10 +300,10 @@
 	</div>
 
 
-	
-	
-	
-	
+
+
+
+
 	<!-- jQuery -->
 	<script src="js/jquery.min.js"></script>
 	<!-- jQuery Easing -->
@@ -329,4 +330,3 @@
 
 	</body>
 </html>
-

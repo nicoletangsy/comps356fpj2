@@ -28,7 +28,7 @@
 	<link rel="shortcut icon" href="favicon.ico">
 
 	<link href='https://fonts.googleapis.com/css?family=Playfair+Display:400,700,400italic,700italic|Merriweather:300,400italic,300italic,400,700italic' rel='stylesheet' type='text/css'>
-	
+
 	<!-- Animate.css -->
 	<link rel="stylesheet" href="css/animate.css">
 	<!-- Icomoon Icon Fonts-->
@@ -55,7 +55,7 @@
 
 	</head>
 	<body>
-
+		<script src="js/JasonsFunctions.js"></script>
 	<div id="fh5co-container">
 		<div class="js-sticky">
 			<div class="fh5co-main-nav">
@@ -70,14 +70,15 @@
 					<div class="fh5co-menu-2">
 						<a href="news.php" data-nav-section="features">News</a>
 						<a href="games.php" data-nav-section="menu">Game</a>
+						<a href="" data-nav-section="nothing" onclick="popWindow()">Survey</a>
 					</div>
 				</div>
-				
+
 			</div>
 		</div>
 
-		
-		
+
+
 
 
 
@@ -96,7 +97,7 @@
             </template>
         </div>
 		</div>
-		
+
 	</div>
 
 	<div id="fh5co-footer">
@@ -121,10 +122,10 @@
 	</div>
 
 
-	
-	
-	
-	
+
+
+
+
 	<!-- jQuery -->
 	<script src="js/jquery.min.js"></script>
 	<!-- jQuery Easing -->
@@ -151,4 +152,3 @@
 
 	</body>
 </html>
-
