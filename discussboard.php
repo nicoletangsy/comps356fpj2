@@ -1,5 +1,7 @@
-<?php require_once("database.php");
-session_start();?>
+<?php 
+$conn = new mysqli("localhost","root","","cellfish");
+session_start();
+?>
 <!DOCTYPE html>
 <!--[if lt IE 7]>      
 <html class="no-js lt-ie9 lt-ie8 lt-ie7">
@@ -57,11 +59,135 @@ session_start();?>
                <!--[if lt IE 9]>
                <script src="js/respond.min.js"></script>
                <![endif]-->
+			   <style>
+					div.post {
+						background: #000000;
+						color: #DDDDDD;
+					}
+					table.tpost {
+						width: 75%;
+						align: center;
+						border-style: solid;
+						border-color: #DDDDDD;
+					}
+					img.ipost{
+						max-height:200px;
+						max-width:200px;
+						height:auto;
+						width:auto;
+					}
+			   </style>
             </head>
             <body>
 			<?php require ("navbar.php")?>
-			<div style="background: #000000"><font color="DDDDDD">
-			testing
-			</font>
+			<div class="post">
+			<br>
+			<?php 
+				$sql = "select * from board, members where post_user=username and board.id=1";
+				$result = $conn->query($sql);
+				if ($result->num_rows > 0) {
+					While ($row = $result->fetch_assoc()) {
+					$i = 0;
+						?>
+						<table class="tpost"><tr><td colspan="2"><?php echo "Post: ". $row['id'];?></td></tr>
+				<tr>
+				<td>
+					<img src="<?php if (($row['avatar_base64']=='') || ($row['avatar_base64']=='data:image/;base64,')) { echo "user.png";} else
+				{ echo $row['avatar_base64'];}?>" height=120 width=120></img><br>
+					User: <a href="profile.php"><?php echo $row['post_user'];?></a>
+				</td>
+					<td>
+					<?php 
+					if (!(($row['board_avatar_base64']=='') || ($row['board_avatar_base64']=='data:image/;base64,'))) {
+						?>
+						<img class="ipost" src="<?php echo $row['board_avatar_base64']?>"/><br>
+					<?php }
+					echo $row['content'];?><br>
+					Post At: <?php echo $row['post_date'];?>
+					</td>
+				</tr>
+						</table>
+						<br>
+			<?php
+				}
+				}
+			?>
+				
+			<?php 
+				$sql2 = "select * from board, members where post_user=username and board.id>1 order by post_date desc";
+				$result2 = $conn->query($sql2);
+				if ($result2->num_rows > 0) {
+					$i = $result2->num_rows+1;
+					While ($row2 = $result2->fetch_assoc()) {
+						?>
+						<table class="tpost"><tr><td colspan="2"><?php echo "Post: ". $i;?></td></tr>
+				<tr>
+				<td>
+					<img src="<?php if (($row2['avatar_base64']=='') || ($row2['avatar_base64']=='data:image/;base64,')) { echo "user.png";} else
+				{ echo $row2['avatar_base64'];}?>" height=120 width=120></img><br>
+					User: <a href="profile.php"><?php echo $row2['post_user'];?></a>
+				</td>
+					<td>
+					<?php 
+					if (!(($row2['board_avatar_base64']=='') || ($row2['board_avatar_base64']=='data:image/;base64,'))) {
+						?>
+						<img class="ipost" src="<?php echo $row2['board_avatar_base64']?>"/><br>
+					<?php }
+					echo $row2['content'];?><br>
+					Post At: <?php echo $row2['post_date'];?>
+					</td>
+				</tr>
+				<?php
+				$sql3 = "select reply_to, reply_user, reply_date, reply_content from board, replyboard where board.id=reply_to and board.id = " .$i. " order by reply_date";
+				//echo "<tr><td>The current i = $i </td></tr>";
+				$result3 = $conn->query($sql3);
+				if ($result3->num_rows>0) {
+					while ($row3 = $result3->fetch_assoc()) {
+						?>
+						<tr>
+						<td></td>
+						<td><a href="profile.php"><?php echo $row3['reply_user'];?></a>'s reply: <?php echo $row3['reply_content'];?><br>
+						Replied At: <?php echo $row3['reply_date']?>
+						</td>
+						</tr>
+				<?php
+					}
+				}
+				?>
+				<tr>
+				<td colspan=2>
+				<form action="replypost.php?postid=<?php echo $i?>" method="POST" enctype="multipart/form-data">
+				<input name="reply" placeholder="<?php echo $i." "?>Leave your reply here..."/>
+				<input type="submit" value = "Reply">
+				</form>
+				</td>
+				</tr>
+						</table>
+						<br>
+			<?php
+				$i = $i-1;
+				}
+				}
+			?>
+			<br>
 			</div>
+			<?php if(isset($_SESSION['username'])) {
+			?>
+			<div class="post">
+			<table class="tpost">
+			<form action="newpost.php" method="POST" enctype="multipart/form-data">
+			<tr><th><label>Leave you experience here!</label></th></tr>
+			<tr>
+			<td>
+			<textarea name="content" placeholder="Enter text here..."></textarea><br>
+			<label for="image">Upload Picture: </label>
+			<input name="image" type="file">
+			<input type="submit" value = "Post">
+			</td>
+			</tr>
+			</form>
+			</table>
+			</div>
+			<?php }
+  ?>
 			<?php require ("footer.php")?>

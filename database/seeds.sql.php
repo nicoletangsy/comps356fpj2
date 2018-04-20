@@ -21,6 +21,8 @@ $image9 = read_as_dataurl(__DIR__ . '/assets/image9.jpg');
 $image10 = read_as_dataurl(__DIR__ . '/assets/image10.jpg');
 $image12121 = read_as_dataurl(__DIR__ . '/assets/image12121.png');
 
+$cellfish = read_as_dataurl(__DIR__ . '/assets/cellfish.png');
+
 return "
 INSERT INTO `Comment` (`Id`, `ip`, `Content`, `Post_id`, `DateTime`, `likeNo`) VALUES
 (5, '202.40.137.201', 'Is good.', 2, '2017-11-24 06:48:41', 1),
@@ -82,7 +84,7 @@ INSERT INTO `SubComment` (`Id`, `IP`, `Content`, `DateTime`, `comment_Id`) VALUE
 (14, '123.15.20.110', 'Totally agree!', '2017-11-30 09:09:48', 16),
 (16, '202.125.234.10', 'totally agree!', '2017-12-07 09:48:12', 19);
 
-INSERT INTO board (content, post_user, post_date) VALUES
-('Welcome to Cellfish Discuss Board!\nYou can leave your dailylife experience about Cellfish!', 'admin', '2017-11-23 00:00:00');
+INSERT INTO board (content, post_user, post_date, board_avatar_base64) VALUES
+('Welcome to Cellfish Discuss Board!<br> You can leave your dailylife experience about Cellfish!', 'admin', '2017-11-23 00:00:00', '$cellfish');
 
 ";

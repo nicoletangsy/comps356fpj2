@@ -86,8 +86,9 @@ CREATE TABLE board (
     id INT UNSIGNED NOT NULL AUTO_INCREMENT, 
 	content LONGTEXT NOT NULL,
 	post_user VARCHAR(20) NOT NULL,
-	post_date VARCHAR(30) NOT NULL, 
-	avatar_base64 LONGTEXT, 
+	post_date datetime NOT NULL, 
+	last_modified datetime, 
+	board_avatar_base64 LONGTEXT, 
 	PRIMARY KEY (id), 
 	FOREIGN KEY (post_user) references members(username)
 );
@@ -95,12 +96,12 @@ CREATE TABLE board (
 -- create table for holding replys in discuss board, reply content with a maximun length of 255 characters
 CREATE TABLE replyboard (
 	id INT UNSIGNED NOT NULL AUTO_INCREMENT, 
-	content TINYTEXT NOT NULL,
-	post_user VARCHAR(20) NOT NULL,
-	post_date VARCHAR(30) NOT NULL, 
+	reply_content TINYTEXT NOT NULL,
+	reply_user VARCHAR(20) NOT NULL,
+	reply_date datetime NOT NULL, 
 	reply_to INT UNSIGNED NOT NULL,
 	PRIMARY KEY (id), 
-	FOREIGN KEY (post_user) references members(username), 
+	FOREIGN KEY (reply_user) references members(username), 
 	FOREIGN KEY (reply_to) references board(id)
 );
 

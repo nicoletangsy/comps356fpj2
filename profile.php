@@ -82,7 +82,7 @@ session_start();
         <form action="editProfile.php">
 		<div class="text-center">
             <img src="<?php if (($result['avatar_base64']=='') || ($result['avatar_base64']=='data:image/;base64,')) { echo "user.png";} else
-				{ echo $result['avatar_base64'];}?>" height=240 weight=24></img><br>
+				{ echo $result['avatar_base64'];}?>" height=240 width=240></img><br>
 
         </div>
 		<div class="form-group">
