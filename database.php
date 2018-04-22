@@ -1,7 +1,7 @@
 <?php
 $servername = "localhost";
 $username = "root";
-$password = "root";
+$password = "";
 
 try {
     $conn = new PDO("mysql:host=$servername;dbname=Cellfish", $username, $password);
