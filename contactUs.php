@@ -1,3 +1,7 @@
+<?php
+require_once("database.php");
+session_start();
+?>
 <!DOCTYPE html>
 <!--[if lt IE 7]>      
 <html class="no-js lt-ie9 lt-ie8 lt-ie7">
@@ -14,7 +18,7 @@
             <head>
                <meta charset="utf-8">
                <meta http-equiv="X-UA-Compatible" content="IE=edge">
-               <title>Cellfish &mdash; 100% Free Fully Responsive HTML5 Template by FREEHTML5.co</title>
+               <title>Cellfish &mdash; Contact Us</title>
                <meta name="viewport" content="width=device-width, initial-scale=1">
                <meta name="description" content="Free HTML5 Template by FREEHTML5.CO" />
                <meta name="keywords" content="free html5, free template, free bootstrap, html5, css3, mobile first, responsive" />
@@ -57,28 +61,20 @@
                <![endif]-->
             </head>
             <body>
-               <div id="fh5co-container">
-               <div class="js-sticky">
-                  <div class="fh5co-main-nav">
-                     <div class="container-fluid">
-                        <div class="fh5co-menu-1">
-                           <a href="index.html" data-nav-section="home">Home</a>
-                           <a href="about.php" data-nav-section="about">About</a>
-                        </div>
-                        <div class="fh5co-logo">
-                           <a href="index.html">Cellfish</a>
-                        </div>
-                        <div class="fh5co-menu-2">
-                           <a href="news.php" data-nav-section="features">News</a>
-                           <a href="games.php" data-nav-section="menu">Game</a>
-                        </div>
+               <?php require ("navbar.php");?>
+               <div style="background: #130d08 url(images/wood_1.png) repeat;">
+                  <h1 style="margin-top: 0px;color:#E8F7EE;">Contact Form</h1>
+                  <form class="cf" style="margin-bottom: 0px;" action="submitContact.php" method="post">
+                     <div class="half left cf">
+                        <input type="text" id="input-name" name="name" placeholder="Name">
+                        <input type="email" id="input-email" name="email" placeholder="Email address">
+                        <input type="text" id="input-subject" name="subject" placeholder="Subject">
                      </div>
-                  </div>
-               </div>
-               <br>
-               <br>
-               <div style="background: #130d08 url(images/wood_1.png) repeat;height:300px">
-                  <p style="margin: auto;width: 50%;padding: 10px;"><font color="FFFFFF">Thank you! We'll get back to you within 1 to 2 business days.</font></p>
+                     <div class="half right cf">
+                        <textarea name="message" type="text" id="input-message" placeholder="Message"></textarea>
+                     </div>
+                     <input type="submit" value="Submit" id="input-submit">
+                  </form>
                </div>
                <div id="fh5co-footer">
                   <div class="container">

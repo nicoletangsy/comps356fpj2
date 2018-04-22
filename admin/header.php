@@ -1,3 +1,9 @@
+<?php
+require_once '../database.php';
+session_start();
+if (isset($_SESSION['username']) && $_SESSION['username']=="admin") {
+	
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -7,7 +13,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
   <meta name="author" content="">
-  <title>SB Admin - Start Bootstrap Template</title>
+  <title>Cellfish - Admin Home Page</title>
   <!-- Bootstrap core CSS-->
   <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <!-- Custom fonts for this template-->
@@ -76,22 +82,16 @@
         </li>
       </ul>
       <ul class="navbar-nav ml-auto">
+
         <li class="nav-item">
-          <form class="form-inline my-2 my-lg-0 mr-lg-2">
-            <div class="input-group">
-              <input class="form-control" type="text" placeholder="Search for...">
-              <span class="input-group-btn">
-                <button class="btn btn-primary" type="button">
-                  <i class="fa fa-search"></i>
-                </button>
-              </span>
-            </div>
-          </form>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" data-toggle="modal" data-target="#exampleModal">
-            <i class="fa fa-fw fa-sign-out"></i>Logout</a>
+          <a class="nav-link" href="../index.php" >
+            <i>Back to Home Page</i></a>
         </li>
       </ul>
     </div>
   </nav>
+<?php
+  } else {
+	  echo "<script type='text/javascript'>alert('Sorry, You have no permission!');window.history.back();</script>";
+  }
+?>

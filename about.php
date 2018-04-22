@@ -10,7 +10,7 @@ session_start();
 	<head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Cellfish &mdash; 100% Free Fully Responsive HTML5 Template by FREEHTML5.co</title>
+	<title>Cellfish &mdash; About Me</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="description" content="Free HTML5 Template by FREEHTML5.CO" />
 	<meta name="keywords" content="free html5, free template, free bootstrap, html5, css3, mobile first, responsive" />
@@ -75,7 +75,7 @@ Most of the accidents that happen daily arise because of mobile phones. The mobi
 These are the positive and negative impacts of mobile phones on our lives. These is no doubt mobile is a necessity these days, but we should take care of the negative points too and use this technology accordingly. 
 In order to publicize “No cellfish”, we built this website and let people to know more about issue of cellfish.
 </p>
-<p class="text-center to-animate"><a href="contactUs.html" class="btn btn-primary btn-outline">Contact Us</a></p>
+<p class="text-center to-animate"><a href="contactUs.php" class="btn btn-primary btn-outline">Contact Us</a></p>
 			</div>
 		</div>
 <?php require("footer.php");?>

@@ -1,4 +1,3 @@
-
 <?php include("header.php"); ?>
   <div class="content-wrapper">
     <div class="container-fluid">
@@ -88,3 +87,4 @@
 </body>
 
 </html>
+<?php include ("footer.php"); ?>
