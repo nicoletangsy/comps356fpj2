@@ -15,6 +15,6 @@ if(isset($_GET['post_id'], $_GET['rating'])){
         }
     }
 
-    header('Location: detailtest.php?id=' .$post_id);
+    header('Location: detail.php?id=' .$post_id);
 }
 ?>
