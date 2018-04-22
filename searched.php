@@ -1,5 +1,5 @@
 <?php
- $connection = mysqli_connect("localhost","root","","cellfish");
+ $connection = mysqli_connect("localhost","root","root","cellfish");
  ?>
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
@@ -72,6 +72,14 @@
 		color:White;
 		font-size: 30px;
 	}
+	#useruser{
+		color:White;
+		font-size: 20px;
+	}
+	#datedate{
+		color:White;
+		font-size: 20px;
+	}
 </style>
 	</head>
 	<body class="bg-dark"><body>
@@ -95,11 +103,28 @@
 					<p>".$row['Introduction']."</p>
 					</div>";
 				}
-			} else {
-				echo "<br> < There are no results matching your search!";
 			}
+		 } else if(isset($_POST['submit-searchpost']))
+			{
+				$search = mysqli_real_escape_string($connection, $_POST['post']);
+				$sql = "SELECT * FROM board WHERE content LIKE '%$search%' OR post_user LIKE '%$search%' ORDER BY post_date";
+				$result = mysqli_query($connection, $sql);
+				$queryResult = mysqli_num_rows($result);
 
-		}?>
+				echo "<h2>There are ".$queryResult." results!</h2>";
+			if($queryResult > 0){
+				while($row = mysqli_fetch_assoc($result)){
+					echo "<div id='result'>
+					<h3>".$row['content']."</h3>
+					<div id='useruser'>by user <a href='profile.php?username=".$row['post_user']."'>".$row['post_user']."</a></div><div id='datedate'>".$row['post_date']."</div>
+					</div>";
+				}
+			}
+		} else
+			{
+				echo "<br>  There are no results matching your search!";
+			}
+			?>
 		</div>
   </div>
   <br><br>
