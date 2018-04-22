@@ -95,19 +95,40 @@ CREATE TABLE board (
 
 -- create table for holding replys in discuss board, reply content with a maximun length of 255 characters
 CREATE TABLE replyboard (
-	id INT UNSIGNED NOT NULL AUTO_INCREMENT, 
+	reply_id INT UNSIGNED NOT NULL AUTO_INCREMENT, 
 	reply_content TINYTEXT NOT NULL,
 	reply_user VARCHAR(20) NOT NULL,
 	reply_date datetime NOT NULL, 
 	reply_to INT UNSIGNED NOT NULL,
-	PRIMARY KEY (id), 
+	PRIMARY KEY (reply_id), 
 	FOREIGN KEY (reply_user) references members(username), 
 	FOREIGN KEY (reply_to) references board(id)
 );
 
 
+-- create table for holding reports of posts in discuss board
+CREATE TABLE reportpost (
+	report_id INT UNSIGNED NOT NULL AUTO_INCREMENT, 
+	report_user VARCHAR(20) NOT NULL,
+	report_date datetime NOT NULL, 
+	reportpost_id INT UNSIGNED NOT NULL,
+	reason CHAR(1) NOT NULL, 
+	PRIMARY KEY (report_id), 
+	FOREIGN KEY (report_user) references members(username), 
+	FOREIGN KEY (reportpost_id) references board(id)
+);
 
-
+-- create table for holding reports of comments in discuss board
+CREATE TABLE reportcomment (
+	report_id INT UNSIGNED NOT NULL AUTO_INCREMENT, 
+	report_user VARCHAR(20) NOT NULL,
+	report_date datetime NOT NULL, 
+	reportcomment_id INT UNSIGNED NOT NULL,
+	reason CHAR(1) NOT NULL, 
+	PRIMARY KEY (report_id), 
+	FOREIGN KEY (report_user) references members(username), 
+	FOREIGN KEY (reportcomment_id) references replyboard(reply_id)
+);
 
 
 

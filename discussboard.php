@@ -77,74 +77,48 @@ session_start();
 						width:auto;
 					}
 					/* Popup container - can be anything you want */
-.popup {
-    position: relative;
-    display: inline-block;
-    cursor: pointer;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-}
-
-/* The actual popup */
-.popup .popuptext {
-    visibility: hidden;
-    width: 350px;
-    background-color: #555;
-    color: #fff;
-    text-align: center;
-    border-radius: 10px;
-    padding: 8px 0;
-    position: absolute;
-    z-index: 1;
-    bottom: 125%;
-    left: 50%;
-    margin-left: -80px;
-}
-
-/* Popup arrow */
-.popup .popuptext::after {
-    content: "";
-    position: absolute;
-    top: 100%;
-    left: 50%;
-    margin-left: -5px;
-    border-width: 5px;
-    border-style: solid;
-    border-color: #555 transparent transparent transparent;
-}
-
-/* Toggle this class - hide and show the popup */
-.popup .show {
-    visibility: visible;
-    -webkit-animation: fadeIn 1s;
-    animation: fadeIn 1s;
-}
-
-/* Add animation (fade in the popup) */
-@-webkit-keyframes fadeIn {
-    from {opacity: 0;} 
-    to {opacity: 1;}
-}
-
-@keyframes fadeIn {
-    from {opacity: 0;}
-    to {opacity:1 ;}
-}
-
-.button {
-    background-color: #999999;
-    color: white;
-    padding: 8px 20px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin: 4px 2px;
-    cursor: pointer;
-}
 			   </style>
+<style>
+.btn {
+    background-color: #777777;
+    color: white;
+    padding: 10px;
+    font-size: 12px;
+    border: none;
+}
+
+.dropdown {
+    position: absolute;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 250px;
+    z-index: 1;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 1px 2px;
+    text-decoration: none;
+    display: block;
+	font-size: 12px;
+}
+
+.dropdown-content a:hover {background-color: #ddd}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+	color: white;
+}
+
+.btn:hover, .dropdown:hover .btn {
+    background-color: #222222;
+}
+</style>
 			   <script>
 // When the user clicks on div, open the popup
 function myFunction() {
@@ -212,32 +186,41 @@ function myFunction() {
 					Post At: <?php echo $row2['post_date'];?>
 					</td>
 					<td>
-					<div class="popup">
-					<input class="button" type="submit" value="Report" onclick="myFunction()">
-					<span class="popuptext" id="myPopup">
-					<a href="report.php?id=1">This content contains violent message.</a><br>
-					<a href="report.php?id=2">This content contains pornography.</a>
-					<a href="report.php?id=3">Other inappropriate content.</a>
-					</span>
+					<div class="dropdown">
+					<button class="btn" style="border-left:1px solid #0d8bf2">
+					<i class="fa fa-caret-down">Report</i>
+					</button>
+					<div class="dropdown-content">
+					<a href="report.php?reid=1">This content contains violent message.</a>
+					<a href="report.php?reid=2">This content contains pornography.</a>
+					<a href="report.php?reid=3">Other inappropriate content.</a>
+					</div>
 					</div>
 					</td>
 				</tr>
 				<?php
-				$sql3 = "select reply_to, reply_user, reply_date, reply_content from board, replyboard where board.id=reply_to and board.id = " .$i. " order by reply_date";
+				$sql3 = "select reply_id, reply_to, reply_user, reply_date, reply_content from board, replyboard where board.id=reply_to and board.id = " .$i. " order by reply_date";
 				//echo "<tr><td>The current i = $i </td></tr>";
 				$result3 = $conn->query($sql3);
 				if ($result3->num_rows>0) {
+					$j = $result3->num_rows+1;;
 					while ($row3 = $result3->fetch_assoc()) {
 						?>
 						<tr>
 						<td></td>
-						<td><a href="profile.php?username=<?php echo $row3['reply_user'];?>"><?php echo $row3['reply_user'];?></a>'s reply: <?php echo $row3['reply_content'];?><br>
+						<td><a href="profile.php?username=<?php echo $row3['reply_user'];?>"><?php echo $row3['reply_user'];?></a>'s reply #<?php echo $row3['reply_id'];?>: <?php echo $row3['reply_content'];?><br>
 						Replied At: <?php echo $row3['reply_date']?>
 						</td>
 						<td>
-					<div class="popup">
-					<input type="submit" value="Report" onclick="myFunction()">
-					<span class="popuptext" id="myPopup"><a href="index.php">A Simple Popup!</a></span>
+					<div class="dropdown">
+					<button class="btn" style="border-left:1px solid #0d8bf2">
+					<i class="fa fa-caret-down">Report</i>
+					</button>
+					<div class="dropdown-content">
+					<a href="report.php?reid=1?">This content contains violent message.</a>
+					<a href="report.php?reid=2?">This content contains pornography.</a>
+					<a href="report.php?reid=3?">Other inappropriate content.</a>
+					</div>
 					</div>
 					</tr>
 						</tr>
