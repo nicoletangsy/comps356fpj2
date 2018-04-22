@@ -15,6 +15,7 @@
 					<div class="fh5co-menu-2">
 						
 						<a href="games.php" data-nav-section="menu">Game</a>
+						<a href="survey.php" data-nav-section="menu">Survey</a>
 						<a href="<?php if (isset($_SESSION['username'])) {
 							echo "logout.php";
 						} else {
