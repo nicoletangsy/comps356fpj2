@@ -21,6 +21,9 @@ $image9 = read_as_dataurl(__DIR__ . '/assets/image9.jpg');
 $image10 = read_as_dataurl(__DIR__ . '/assets/image10.jpg');
 $image12121 = read_as_dataurl(__DIR__ . '/assets/image12121.png');
 
+$cellfish = read_as_dataurl(__DIR__ . '/assets/cellfish.png');
+$board3 = read_as_dataurl(__DIR__ . '/assets/board3.jpg');
+
 return "
 INSERT INTO `Comment` (`Id`, `ip`, `Content`, `Post_id`, `DateTime`, `likeNo`) VALUES
 (5, '202.40.137.201', 'Is good.', 2, '2017-11-24 06:48:41', 1),
@@ -46,8 +49,10 @@ INSERT INTO `Liked` (`Id`, `LikeIP`, `LikeId`, `Type`) VALUES
 (25, '202.40.157.7', 16, 'Comment');
 
 INSERT INTO members (username, password, email, question, answer) VALUES 
-('user', 'password', '123@abc.com', '1', 'dog'), 
-('test', 'newpassword', 'abc@123.com', '5', 'no');
+('admin', 'admin', 'admin@cellfish.com', 'admin', 'admin'), 
+('user', 'test', '123@abc.com', '1', 'dog'), 
+('test', 'test', 'abc@123.com', '5', 'no'), 
+('hot', 'hot', 'abc@123.com', '5', 'no');
 
 INSERT INTO `Post` (`Id`, `Title`, `Content`, `Introduction`, `Image`, `likeNo`, `DateTime`, `type`) VALUES
 (1, 'Cell phones are causing more and more car crashes...', 'More than a quarter of all car crashes in America are likely caused by cell phone use, a study by the Nation Safety Council has shown.\r\n\r\nAccording to the NSC, the estimate for crashes caused by texting rose to at least 6% in 2013.\r\n\r\nAdditionally, 21% of crashes in 2013 were related to the use of handheld or hands-free phones.\r\n\r\nThe council estimates that talking on the phone led to 1.2 million wrecks in 2013 , while texting was involved in at least 341,000 more.\r\n\r\nThere were some 5.69 million auto crashes in the US in 2013, the NSC estimates based on National Highway Traffic Safety Administration figures.\r\n\r\nThe NSC found that 9% of drivers at any time during daylight hours were talking on cell phones, and that drivers talking on the phone while behind the wheel were four times as likely to crash as drivers who were not using their phones.\r\n\r\nThe number of drivers ï¿½manually manipulatingï¿½ handheld devices, a catch-all term for using a phone with your hands to do things like text, was estimated to be 1.7% of all drivers at anytime during the day. Though studies into the subject have been limited, text messaging while driving is believed to increase the risk of crash eight to 23 times over driving while not texting.\r\n\r\nThe latest findings mark the third year in a row that phone-related crashes have increased in the US, Bob Brown of Network World writes.\r\n\r\nAccording to the National Transportation Safety Board, distracted driving was one of the Americaï¿½s most pressing transportation challenges.', 'More than a quarter of all car crashes in America are likely caused by cell phone use, a study by the Nation Safety Council has shown.', '', 2, '2017-11-23 00:00:00', 'Accident');
@@ -80,5 +85,16 @@ INSERT INTO `SubComment` (`Id`, `IP`, `Content`, `DateTime`, `comment_Id`) VALUE
 (11, '202.40.157.7', '43424342', '2017-11-28 08:15:12', 5),
 (14, '123.15.20.110', 'Totally agree!', '2017-11-30 09:09:48', 16),
 (16, '202.125.234.10', 'totally agree!', '2017-12-07 09:48:12', 19);
+
+INSERT INTO board (content, post_user, post_date, board_avatar_base64) VALUES
+('Welcome to Cellfish Discuss Board!<br> You can leave your dailylife experience about Cellfish!', 'admin', '2017-11-23 00:00:00', '$cellfish'), 
+('I hate having test!', 'test', '2018-04-20 21:46:10', ''), 
+('I love listening to the music sung by my oppa!! They sing very good!!', 'user', '2018-04-20 21:46:20', '$board3'), 
+('Hey! Heres a hot girl waiting for you!<br>Immeadiate call: +852 51234567', 'hot', '2018-04-20 22:21:40', '');
+
+INSERT INTO replyboard (reply_user, reply_date, reply_to, reply_content) VALUES 
+('test', '2018-04-21 21:46:10', 3, 'haha! I agree! They sing really well!!'), 
+('hot', '2018-04-22 10:30:50', 3, 'Nah! Theyre just sons of Bxxxx! They sucks!'), 
+('hot', '2018-04-23 11:01:35', 2, 'Hi, rubbish!=)');
 
 ";

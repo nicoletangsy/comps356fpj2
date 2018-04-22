@@ -3,6 +3,7 @@
 			<div class="fh5co-main-nav">
 				<div class="container-fluid">
 					<div class="fh5co-menu-1">
+					<?php if(isset($_SESSION['username'])&&$_SESSION['username']=="admin") {?><a href="admin/cards.php" data-nav-section="admin">Admin Console</a><?php } ?>
 						<a href="index.php" data-nav-section="home">Home</a>
 						<a href="about.php" data-nav-section="about">About</a>
 						<a href="news.php" data-nav-section="menu">News</a>
@@ -13,7 +14,8 @@
 					</div>
 					<div class="fh5co-menu-2">
 						
-						<a href="games.php" data-nav-section="menu">Game</a>
+						<a href="survey.php" data-nav-section="menu">Survey</a>
+						<a href="search.php" data-nav-section="menu">Search</a>
 						<a href="<?php if (isset($_SESSION['username'])) {
 							echo "logout.php";
 						} else {
@@ -33,8 +35,6 @@
 						} else {
 							echo "Register";
 						}?></a>
-						
-						<a href="search.php" data-nav-section="menu">Search</a>
 					</div>
 				</div>
 				

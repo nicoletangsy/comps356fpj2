@@ -6,5 +6,5 @@
     $message = $_POST["message"];
     $sth = $conn->prepare("insert into Contact(Name,Email,Subject,Message) VALUES('$name','$email','$subject','$message')");
     $sth->execute();
-    header('Location: submited.html');
+    header('Location: submited.php');
 ?>

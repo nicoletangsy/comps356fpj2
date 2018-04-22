@@ -1,7 +1,6 @@
 <?php
   require_once("database.php");
   session_start();
-  $_SESSION['username'] = "nict";
   
   if (isset($_SESSION['username'])) {
 	  try{
@@ -57,6 +56,6 @@
 		}
 	header("Location: profile.php");
   }  else {
-	die ("You must enter all fields!  <br><br>Return to <a href=\"login.html\">Login</a>.");
+	die ("You must login first!  <br><br>Return to <a href=\"login.html\">Login</a>.");
   }
 ?>

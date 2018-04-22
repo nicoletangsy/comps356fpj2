@@ -132,7 +132,7 @@ session_start();
 						<a href="<?php if (isset($_SESSION['username'])) {
 							echo "logout.php";
 						} else {
-							echo "login.php";
+							echo "login.html";
 						}?>" data-nav-section="menu"><?php if (isset($_SESSION['username'])) {
 							echo "Logout";
 						} else {
@@ -142,7 +142,7 @@ session_start();
 						<a href="<?php if (isset($_SESSION['username'])) {
 							echo "profile.php";
 						} else {
-							echo "register.php";
+							echo "register.html";
 						}?>" data-nav-section="menu"><?php if (isset($_SESSION['username'])) {
 							echo $_SESSION['username'];
 						} else {
@@ -160,13 +160,12 @@ session_start();
 			<div class="title">
 				<h2><?=$result['Title']?></h2>
 				<span class="byline"><?=$myDateTime->format('Y-m-d H:i');?></span> <i class="am-icon-thumbs-up" id="postLike" onclick="like(<?=$_GET['id']?>,'Post')">  <?=$result["likeNo"]?></i>
+
 				<div class="star-rating">
-				<?php if (isset($_SESSION['username'])){?>
 						Rate this news:
 					<?php foreach(range(1, 5) as $rating): ?>
 						<a href ="rate.php?post_id=<?php echo $id?>&rating=<?php echo $rating;?>"> <?php echo $rating; ?> </a>
 					<?php endforeach; ?>Star
-				<?php }?>
 		</div>
 		
 		<div class="therate">

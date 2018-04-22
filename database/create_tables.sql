@@ -81,6 +81,20 @@ CREATE TABLE members (
 	UNIQUE (username)
 );
 
+-- create table for holding discuss board's comment
+CREATE TABLE board (
+    id INT UNSIGNED NOT NULL AUTO_INCREMENT, 
+	content LONGTEXT NOT NULL,
+	post_user VARCHAR(20) NOT NULL,
+	post_date datetime NOT NULL, 
+	last_modified datetime, 
+	board_avatar_base64 LONGTEXT, 
+	PRIMARY KEY (id), 
+	FOREIGN KEY (post_user) references members(username)
+);
+
+-- create table for holding users rating news data
+
 CREATE TABLE rating (
   id int(11) NOT NULL AUTO_INCREMENT,
   post_id int(11) NOT NULL,
@@ -88,9 +102,42 @@ CREATE TABLE rating (
   username varchar(20) NOT NULLL
 ) 
 
+-- create table for holding replys in discuss board, reply content with a maximun length of 255 characters
+CREATE TABLE replyboard (
+	reply_id INT UNSIGNED NOT NULL AUTO_INCREMENT, 
+	reply_content TINYTEXT NOT NULL,
+	reply_user VARCHAR(20) NOT NULL,
+	reply_date datetime NOT NULL, 
+	reply_to INT UNSIGNED NOT NULL,
+	PRIMARY KEY (reply_id), 
+	FOREIGN KEY (reply_user) references members(username), 
+	FOREIGN KEY (reply_to) references board(id)
+);
 
 
+-- create table for holding reports of posts in discuss board
+CREATE TABLE reportpost (
+	report_id INT UNSIGNED NOT NULL AUTO_INCREMENT, 
+	report_user VARCHAR(20) NOT NULL,
+	report_date datetime NOT NULL, 
+	reportpost_id INT UNSIGNED NOT NULL,
+	reason CHAR(1) NOT NULL, 
+	PRIMARY KEY (report_id), 
+	FOREIGN KEY (report_user) references members(username), 
+	FOREIGN KEY (reportpost_id) references board(id)
+);
 
+-- create table for holding reports of comments in discuss board
+CREATE TABLE reportcomment (
+	report_id INT UNSIGNED NOT NULL AUTO_INCREMENT, 
+	report_user VARCHAR(20) NOT NULL,
+	report_date datetime NOT NULL, 
+	reportcomment_id INT UNSIGNED NOT NULL,
+	reason CHAR(1) NOT NULL, 
+	PRIMARY KEY (report_id), 
+	FOREIGN KEY (report_user) references members(username), 
+	FOREIGN KEY (reportcomment_id) references replyboard(reply_id)
+);
 
 
 
