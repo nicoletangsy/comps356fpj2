@@ -16,7 +16,7 @@
 	$sth = $conn->prepare($aaa);
 	echo "$aaa";
     print_r($sth->execute());
-	header('Location: addpost.php');
+	header('Location: addnews.php');
     
 ?>
     

@@ -1,18 +1,9 @@
+<?php include("header.php"); ?>
 <?php
-	require_once('../database.php');
-		session_start();
-	if (isset($_GET['logout'])) {
-     unset($_SESSION['admin']);
-    }
-	if(!$_SESSION['admin']){
-		header('Location: login.html');
-	}
 	$sth = $conn->prepare("SELECT Id,Title,type,DateTime FROM Post");
 	$sth->execute();
     $result = $sth->fetchAll();
-
 ?>
-<?php include("header.php"); ?>
   <div class="content-wrapper">
     <div class="container-fluid">
       <!-- Breadcrumbs-->
@@ -77,7 +68,7 @@
           <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
           <div class="modal-footer">
             <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-            <a class="btn btn-primary" href="listpost.php?logout">Logout</a>
+            <a class="btn btn-primary" href="listallnews.php?logout">Logout</a>
           </div>
         </div>
       </div>

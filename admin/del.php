@@ -4,7 +4,7 @@
 	echo $aaa;
 	$sth = $conn->prepare($aaa);
     print_r($sth->execute());
-    header('Location: listpost.php');
+    header('Location: listallnews.php');
     
     
 ?>

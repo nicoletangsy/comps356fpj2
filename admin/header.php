@@ -13,7 +13,7 @@ if (isset($_SESSION['username']) && $_SESSION['username']=="admin") {
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
   <meta name="author" content="">
-  <title>Cellfish - Admin Home Page</title>
+  <title>Cellfish - Admin Console</title>
   <!-- Bootstrap core CSS-->
   <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <!-- Custom fonts for this template-->
@@ -37,11 +37,26 @@ if (isset($_SESSION['username']) && $_SESSION['username']=="admin") {
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Tables">
                     <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseExamplePages" data-parent="#exampleAccordion">
             <i class="fa fa-fw fa-file"></i>
-            <span class="nav-link-text">Post</span>
+            <span class="nav-link-text">News</span>
           </a>
                     <ul class="sidenav-second-level collapse" id="collapseExamplePages">
             <li>
-              <a href="addpost.php">Add Post</a>
+              <a href="addnews.php">Add News</a>
+            </li>
+            <li>
+              <a href="listallnews.php">List All News</a>
+            </li>
+
+          </ul>
+        </li>
+		<li class="nav-item" data-toggle="tooltip" data-placement="right" title="Tables">
+                    <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#DiscussBoard" data-parent="#exampleAccordion">
+            <i class="fa fa-fw fa-file"></i>
+            <span class="nav-link-text">Discuss Board</span>
+          </a>
+                    <ul class="sidenav-second-level collapse" id="DiscussBoard">
+            <li>
+              <a href="listallpost.php">Add Post</a>
             </li>
             <li>
               <a href="listpost.php">List All Post</a>
@@ -54,13 +69,6 @@ if (isset($_SESSION['username']) && $_SESSION['username']=="admin") {
             <i class="fa fa-fw fa-table"></i>
             <span class="nav-link-text">Feedback</span>
           </a>
-
-        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
-          <a class="nav-link" href="Account.php">
-            <i class="fa fa-fw fa-dashboard"></i>
-            <span class="nav-link-text">Account</span>
-          </a>
-        </li>
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Components">
           <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseComponents" data-parent="#exampleAccordion">
             <i class="fa fa-fw fa-wrench"></i>
