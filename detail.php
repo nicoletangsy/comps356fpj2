@@ -19,6 +19,13 @@ session_start();
     $result = $sth->fetch();
     $myDateTime = new DateTime($result['DateTime'], new DateTimeZone('GMT'));
 	$myDateTime->setTimezone(new DateTimeZone('Asia/Hong_Kong')); 
+	$post = $conn->prepare("SELECT Post.Id, AVG(rating.rating) 
+		AS rate FROM Post
+		LEFT JOIN rating 
+		ON Post.Id = rating.post_id 
+		WHERE Post.Id = $id");
+    	$post->execute();
+		$posttest = $post->fetch();
 ?>
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
@@ -68,7 +75,7 @@ session_start();
 
 	<link rel="stylesheet" href="css/style.css">
 	<link rel="stylesheet" href="css/index.css">
-	
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="js/index.js"></script>
 
 	<!-- Modernizr JS -->
@@ -77,6 +84,32 @@ session_start();
 	<!--[if lt IE 9]>
 	<script src="js/respond.min.js"></script>
 	<![endif]-->
+	<style>
+	.star-rating {
+    direction: rtl;
+    display: inline-block;
+    padding: 20px
+}
+
+.star-rating input[type=radio] {
+    display: none
+}
+
+.star-rating label {
+    color: #bbb;
+    font-size: 18px;
+    padding: 0;
+    cursor: pointer;
+    -webkit-transition: all .3s ease-in-out;
+    transition: all .3s ease-in-out
+}
+
+.star-rating label:hover,
+.star-rating label:hover ~ label,
+.star-rating input[type=radio]:checked ~ label {
+    color: #f2b600
+}
+</style>
 
 	</head>
 	<body>
@@ -126,8 +159,33 @@ session_start();
 		<div id="content">
 			<div class="title">
 				<h2><?=$result['Title']?></h2>
-				<span class="byline"><?=$myDateTime->format('Y-m-d H:i');?></span> <i class="am-icon-thumbs-up" id="postLike" onclick="like(<?=$_GET['id']?>,'Post')">  <?=$result["likeNo"]?></i></p></div>
+				<span class="byline"><?=$myDateTime->format('Y-m-d H:i');?></span> <i class="am-icon-thumbs-up" id="postLike" onclick="like(<?=$_GET['id']?>,'Post')">  <?=$result["likeNo"]?></i>
+
+				<div class="star-rating">
+						Rate this news:
+					<?php foreach(range(1, 5) as $rating): ?>
+						<a href ="rate.php?post_id=<?php echo $id?>&rating=<?php echo $rating;?>"> <?php echo $rating; ?> </a>
+					<?php endforeach; ?>Star
+		</div>
+		
+		<div class="therate">
+						Rate:
+						<?php for($x = 0; $x<5 ; $x++){
+							if(floor(ROUND($posttest['rate'],1)) -$x >=1){
+								echo '<i class="fa fa-star"></i>';}
+								elseif(ROUND($posttest['rate'],1)-$x >0){
+									echo'<i class="fa fa-star-half-o"></i>';}
+									else{
+										echo '<i class="fa fa-star-o"></i>';}
+							
+						}
+						?>
+					</div>
+
+
+		</p></div>
 			<p><img src="<?=$result['Image']?>" alt="" class="image image-full" /> </p>
+			
 			<p><?=$result['Content']?></p>
 			<p style="color:black;border-bottom:1px solid rgba(34,36,38,.15);">Comment</p>
 			<article class="am-comment">
