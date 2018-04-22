@@ -27,16 +27,16 @@
 							$conn->exec($sql);
 							echo "Password changed successfully!";
 						} else {
-							die("Your password should be between 8 and 16 characters! Please re-enter. <br><br>Return to <a href=\"forgotpassword.html\">Forgot Password?</a>.");
+							die("Your password should be between 8 and 16 characters! Please re-enter. <br><br>Return to <a href=\"forgotpassword.php\">Forgot Password?</a>.");
 						}
 					} else {
-						die("Passwords do not match. Please re-enter. <br><br>Return to <a href=\"forgotpassword.html\">Forgot Password?</a>.");
+						die("Passwords do not match. Please re-enter. <br><br>Return to <a href=\"forgotpassword.php\">Forgot Password?</a>.");
 					}
 				} else{
-					die("The question or answer for recovery is not correct. Please re-enter. <br><br>Return to <a href=\"forgotpassword.html\">Forgot Password?</a>.");
+					die("The question or answer for recovery is not correct. Please re-enter. <br><br>Return to <a href=\"forgotpassword.php\">Forgot Password?</a>.");
 				}
 			} else {
-				die("The username is not correct. Please re-enter. <br><br>Return to <a href=\"forgotpassword.html\">Forgot Password?</a>.");
+				die("The username is not correct. Please re-enter. <br><br>Return to <a href=\"forgotpassword.php\">Forgot Password?</a>.");
 			}
 		}
 	}
@@ -48,7 +48,7 @@
 
 	$conn = null;
   } else {
-	die ("You must enter all fields!  <br><br>Return to <a href=\"register.html\">Register</a>.");
+	die ("You must enter all fields!  <br><br>Return to <a href=\"register.php\">Register</a>.");
   }
 
 

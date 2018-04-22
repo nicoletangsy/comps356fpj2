@@ -1,4 +1,3 @@
-
 	<div id="fh5co-container">
 		<div class="js-sticky">
 			<div class="fh5co-main-nav">
@@ -35,6 +34,8 @@
 						} else {
 							echo "Register";
 						}?></a>
+						
+						<a href="search.php" data-nav-section="menu">Search</a>
 					</div>
 				</div>
 				
