@@ -147,7 +147,7 @@
 	
   ?>
     <?php }  else {?>
-	<br><br><br><p style="margin: auto;width: 50%;padding: 10px;"><font color="FFFFFF">You must <a href="login.html">Login</a> first!</font></p><br><br><br><br><br><br>
+	<br><br><br><p style="margin: auto;width: 50%;padding: 10px;"><font color="FFFFFF">You must <a href="login.php">Login</a> first!</font></p><br><br><br><br><br><br>
 	<?php
   }
   if (isset($_POST['currentPassword'])&&isset($_POST['password'])&&isset($_POST['cpassword'])) {
