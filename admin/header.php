@@ -57,12 +57,14 @@ if (isset($_SESSION['username']) && $_SESSION['username']=="admin") {
           </a>
                     <ul class="sidenav-second-level collapse" id="DiscussBoard">
             <li>
-              <a href="listallpost.php">Add Post</a>
+              <a href="listallpost.php">List All Post</a>
             </li>
             <li>
-              <a href="listpost.php">List All Post</a>
+              <a href="listpostreports.php">Manage Post Reports</a>
             </li>
-
+			<li>
+              <a href="listcommentreports.php">Manage Comments Reports</a>
+            </li>
           </ul>
         </li>
          <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Example Pages">

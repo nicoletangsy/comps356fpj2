@@ -1,6 +1,6 @@
 <?php include("header.php"); ?>
 <?php
-	$sth = $conn->prepare("SELECT Id,Title,type,DateTime FROM Post");
+	$sth = $conn->prepare("SELECT * FROM board");
 	$sth->execute();
     $result = $sth->fetchAll();
 ?>
@@ -9,30 +9,32 @@
       <!-- Breadcrumbs-->
       <ol class="breadcrumb">
         <li class="breadcrumb-item">
-          <a href="#">News</a>
+          <a href="#">Discuss Board</a>
         </li>
-        <li class="breadcrumb-item active">List All News</li>
+        <li class="breadcrumb-item active">List All Posts</li>
       </ol>
       <!-- Example DataTables Card-->
       <div class="card mb-3">
         <div class="card-header">
-          <i class="fa fa-table"></i> All News</div>
+          <i class="fa fa-table"></i> All Posts</div>
         <div class="card-body">
           <div class="table-responsive">
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
               <thead>
                 <tr>
                   <th>Id</th>
-                  <th>Title</th>
+                  <th>Content</th>
+                  <th>Posted By</th>
                   <th>DateTime</th>
-                  <th>Type</th>
                   <th></th>
                 </tr>
               </thead>
               <tbody>
                 <?php 
   							foreach ($result as $aa){
-  								echo "<tr><td>".$aa['Id']."</td><td><a href='editpost.php?Id=".$aa["Id"]."'>".$aa["Title"]."</a></td><td>".$aa['DateTime']."</td><td>".$aa['type']."</td><td><a style='cursor: pointer;'  onclick='del(".$aa['Id'].")'>&times</a></td></tr>";
+  								echo "<tr><td>".$aa['id'].
+								"</td><td><a href='viewpost.php?Id=".$aa["id"]."'>"
+								.$aa["content"]."</a></td><td>".$aa['post_user']."</td><td>".$aa['post_date']."</td><td><a style='cursor: pointer;'  onclick='deletepost(".$aa['id'].")'>&times</a></td></tr>";
 							  }
 						    ?>
               </tbody>
@@ -106,9 +108,9 @@ function getCookie(cname) {
     }
     return "";
 }
-      	function del(a){
+      	function deletepost(a){
 	       if(confirm("Are are sure?")){
-	      window.location = 'del.php?Id='+a;
+	      window.location = 'deletepost.php?Id='+a;
 	       }
 	   }
     </script>
