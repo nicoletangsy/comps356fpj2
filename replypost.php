@@ -19,6 +19,6 @@
 		}
 	header("Location: discussboard.php");
   }  else {
-	die ("You must login first!  <br><br>Return to <a href=\"login.html\">Login</a>.");
+	die ("You must login first!  <br><br>Return to <a href=\"login.php\">Login</a>.");
   }
 ?>
