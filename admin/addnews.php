@@ -109,7 +109,7 @@
           <fieldset>
 							<fieldset>
 							<legend>Post Details</legend>
-					    <form onsubmit="return up()" action="#" method="POST" enctype="multipart/form-data">
+					    <form onsubmit="return up()" action="InCheck.php" method="POST" enctype="multipart/form-data">
                         <label for="Type"><span>Type <span class="required">*</span></span>
 						<select class="input-field" name="Id">
 							<option value="Accident">Accident</option>
@@ -126,7 +126,8 @@
                    		  
 					
 			                     <label for="Image"><span>Image <span class="required">*</span></span><img  src="data:image/png;base64" class="img-responsive" width="524" height="350">
-										    </figure><input type="file" onchange="change()" name="Image" /> </label>
+										    </figure>
+											<input onchange="change()" name="image" type="file"></label>
 										    </fieldset><input type="submit" class="am-btn am-btn-secondary" value="Insert"/> <input type="Reset" class="am-btn am-btn-secondary" value="Reset"/>
 			                      </div>
 			                      
