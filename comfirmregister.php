@@ -32,7 +32,7 @@
 			$result = $stat->fetch();
 			//echo $result['username'];
 			if($result['username'] == $username){
-				die("This username \"".$username."\" had been Registed. Please try another username. <br><br>Return to <a href=\"register.html\">Register</a>.");
+				die("This username \"".$username."\" had been Registed. Please try another username. <br><br>Return to <a href=\"register.php\">Register</a>.");
 			}
 		} 
 
