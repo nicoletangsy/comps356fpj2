@@ -187,17 +187,21 @@ function myFunction() {
 					Post At: <?php echo $row2['post_date'];?>
 					</td>
 					<td>
+
+					<?php if (isset($_SESSION['username'])) { ?>
 					<div class="dropdown">
 					<button class="btn" style="border-left:1px solid #0d8bf2">
 					<i class="fa fa-caret-down">Report</i>
 					</button>
 					<div class="dropdown-content">
-					<a href="report.php?reid=1">This content contains violent message.</a>
-					<a href="report.php?reid=2">This content contains pornography.</a>
-					<a href="report.php?reid=3">Other inappropriate content.</a>
+					<a href="report.php?reid=1&board_id=<?php echo $i?>">This content contains violent message.</a>
+					<a href="report.php?reid=2&board_id=<?php echo $i?>">This content contains pornography.</a>
+					<a href="report.php?reid=3&board_id=<?php echo $i?>">Other inappropriate content.</a>
 					</div>
 					</div>
 					</td>
+					<?php } ?>
+
 				</tr>
 				<?php
 				$sql3 = "select reply_id, reply_to, reply_user, reply_date, reply_content from board, replyboard where board.id=reply_to and board.id = " .$i. " order by reply_date";
@@ -213,16 +217,21 @@ function myFunction() {
 						Replied At: <?php echo $row3['reply_date']?>
 						</td>
 						<td>
+					
+						<?php if (isset($_SESSION['username'])) { ?>
 					<div class="dropdown">
 					<button class="btn" style="border-left:1px solid #0d8bf2">
 					<i class="fa fa-caret-down">Report</i>
 					</button>
 					<div class="dropdown-content">
-					<a href="report.php?reid=1?">This content contains violent message.</a>
-					<a href="report.php?reid=2?">This content contains pornography.</a>
-					<a href="report.php?reid=3?">Other inappropriate content.</a>
+					<a href="reportcomment.php?reid=1&reply_id=<?php echo $j?>">This content contains violent message.</a>
+					<a href="reportcomment.php?reid=2&reply_id=<?php echo $j?>">This content contains pornography.</a>
+					<a href="reportcomment.php?reid=3&reply_id=<?php echo $j?>">Other inappropriate content.</a>
 					</div>
 					</div>
+					</td>
+
+					<?php }?>
 					</tr>
 						</tr>
 				<?php
