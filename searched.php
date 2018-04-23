@@ -80,6 +80,7 @@
 		color:White;
 		font-size: 20px;
 	}
+
 </style>
 	</head>
 	<body class="bg-dark"><body>
@@ -90,12 +91,13 @@
   <br><br>
 	<?php
 		if(isset($_POST['submit-search'])){
-			$search = mysqli_real_escape_string($connection, $_POST['title']);
+			if(trim($_POST['title']) != ''){
+			$search = mysqli_real_escape_string($connection, trim($_POST['title']));
 			$sql = "SELECT * FROM Post WHERE Title LIKE '%$search%' OR Introduction LIKE '%$search%' OR Content LIKE '%$search%'";
 			$result = mysqli_query($connection, $sql);
 			$queryResult = mysqli_num_rows($result);
 
-			echo "<h2>There are ".$queryResult." results!</h2>";
+			echo "<h2>There are ".$queryResult." results!</h2> ";
 			if($queryResult > 0){
 				while($row = mysqli_fetch_assoc($result)){
 					echo "<div id='result'>
@@ -104,9 +106,14 @@
 					</div>";
 				}
 			}
+			}else
+		{
+			echo "<br>  <font color='white'>There are no results matching your search!</font>";
+		}
 		 } else if(isset($_POST['submit-searchpost']))
 			{
-				$search = mysqli_real_escape_string($connection, $_POST['post']);
+				if(trim($_POST['post'] != '')){
+				$search = mysqli_real_escape_string($connection, trim($_POST['post']));
 				$sql = "SELECT * FROM board WHERE content LIKE '%$search%' OR post_user LIKE '%$search%' ORDER BY post_date";
 				$result = mysqli_query($connection, $sql);
 				$queryResult = mysqli_num_rows($result);
@@ -120,10 +127,15 @@
 					</div>";
 				}
 			}
-		} else
+		}else
+		{
+			echo "<br>  <font color='white'>There are no results matching your search!</font>";
+		}
+	}else
 			{
-				echo "<br>  There are no results matching your search!";
+				echo "<br> <font color='white'> There are no results matching your search!</font>";
 			}
+			
 			?>
 		</div>
   </div>
