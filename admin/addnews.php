@@ -109,8 +109,16 @@
           <fieldset>
 							<fieldset>
 							<legend>Post Details</legend>
-					    <form onsubmit="return up()" action="InCheck.php" method="POST" enctype="multipart/form-data">
-                        <label for="Type"><span>Type <span class="required">*</span></span><input type="text" class="input-field" name="Id" value="" /></label>
+					    <form onsubmit="return up()" action="#" method="POST" enctype="multipart/form-data">
+                        <label for="Type"><span>Type <span class="required">*</span></span>
+						<select class="input-field" name="Id">
+							<option value="Accident">Accident</option>
+							<option value="Health">Health</option>
+							<option value="Patients">Patients</option>
+							<option value="Mobile Addiction">Mobile Addiction</option>
+							<option value="Other">Other</option>
+						</select>
+						</label>
                         <label for="Title"><span>Title <span class="required">*</span></span><textarea name="Title" class="textarea-field "></textarea></label>
 						<label for="Content"><span>Content <span class="required">*</span></span><textarea  name="Content" class="textarea-field aaa" style="height=250px"></textarea></label>
 						<label for="Introduction"><span>Introduction <span class="required">*</span></span><textarea name="Introduction" class="textarea-field"></textarea></label>
