@@ -87,7 +87,6 @@ CREATE TABLE board (
 	content LONGTEXT NOT NULL,
 	post_user VARCHAR(20) NOT NULL,
 	post_date datetime NOT NULL, 
-	last_modified datetime, 
 	board_avatar_base64 LONGTEXT, 
 	PRIMARY KEY (id), 
 	FOREIGN KEY (post_user) references members(username)

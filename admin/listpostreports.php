@@ -1,6 +1,6 @@
 <?php include("header.php"); ?>
 <?php
-	$sth = $conn->prepare("SELECT * FROM board");
+	$sth = $conn->prepare("SELECT * FROM reportpost, board where board.id=reportpost_id");
 	$sth->execute();
     $result = $sth->fetchAll();
 ?>
@@ -11,30 +11,38 @@
         <li class="breadcrumb-item">
           <a href="#">Discuss Board</a>
         </li>
-        <li class="breadcrumb-item active">List All Posts</li>
+        <li class="breadcrumb-item active">Manage Post Reports</li>
       </ol>
       <!-- Example DataTables Card-->
       <div class="card mb-3">
         <div class="card-header">
-          <i class="fa fa-table"></i> All Posts</div>
+          <i class="fa fa-table"></i> All Post Reports</div>
         <div class="card-body">
           <div class="table-responsive">
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
               <thead>
                 <tr>
-                  <th>Id</th>
-                  <th>Content</th>
-                  <th>Posted By</th>
-                  <th>DateTime</th>
+                  <th>Report Content</th>
+				  <th>Report Reason</th>
+                  <th>Report User</th>
+                  <th>Report DateTime</th>
                   <th>Delete Post</th>
+                  <th>Ignore Report</th>
                 </tr>
               </thead>
               <tbody>
                 <?php 
   							foreach ($result as $aa){
-  								echo "<tr><td>".$aa['id'].
-								"</td><td><a href='viewpost.php?Id=".$aa["id"]."'>"
-								.$aa["content"]."</a></td><td>".$aa['post_user']."</td><td>".$aa['post_date']."</td><td><a style='cursor: pointer;'  onclick='deletepost(".$aa['id'].")'>&times</a></td></tr>";
+								if ($aa['reason']=="1") {
+									$reason = "Violence";
+								} else if ($aa['reason']=="2") {
+									$reason = "Pornography";
+								} else {
+									$reason = "Others";
+								}
+  								echo "<td><a href='viewpost.php?Id=".$aa["id"]."'>"
+								.$aa["content"]."</a></td><td>".$reason."</td><td><a href='../profile.php?username=".$aa['report_user']."'>".$aa['report_user']."</a></td><td>".$aa['report_date'].
+								"</td><td><a style='cursor: pointer;'  onclick='deletepost(".$aa['id'].")'>&times</a></td><td><a style='cursor: pointer;'  onclick='deletereportpost(".$aa['report_id'].")'>&times</a></td></tr>";
 							  }
 						    ?>
               </tbody>
@@ -108,9 +116,14 @@ function getCookie(cname) {
     }
     return "";
 }
-      	function deletepost(a){
+      	function deletereportpost(a){
 	       if(confirm("Are are sure?")){
-	      window.location = 'deletepost.php?Id='+a;
+	      window.location = 'deletereportpost.php?Id='+a;
+	       }
+	   }
+	   function deletepost(a){
+	       if(confirm("Are are sure?")){
+	      window.location = 'comfirmdeletepost.php?Id='+a;
 	       }
 	   }
     </script>

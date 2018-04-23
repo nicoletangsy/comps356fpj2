@@ -77,7 +77,6 @@ session_start();
 						height:auto;
 						width:auto;
 					}
-					/* Popup container - can be anything you want */
 			   </style>
 <style>
 .btn {

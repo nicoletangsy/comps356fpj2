@@ -1,9 +1,5 @@
 <?php
-	require_once('../database.php');
-	session_start();
-	if(!$_SESSION['admin']){
-		header('Location: login.html');
-	}
+	include("header.php"); 
 	$sth = $conn->prepare("SELECT * FROM Post where Id =".$_GET["Id"]);
 	$sth->execute();
     $result = $sth->fetchAll();
@@ -110,7 +106,6 @@
 	    height:250px;
 }
 </style>
-<?php include("header.php"); ?>
   <div class="content-wrapper">
     <div class="container-fluid">
       <!-- Breadcrumbs-->

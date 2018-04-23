@@ -20,11 +20,6 @@
 			</div>
 			<div class="row">
 				<div class="col-md-12 text-center">
-					<ul class="fh5co-social">
-						<li class="to-animate-2" data-href="https://se1-edmondwoo.c9users.io/aaaaa/home.html"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fse1-edmondwoo.c9users.io%2Faaaaa%2Fhome.html&amp;src=sdkpreparse"><i class="icon-facebook"></i></a></li>
-						<li class="to-animate-2"><a href="#"><i class="icon-twitter"></i></a></li>
-						<li class="to-animate-2"><a href="#"><i class="icon-instagram"></i></a></li>
-					</ul>
 				</div>
 			</div>
 		</div>
