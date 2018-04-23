@@ -94,12 +94,14 @@ CREATE TABLE board (
 );
 
 -- create table for holding users rating news data
+
 CREATE TABLE rating (
   id int(11) NOT NULL AUTO_INCREMENT,
   post_id int(11) NOT NULL,
   rating int(11) NOT NULL,
-  member_id int(11) DEFAULT NULL, 
-  PRIMARY KEY (id)
+  username varchar(20) NOT NULL,
+  PRIMARY KEY (id), 
+  FOREIGN KEY (username) references members(username)
 );
 
 -- create table for holding replys in discuss board, reply content with a maximun length of 255 characters

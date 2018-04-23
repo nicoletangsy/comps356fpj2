@@ -74,13 +74,13 @@
 		if ($stat->setFetchMode(PDO::FETCH_ASSOC) === TRUE){
 			$result = $stat->fetch();
 			if($result['username'] == null){
-				echo "<br>This Username \"".$username."\" does not exist! 	<br>Please <a href=register.html>Register</a>.";
+				echo "<br>This Username \"".$username."\" does not exist! 	<br>Please <a href=register.php>Register</a>.";
 			} else if ($password == $result['password']){
 				session_start();
 				$_SESSION['username'] = $result['username'];
 				header("Location: index.php");
 			} else {
-				echo "Incorrect Password! <br>Go to the  <a href=login.html>Previous</a> Page.";
+				echo "Incorrect Password! <br>Go to the  <a href=login.php>Previous</a> Page.";
 			}
 		}
 	  } catch(PDOException $e)
@@ -89,7 +89,7 @@
 		}
 	
   }  else {
-	die ("You must enter all fields!  <br><br>Return to <a href=\"login.html\">Login</a>.");
+	die ("You must enter all fields!  <br><br>Return to <a href=\"login.php\">Login</a>.");
   }
 
 ?>

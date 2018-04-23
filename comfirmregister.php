@@ -15,13 +15,13 @@
 
 	//validation
 	if(strlen($username) < 4 || strlen($username) > 16) {
-		die("Your username should be between 4 and 16 characters! <br><br>Return to <a href=\"register.html\">Register</a>.");
+		die("Your username should be between 4 and 16 characters! <br><br>Return to <a href=\"register.php\">Register</a>.");
 	}
 	if(strlen($password) < 8 || strlen($password) > 16) {
-		die("Your password should be between 8 and 16 characters! <br><br>Return to <a href=\"register.html\">Register</a>.");
+		die("Your password should be between 8 and 16 characters! <br><br>Return to <a href=\"register.php\">Register</a>.");
 	}
 	if ($password != $cpassword) {
-		die("The Passwords do not match, Please retry!   <br><br>Return to <a href=\"register.html\">Register</a>.");
+		die("The Passwords do not match, Please retry!   <br><br>Return to <a href=\"register.php\">Register</a>.");
 	}
 	try {
 		$sql = "select username from members where username = '".$username."'";
@@ -32,7 +32,7 @@
 			$result = $stat->fetch();
 			//echo $result['username'];
 			if($result['username'] == $username){
-				die("This username \"".$username."\" had been Registed. Please try another username. <br><br>Return to <a href=\"register.html\">Register</a>.");
+				die("This username \"".$username."\" had been Registed. Please try another username. <br><br>Return to <a href=\"register.php\">Register</a>.");
 			}
 		} 
 
@@ -49,7 +49,7 @@
 
 	$conn = null;
   } else {
-	die ("You must enter all fields!  <br><br>Return to <a href=\"register.html\">Register</a>.");
+	die ("You must enter all fields!  <br><br>Return to <a href=\"register.php\">Register</a>.");
   }
 
 

@@ -1,5 +1,9 @@
 <?php 
+<<<<<<< HEAD
 $conn = new mysqli("localhost","root","","cellfish");
+=======
+$conn = new mysqli("localhost","root","root","cellfish");
+>>>>>>> 8afc3b0
 session_start();
 ?>
 <!DOCTYPE html>
