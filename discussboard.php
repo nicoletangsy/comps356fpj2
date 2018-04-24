@@ -186,6 +186,10 @@ function myFunction() {
 					<?php }
 					echo $row['content'];?><br>
 					Post At: <?php echo $row['post_date'];?>
+					<?php if (isset($row['last_modifies'])) { ?>
+						
+					<br> Last Modified At: <?php echo $row['last_modifies'];?>
+					<?php } ?>
 					</td>
 				</tr>
 						</table>
@@ -225,6 +229,10 @@ function myFunction() {
 					<?php }
 					echo $row2['content'];?><br>
 					Post At: <?php echo $row2['post_date'];?>
+					<?php if (isset($row2['last_modifies'])) { ?>
+						
+					<br> Last Modified At: <?php echo $row2['last_modifies'];?>
+					<?php } ?>
 					</td>
 					<td>
 					<?php if (isset($_SESSION['username'])) { ?>
@@ -252,7 +260,7 @@ function myFunction() {
 						?>
 						<tr>
 						<td></td>
-						<td><a href="profile.php?username=<?php echo $row3['reply_user'];?>"><?php echo $row3['reply_user'];?></a>'s reply #<?php echo $row3['reply_id'];?>: <?php echo $row3['reply_content'];?><br>
+						<td><br><a href="profile.php?username=<?php echo $row3['reply_user'];?>"><?php echo $row3['reply_user'];?></a>'s reply : <?php echo $row3['reply_content'];?><br>
 						Replied At: <?php echo $row3['reply_date']?>
 						</td>
 						<td>

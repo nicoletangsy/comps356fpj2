@@ -79,13 +79,13 @@ session_start();
 					}
 			   </style>
 <style>
-.btn {
-    background-color: #777777;
-    color: white;
-    padding: 10px;
-    font-size: 12px;
-    border: none;
-}
+ .btn {
+     background-color: #777777;
+	 color: white;
+     padding: 10px;
+     font-size: 12px;
+     border: none;
+ }
 
 .dropdown {
     position: absolute;
@@ -98,27 +98,54 @@ session_start();
     background-color: #f1f1f1;
     min-width: 250px;
     z-index: 1;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    border-radius:8px;
 }
 
-.dropdown-content a {
-    color: black;
-    padding: 1px 2px;
-    text-decoration: none;
-    display: block;
-	font-size: 12px;
-}
-
+ .dropdown-content a {
+     color: black;
+    padding: 2px 4px;
+     text-decoration: none;
+     display: block;
+ 	font-size: 12px;
+	border-radius:8px;
+ }
+ 
 .dropdown-content a:hover {background-color: #ddd}
 
 .dropdown:hover .dropdown-content {
     display: block;
 	color: white;
 }
-
-.btn:hover, .dropdown:hover .btn {
-    background-color: #222222;
+ 
+ .btn:hover, .dropdown:hover .btn {
+     background-color: #222222;
+ }
+ 
+input[type=submit] {
+	float: right;
+    width: 100px;
+    background-color: #fb6e14;
+    color: white;
+    padding: 10px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
 }
-</style>
+
+textarea{
+	border-radius: 8px;
+	height: 150px;
+	width: 400px;
+}
+
+.tpost{
+	padding: 10px;
+	border-bottom: 3px;
+}
+
+ </style>
 			   <script>
 // When the user clicks on div, open the popup
 function myFunction() {
@@ -156,7 +183,7 @@ function myFunction() {
 					<textarea name="content" placeholder="Enter text here..."><?php 
 					echo $row2['content'];?></textarea><br>
 					<label for="image">Upload Picture: </label><input name="image" type="file">
-					<input type="submit" value = "Post">
+					<input type="submit" value = "Post" style="float: left;">
 					</form>
 					</td>
 					<td>

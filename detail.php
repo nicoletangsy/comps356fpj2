@@ -3,9 +3,8 @@ require_once("database.php");
 session_start();
 ?>
 <?php
-	require_once('database.php');
 	if (!isset($_GET['id'])){
-		header("Location: index.html");
+		header("Location: index.php");
 	}
 	$id = $_GET["id"];
 	$sth = $conn->prepare("SELECT Title,Content,Image,DateTime,likeNo FROM Post where Id=$id ORDER BY likeNo desc");
