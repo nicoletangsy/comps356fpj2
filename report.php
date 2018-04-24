@@ -11,7 +11,7 @@ if(isset($_GET['reid'], $_GET['board_id'])){
     $reportid = (int)$_GET['reid'];
     $reportpost_id = (int)$_GET['board_id'];
 
-        $exists = $conn->query("SELECT id FROM board WHERE id = {$reportpost_id}")->num_rows ? true : false;
+        $exists = $conn->query("SELECT board_id FROM board WHERE board_id = {$reportpost_id}")->num_rows ? true : false;
         $existsusername = $conn->query("SELECT report_user FROM reportpost WHERE report_user = '{$user}' AND reportpost_id = {$reportpost_id}")->num_rows ? true : false;
 
         if($existsusername){

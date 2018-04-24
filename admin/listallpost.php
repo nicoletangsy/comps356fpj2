@@ -32,9 +32,9 @@
               <tbody>
                 <?php 
   							foreach ($result as $aa){
-  								echo "<tr><td>".$aa['id'].
-								"</td><td><a href='viewpost.php?Id=".$aa["id"]."'>"
-								.$aa["content"]."</a></td><td>".$aa['post_user']."</td><td>".$aa['post_date']."</td><td><a style='cursor: pointer;'  onclick='deletepost(".$aa['id'].")'>&times</a></td></tr>";
+  								echo "<tr><td>".$aa['board_id'].
+								"</td><td><a href='viewpost.php?Id=".$aa["board_id"]."'>"
+								.$aa["content"]."</a></td><td>".$aa['post_user']."</td><td>".$aa['post_date']."</td><td><a style='cursor: pointer;'  onclick='deletepost(".$aa['board_id'].")'>&times</a></td></tr>";
 							  }
 						    ?>
               </tbody>

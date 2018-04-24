@@ -83,12 +83,13 @@ CREATE TABLE members (
 
 -- create table for holding discuss board's comment
 CREATE TABLE board (
-    id INT UNSIGNED NOT NULL AUTO_INCREMENT, 
+    board_id INT UNSIGNED NOT NULL AUTO_INCREMENT, 
 	content LONGTEXT NOT NULL,
 	post_user VARCHAR(20) NOT NULL,
 	post_date datetime NOT NULL, 
+	last_modifies datetime, 
 	board_avatar_base64 LONGTEXT, 
-	PRIMARY KEY (id), 
+	PRIMARY KEY (board_id), 
 	FOREIGN KEY (post_user) references members(username)
 );
 
@@ -112,7 +113,7 @@ CREATE TABLE replyboard (
 	reply_to INT UNSIGNED NOT NULL,
 	PRIMARY KEY (reply_id), 
 	FOREIGN KEY (reply_user) references members(username), 
-	FOREIGN KEY (reply_to) references board(id)
+	FOREIGN KEY (reply_to) references board(board_id)
 );
 
 
@@ -125,7 +126,7 @@ CREATE TABLE reportpost (
 	reason CHAR(1) NOT NULL, 
 	PRIMARY KEY (report_id), 
 	FOREIGN KEY (report_user) references members(username), 
-	FOREIGN KEY (reportpost_id) references board(id)
+	FOREIGN KEY (reportpost_id) references board(board_id)
 );
 
 -- create table for holding reports of comments in discuss board

@@ -1,6 +1,6 @@
 <?php include("header.php"); ?>
 <?php
-	$sth = $conn->prepare("SELECT * FROM reportpost, board where board.id=reportpost_id");
+	$sth = $conn->prepare("SELECT * FROM reportpost, board where board.board_id=reportpost_id");
 	$sth->execute();
     $result = $sth->fetchAll();
 ?>
@@ -40,9 +40,9 @@
 								} else {
 									$reason = "Others";
 								}
-  								echo "<td><a href='viewpost.php?Id=".$aa["id"]."'>"
+  								echo "<td><a href='viewpost.php?Id=".$aa["board_id"]."'>"
 								.$aa["content"]."</a></td><td>".$reason."</td><td><a href='../profile.php?username=".$aa['report_user']."'>".$aa['report_user']."</a></td><td>".$aa['report_date'].
-								"</td><td><a style='cursor: pointer;'  onclick='deletepost(".$aa['id'].")'>&times</a></td><td><a style='cursor: pointer;'  onclick='deletereportpost(".$aa['report_id'].")'>&times</a></td></tr>";
+								"</td><td><a style='cursor: pointer;'  onclick='deletepost(".$aa['board_id'].")'>&times</a></td><td><a style='cursor: pointer;'  onclick='deletereportpost(".$aa['report_id'].")'>&times</a></td></tr>";
 							  }
 						    ?>
               </tbody>

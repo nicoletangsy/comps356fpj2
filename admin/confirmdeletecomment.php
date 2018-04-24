@@ -6,6 +6,6 @@
 	$sth = $conn->prepare($aaa);
     print_r($sth->execute());
 	$postid = $_GET['postid'];
-    header("Location: viewpost.php?Id=$postid");
+    header("Location: listcommentreports.php");
 
 ?>

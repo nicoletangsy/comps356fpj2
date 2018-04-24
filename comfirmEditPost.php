@@ -17,12 +17,13 @@
 			} else {
 				$base64 = "";
 			}
+		$bid = (int)$_GET['board_id'];
 		$username = $_SESSION['username'];
 		$content = nl2br($_POST['content']);
 		$d=strtotime("+8 Hours");
 		$date=date('Y-m-d H:i:s', $d);
 		
-		$sql = "insert into board (post_user, post_date, content, board_avatar_base64) values ('" .$username. "', '" .$date. "', '" .$content. "', '" .$base64. "')";
+		$sql = "update board set content = '".$content."', last_modifies = '".$date."', board_avatar_base64 = '".$base64."' where board_id = ".$bid;
 		$conn->exec($sql);
 		} catch(PDOException $e)
 		{
