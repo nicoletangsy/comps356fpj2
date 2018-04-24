@@ -42,7 +42,7 @@
 								}
   								echo "<td><a href='viewpost.php?Id=".$aa["board_id"]."'>"
 								.$aa["content"]."</a></td><td>".$reason."</td><td><a href='../profile.php?username=".$aa['report_user']."'>".$aa['report_user']."</a></td><td>".$aa['report_date'].
-								"</td><td><a style='cursor: pointer;'  onclick='deletepost(".$aa['board_id'].")'>&times</a></td><td><a style='cursor: pointer;'  onclick='deletereportpost(".$aa['report_id'].")'>&times</a></td></tr>";
+								"</td><td><a style='cursor: pointer;'  onclick='confirmdeletepost(".$aa['report_id'].")'>&times</a></td><td><a style='cursor: pointer;'  onclick='deletereportpost(".$aa['report_id'].")'>&times</a></td></tr>";
 							  }
 						    ?>
               </tbody>
@@ -121,9 +121,9 @@ function getCookie(cname) {
 	      window.location = 'deletereportpost.php?Id='+a;
 	       }
 	   }
-	   function deletepost(a){
+	   function confirmdeletepost(a){
 	       if(confirm("Are are sure?")){
-	      window.location = 'comfirmdeletepost.php?Id='+a;
+	      window.location = 'confirmdeletepost.php?Id='+a;
 	       }
 	   }
     </script>

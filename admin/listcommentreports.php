@@ -43,7 +43,7 @@
 								}
   								echo "<td>".$aa["reply_content"].
 								"</td><td><a href='../profile.php?username=".$aa['reply_user']."'>".$aa['reply_user']."</a></td><td>".$reason."</td><td><a href='../profile.php?username=".$aa['report_user']."'>".$aa['report_user']."</a></td><td>".$aa['report_date'].
-								"</td><td><a style='cursor: pointer;'  onclick='confirmdeletecomment(".$aa['reply_id'].", ".$aa['report_id'].")'>&times</a></td><td><a style='cursor: pointer;'  onclick='deletereportcomment(".$aa['report_id'].")'>&times</a></td></tr>";
+								"</td><td><a style='cursor: pointer;'  onclick='confirmdeletecomment(".$aa['report_id'].")'>&times</a></td><td><a style='cursor: pointer;'  onclick='deletereportcomment(".$aa['report_id'].")'>&times</a></td></tr>";
 							  }
 						    ?>
               </tbody>
@@ -122,9 +122,9 @@ function getCookie(cname) {
 	      window.location = 'deletereportcomment.php?Id='+a;
 	       }
 	   }
-	   function confirmdeletecomment(a, b){
+	   function confirmdeletecomment(a){
 	       if(confirm("Are are sure?")){
-	      window.location = 'deletereportcomment.php?Id='+a+'&rid='+b;
+	      window.location = 'confirmdeletecomment.php?Id='+a;
 	       }
 	   }
     </script>
