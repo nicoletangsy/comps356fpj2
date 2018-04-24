@@ -1,4 +1,5 @@
 <?php 
+
 $conn = new mysqli("localhost","root","","cellfish");
 session_start();
 ?>
@@ -76,7 +77,6 @@ session_start();
 						height:auto;
 						width:auto;
 					}
-					/* Popup container - can be anything you want */
 			   </style>
 <style>
 .btn {
@@ -98,14 +98,17 @@ session_start();
     background-color: #f1f1f1;
     min-width: 250px;
     z-index: 1;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    border-radius:8px;
 }
 
 .dropdown-content a {
     color: black;
-    padding: 1px 2px;
+    padding: 2px 4px;
     text-decoration: none;
     display: block;
 	font-size: 12px;
+	border-radius:8px;
 }
 
 .dropdown-content a:hover {background-color: #ddd}
@@ -114,10 +117,34 @@ session_start();
     display: block;
 	color: white;
 }
+	
 
 .btn:hover, .dropdown:hover .btn {
     background-color: #222222;
 }
+
+input[type=submit] {
+	float: right;
+    width: 100px;
+    background-color: #fb6e14;
+    color: white;
+    padding: 10px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+textarea{
+	border-radius: 8px;
+	height: 150px;
+	width: 400px;
+}
+
+.tpost{
+	border-bottom: 3px;
+}
+
 </style>
 			   <script>
 // When the user clicks on div, open the popup
@@ -186,17 +213,21 @@ function myFunction() {
 					Post At: <?php echo $row2['post_date'];?>
 					</td>
 					<td>
+
+					<?php if (isset($_SESSION['username'])) { ?>
 					<div class="dropdown">
 					<button class="btn" style="border-left:1px solid #0d8bf2">
 					<i class="fa fa-caret-down">Report</i>
 					</button>
 					<div class="dropdown-content">
-					<a href="report.php?reid=1">This content contains violent message.</a>
-					<a href="report.php?reid=2">This content contains pornography.</a>
-					<a href="report.php?reid=3">Other inappropriate content.</a>
+					<a href="report.php?reid=1&board_id=<?php echo $i?>">This content contains violent message.</a>
+					<a href="report.php?reid=2&board_id=<?php echo $i?>">This content contains pornography.</a>
+					<a href="report.php?reid=3&board_id=<?php echo $i?>">Other inappropriate content.</a>
 					</div>
 					</div>
 					</td>
+					<?php } ?>
+
 				</tr>
 				<?php
 				$sql3 = "select reply_id, reply_to, reply_user, reply_date, reply_content from board, replyboard where board.id=reply_to and board.id = " .$i. " order by reply_date";
@@ -212,16 +243,21 @@ function myFunction() {
 						Replied At: <?php echo $row3['reply_date']?>
 						</td>
 						<td>
+					
+						<?php if (isset($_SESSION['username'])) { ?>
 					<div class="dropdown">
 					<button class="btn" style="border-left:1px solid #0d8bf2">
 					<i class="fa fa-caret-down">Report</i>
 					</button>
 					<div class="dropdown-content">
-					<a href="report.php?reid=1?">This content contains violent message.</a>
-					<a href="report.php?reid=2?">This content contains pornography.</a>
-					<a href="report.php?reid=3?">Other inappropriate content.</a>
+					<a href="reportcomment.php?reid=1&reply_id=<?php echo $j?>">This content contains violent message.</a>
+					<a href="reportcomment.php?reid=2&reply_id=<?php echo $j?>">This content contains pornography.</a>
+					<a href="reportcomment.php?reid=3&reply_id=<?php echo $j?>">Other inappropriate content.</a>
 					</div>
 					</div>
+					</td>
+
+					<?php }?>
 					</tr>
 						</tr>
 				<?php
@@ -231,7 +267,7 @@ function myFunction() {
 				<tr>
 				<td colspan=2>
 				<form action="replypost.php?postid=<?php echo $i?>" method="POST" enctype="multipart/form-data">
-				<input name="reply" placeholder="Leave your reply here..."/>
+				<input name="reply" placeholder="Leave your reply here..." style="color: black;" />
 				<input type="submit" value = "Reply">
 				</form>
 				</td>
@@ -248,15 +284,15 @@ function myFunction() {
 			<?php if(isset($_SESSION['username'])) {
 			?>
 			<div class="post">
-			<table class="tpost">
+			<table class="tpost" style="border: none;">
 			<form action="newpost.php" method="POST" enctype="multipart/form-data">
 			<tr><th><label>Leave you experience here!</label></th></tr>
 			<tr>
 			<td>
-			<textarea name="content" placeholder="Enter text here..."></textarea><br>
+			<textarea name="content" placeholder="Enter text here..." style="color: black;"></textarea><br>
 			<label for="image">Upload Picture: </label>
 			<input name="image" type="file">
-			<input type="submit" value = "Post">
+			<input type="submit" value = "Post" style="float: left;">
 			</td>
 			</tr>
 			</form>
