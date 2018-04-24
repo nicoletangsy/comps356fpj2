@@ -1,6 +1,10 @@
 <?php
- $connection = mysqli_connect("localhost","root","","cellfish");
- ?>
+	require_once('database.php');
+	session_start();
+	$sth = $conn->prepare("SELECT Id, type, Title FROM Post order by DateTime desc");
+	$sth->execute();
+    $result = $sth->fetchAll();
+?>
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
@@ -9,7 +13,7 @@
 	<head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Cellfish &mdash; Search Results</title>
+	<title>Cellfish &mdash; All News</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="description" content="Free HTML5 Template by FREEHTML5.CO" />
 	<meta name="keywords" content="free html5, free template, free bootstrap, html5, css3, mobile first, responsive" />
@@ -80,63 +84,28 @@
 		color:White;
 		font-size: 20px;
 	}
+	#type{
+		color:White;
+		font-size: 20px;
+	}
 
 </style>
 	</head>
-	<body class="bg-dark"><body>
 	<?php require("navbar.php");?>
-	<body class="bg-white">
-  <div class="container">
+<div id="fh5co-featured" data-section="features">
+			<div class="container">
+				<div class="row text-center fh5co-heading row-padded">
+					<div class="col-md-8 col-md-offset-2">
+						<p><a href="news.php">Hot News</a></p>
+						<h2 class="heading to-animate">All News of Cellfish</h2>
+						</div>
+						</div>
   <div id= "result">
-  <br><br>
-	<?php
-		if(isset($_POST['submit-search'])){
-			if(trim($_POST['title']) != ''){
-			$search = mysqli_real_escape_string($connection, trim($_POST['title']));
-			$sql = "SELECT * FROM Post WHERE Title LIKE '%$search%' OR Introduction LIKE '%$search%' OR Content LIKE '%$search%'";
-			$result = mysqli_query($connection, $sql);
-			$queryResult = mysqli_num_rows($result);
-
-			echo "<h2>There are ".$queryResult." results!</h2> ";
-			if($queryResult > 0){
-				while($row = mysqli_fetch_assoc($result)){
-					echo "<div id='result'>
-					<a href ='detail.php?id=".$row['Id']."'> <h3>".$row['Title']."</h3></a>
-					<p>".$row['Introduction']."</p>
-					</div>";
-				}
-			}
-			}else
-		{
-			echo "<br>  <font color='white'>There are no results matching your search!</font>";
-		}
-		 } else if(isset($_POST['submit-searchpost']))
-			{
-				if(trim($_POST['post'] != '')){
-				$search = mysqli_real_escape_string($connection, trim($_POST['post']));
-				$sql = "SELECT * FROM board WHERE content LIKE '%$search%' OR post_user LIKE '%$search%' ORDER BY post_date";
-				$result = mysqli_query($connection, $sql);
-				$queryResult = mysqli_num_rows($result);
-
-				echo "<h2>There are ".$queryResult." results!</h2>";
-			if($queryResult > 0){
-				while($row = mysqli_fetch_assoc($result)){
-					echo "<div id='result'>
-					<h3>".$row['content']."</h3>
-					<div id='useruser'>by user <a href='profile.php?username=".$row['post_user']."'>".$row['post_user']."</a></div><div id='datedate'>".$row['post_date']."</div>
-					</div>";
-				}
-			}
-		}else
-		{
-			echo "<br>  <font color='white'>There are no results matching your search!</font>";
-		}
-	}else
-			{
-				echo "<br> <font color='white'> There are no results matching your search!</font>";
-			}
-			
-			?>
+	<?php 
+  							foreach ($result as $aa){
+  								echo "<div id='result'><font color='white'>".$aa['type'].":</font> <a href='detail.php?id=".$aa["Id"]."'>".$aa["Title"]."</a></div>";
+							  }
+						    ?>
 		</div>
   </div>
   <br><br>

@@ -1,7 +1,7 @@
 <?php
 	require_once('database.php');
 	session_start();
-	$sth = $conn->prepare("SELECT Id,Title,Introduction,Image,type FROM Post ORDER BY likeNo desc");
+	$sth = $conn->prepare("SELECT Id,Title,Introduction,Image,type FROM Post where Image <> 'data:image/;base64,' ORDER BY likeNo desc");
     $sth->execute();
     $result = $sth->fetchAll();
 ?>
@@ -65,6 +65,7 @@
 			<div class="container">
 				<div class="row text-center fh5co-heading row-padded">
 					<div class="col-md-8 col-md-offset-2">
+						<p><a href="allnews.php">All News</a></p>
 						<h2 class="heading to-animate">Hot News of Cellfish</h2>
 						
 					</div>
