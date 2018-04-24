@@ -55,155 +55,12 @@
 	<!--[if lt IE 9]>
 	<script src="js/respond.min.js"></script>
 	<![endif]-->
-	<style>
-	/* Set height of body and the document to 100% to enable "full page tabs" */
-body, html {
-  height: 100%;
-  margin: 0;
-}
 
-/* Style tab links */
-.tablink {
-  background-color: #111;
-  color: white;
-  float: left;
-  border: none;
-  outline: none;
-  cursor: pointer;
-  padding: 14px 16px;
-  font-size: 17px;
-  width: 33%;
-}
-
-.tablink:hover {
-  background-color: #fff;
-  color: #777;
-}
-
-/* Style the tab content (and add height:100% for full page content) */
-.tabcontent {
-  display: none;
-  height: 100%;
-}
-
-
-	</style>
-
-	<script>
-	function openPage(pageName, elmnt, color) {
-    // Hide all elements with class="tabcontent" by default */
-    var i, tabcontent, tablinks;
-    tabcontent = document.getElementsByClassName("tabcontent");
-    for (i = 0; i < tabcontent.length; i++) {
-        tabcontent[i].style.display = "none";
-    }
-
-    // Remove the background color of all tablinks/buttons
-    tablinks = document.getElementsByClassName("tablink");
-    for (i = 0; i < tablinks.length; i++) {
-        tablinks[i].style.backgroundColor = "";
-    }
-
-    // Show the specific tab content
-    document.getElementById(pageName).style.display = "block";
-
-    // Add the specific color to the button used to open the tab content
-    elmnt.style.backgroundColor = color;
-}
-
-// Get the element with id="defaultOpen" and click on it
-document.getElementById("defaultOpenThisTab").click();
-	</script>
-	
 	</head>
 	<body>
+	
 <?php require("navbar.php");?>
-<br>
-<button class="tablink" onclick="openPage('Hot', this, 'grey')" id="defaultOpenThisTab">Hot News</button>
-<button class="tablink" onclick="openPage('Latest', this, 'grey')">Latest News</button>
-<button class="tablink" onclick="openPage('All', this, 'grey')">All News</button>
 
-
-<div id="Hot" class="tabcontent">
-	<div id="fh5co-featured" data-section="features">
-			<div class="container">
-				<div class="row text-center fh5co-heading row-padded">
-					<div class="col-md-8 col-md-offset-2">
-						<h2 class="heading to-animate">Hot News of Cellfish</h2>
-						
-					</div>
-				</div>
-				<div class="row">
-					<div class="fh5co-grid">
-						<div class="fh5co-v-half to-animate-2">
-							<div class="fh5co-v-col-2 fh5co-bg-img" style="background-image: url(<?=$result[0]['Image']?>)"></div>
-							<div class="fh5co-v-col-2 fh5co-text fh5co-special-1 arrow-left">
-								<h2><?=$result[0]['Title'] ?></h2>
-								<p><?=$result[0]['Introduction'] ?></p>
-								<a href="detail.php?id=<?=$result[0]['Id']?>"><input type="submit" class="am-btn am-btn-secondary" value="More Details"></a>
-							</div>
-						</div>
-						<div class="fh5co-v-half">
-							<div class="fh5co-h-row-2 to-animate-2">
-								<div class="fh5co-v-col-2 fh5co-bg-img" style="background-image: url(<?=$result[1]['Image']?>)"></div>
-								<div class="fh5co-v-col-2 fh5co-text arrow-left">
-									<h2><?=$result[1]['Title'] ?></h2>
-									<p><?=$result[1]['Introduction'] ?></p>
-									<a href="detail.php?id=<?=$result[1]['Id']?>"><input type="submit" class="am-btn am-btn-secondary" value="More Details"></a>
-								</div>
-							</div>
-							<div class="fh5co-h-row-2 fh5co-reversed to-animate-2">
-								<div class="fh5co-v-col-2 fh5co-bg-img" style="background-image: url(<?=$result[2]['Image']?>)"></div>
-								<div class="fh5co-v-col-2 fh5co-text arrow-right">
-									<h2><?=$result[2]['Title'] ?></h2>
-									<p><?=$result[2]['Introduction'] ?></p>
-									<a href="detail.php?id=<?=$result[2]['Id']?>"><input type="submit" class="am-btn am-btn-secondary" value="More Details"></a>
-								</div>
-							</div>
-						</div>
-
-						<div class="fh5co-v-half">
-
-							<div class="fh5co-h-row-2 to-animate-2">
-								<div class="fh5co-v-col-2 fh5co-bg-img" style="background-image: url(<?=$result[4]['Image']?>)"></div>
-								<div class="fh5co-v-col-2 fh5co-text arrow-left">
-									<h2>Salad with Crispy Chicken</h2>
-									<h2><?=$result[4]['Title'] ?></h2>
-									<p><?=$result[4]['Introduction'] ?></p>
-									<a href="detail.php?id=<?=$result[4]['Id']?>"><input type="submit" class="am-btn am-btn-secondary" value="More Details"></a>
-								</div>
-							</div>
-						</div>
-						<div class="fh5co-v-half to-animate-2">
-							<div class="fh5co-v-col-2 fh5co-bg-img" style="background-image: url(<?=$result[5]['Image']?>)"></div>
-							<div class="fh5co-v-col-2 fh5co-text fh5co-special-1 arrow-left">
-								<h2><?=$result[5]['Title'] ?></h2>
-								<p><?=$result[5]['Introduction'] ?></p>
-								<a href="detail.php?id=<?=$result[5]['Id']?>"><input type="submit" class="am-btn am-btn-secondary" value="More Details"></a>
-							</div>
-						</div>
-
-					</div>
-				</div>
-
-			</div>
-		</div>
-</div>
-
-<div id="Latest" class="tabcontent">
-  <h3>News</h3>
-  <p>Some news this fine day!</p> 
-</div>
-
-<div id="All" class="tabcontent">
-  <h3>Contact</h3>
-  <p>Get in touch, or swing by for a cup of coffee.</p>
-</div>
-
-<div id="About" class="tabcontent">
-  <h3>About</h3>
-  <p>Who we are and what we do.</p>
-</div>
         <div id="fh5co-featured" data-section="features">
 			<div class="container">
 				<div class="row text-center fh5co-heading row-padded">
@@ -267,4 +124,125 @@ document.getElementById("defaultOpenThisTab").click();
 
 			</div>
 		</div>
+<div id="fh5co-menus" >
+			<div class="container">
+				<div class="row text-center fh5co-heading row-padded">
+					<div class="col-md-8 col-md-offset-2">
+						<h2 class="heading to-animate">News</h2>
+					</div>
+				</div>
+				<div class="row row-padded">
+					<div class="col-md-6">
+						<div class="fh5co-food-menu to-animate-2">
+							<h2 class="fh5co-drinks">Accident</h2>
+							<ul>
+								<?php
+									$postC = $conn->prepare("SELECT Id,Title,Introduction,Image,type FROM Post where type='Accident' ORDER BY likeNo desc");
+	    							$postC->execute();
+	    							$posts = $postC->fetchAll();
+									for($i=0;$i<count($posts);$i++){
+										
+									
+								?>
+								<li>
+									<div class="fh5co-food-desc">
+										<figure>
+										</figure>
+										<div>
+											<h3><a href="detail.php?id=<?=$posts[$i]["Id"]?>"><?=$posts[$i]["Title"]?></a></h3>
+										</div>
+									</div>
+								</li>
+								<?php
+									}
+								?>
+							</ul>
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="fh5co-food-menu to-animate-2">
+							<h2 class="fh5co-dishes">Health</h2>
+							<ul>
+								<?php
+									$postC = $conn->prepare("SELECT Id,Title,Introduction,Image,type FROM Post where type='Health' ORDER BY likeNo desc");
+	    							$postC->execute();
+	    							$posts = $postC->fetchAll();
+									for($i=0;$i<count($posts);$i++){
+										
+									
+								?>
+								<li>
+									<div class="fh5co-food-desc">
+										<figure>
+										</figure>
+										<div>
+											<h3><a href="detail.php?id=<?=$posts[$i]["Id"]?>"><?=$posts[$i]["Title"]?></a></h3>
+										</div>
+									</div>
+								</li>
+								<?php
+									}
+								?>
+							</ul>
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="fh5co-food-menu to-animate-2">
+							<h2 class="fh5co-drinks">Mobile Addiction</h2>
+							<ul>
+								<?php
+									$postC = $conn->prepare("SELECT Id,Title,Introduction,Image,type FROM Post where type='Mobile Addiction' ORDER BY likeNo desc");
+	    							$postC->execute();
+	    							$posts = $postC->fetchAll();
+									for($i=0;$i<count($posts);$i++){
+										
+									
+								?>
+								<li>
+									<div class="fh5co-food-desc">
+										<figure>
+										</figure>
+										<div>
+											<h3><a href="detail.php?id=<?=$posts[$i]["Id"]?>"><?=$posts[$i]["Title"]?></a></h3>
+										</div>
+									</div>
+								</li>
+								<?php
+									}
+								?>
+							</ul>
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="fh5co-food-menu to-animate-2">
+							<h2 class="fh5co-dishes">Patients</h2>
+							<ul>
+								<?php
+									$postC = $conn->prepare("SELECT Id,Title,Introduction,Image,type FROM Post where type='Patients' ORDER BY likeNo desc");
+	    							$postC->execute();
+	    							$posts = $postC->fetchAll();
+									for($i=0;$i<count($posts);$i++){
+										
+									
+								?>
+								<li>
+									<div class="fh5co-food-desc">
+										<figure>
+										</figure>
+										<div>
+											<h3><a href="detail.php?id=<?=$posts[$i]["Id"]?>"><?=$posts[$i]["Title"]?></a></h3>
+										</div>
+									</div>
+								</li>
+								<?php
+									}
+								?>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		
+	</div>
 <?php require("footer.php");?>
