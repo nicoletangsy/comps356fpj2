@@ -80,13 +80,28 @@ session_start();
 			   </style>
 <style>
  .btn {
-     background-color: #f1f1f1;
-     min-width: 250px;
-     z-index: 1;
+     background-color: #777777;
+	 color: white;
+     padding: 10px;
+     font-size: 12px;
+     border: none;
+ }
+
+.dropdown {
+    position: absolute;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 250px;
+    z-index: 1;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     border-radius:8px;
- }
- 
+}
+
  .dropdown-content a {
      color: black;
     padding: 2px 4px;
@@ -96,10 +111,12 @@ session_start();
 	border-radius:8px;
  }
  
- .dropdown-content a:hover {background-color: #ddd}
+.dropdown-content a:hover {background-color: #ddd}
+
+.dropdown:hover .dropdown-content {
     display: block;
- 	color: white;
- }	
+	color: white;
+}
  
  .btn:hover, .dropdown:hover .btn {
      background-color: #222222;
@@ -124,8 +141,8 @@ textarea{
 }
 
 .tpost{
+	padding: 10px;
 	border-bottom: 3px;
-	width: 100%;
 }
 
  </style>
@@ -147,15 +164,22 @@ function myFunction() {
 				if ($result->num_rows > 0) {
 					While ($row = $result->fetch_assoc()) {
 						?>
-						<table class="tpost"><tr><td colspan="2"><?php echo "Post: ". $row['board_id'];?></td></tr>
+						<table class="tpost"><tr><td><?php echo "Post: ". $row['board_id'];?></td>
+						<td>
+						<?php if($_SESSION['username']==$row['post_user'] ) {?>
+					<div class="dropdown">
+					<button class="btn" style="border-left:1px solid #0d8bf2"><a href="editPost.php?board_id=<?php echo $row['board_id']?>">
+					<i class="fa fa-caret-down">Edit Post</i></a>
+					</button></div><br>
+					<?php }?>
+						</td></tr>
 				<tr>
 				<td>
 					<img src="<?php if (($row['avatar_base64']=='') || ($row['avatar_base64']=='data:image/;base64,')) { echo "user.png";} else
 				{ echo $row['avatar_base64'];}?>" height=120 width=120></img><br>
 					User: <a href="profile.php?username=<?php echo $row['post_user'];?>"><?php echo $row['post_user'];?></a>
 				</td>
-					<td>
-					<?php 
+					<td><?php 
 					if (!(($row['board_avatar_base64']=='') || ($row['board_avatar_base64']=='data:image/;base64,'))) {
 						?>
 						<img class="ipost" src="<?php echo $row['board_avatar_base64']?>"/><br>
@@ -178,7 +202,15 @@ function myFunction() {
 					While ($row2 = $result2->fetch_assoc()) {
 						$i = $row2['board_id'];
 						?>
-						<table class="tpost"><tr><td colspan="2"><?php echo "Post: ".$row2['board_id'];?></td></tr>
+						<table class="tpost"><tr><td><?php echo "Post: ".$row2['board_id'];?></td>
+						<td>
+						<?php if($_SESSION['username']==$row2['post_user'] ) {?>
+					<div class="dropdown">
+					<button class="btn" style="border-left:1px solid #0d8bf2"><a href="editPost.php?board_id=<?php echo $row2['board_id']?>">
+					<i class="fa fa-caret-down">Edit Post</i></a>
+					</button></div><br>
+					<?php }?>
+						</td></tr>
 				<tr>
 				<td>
 					<img src="<?php if (($row2['avatar_base64']=='') || ($row2['avatar_base64']=='data:image/;base64,')) { echo "user.png";} else
@@ -195,13 +227,7 @@ function myFunction() {
 					Post At: <?php echo $row2['post_date'];?>
 					</td>
 					<td>
-
 					<?php if (isset($_SESSION['username'])) { ?>
-					<?php if($_SESSION['username']==$row2['post_user'] ) {?>
-					<button class="btn" style="border-left:1px solid #0d8bf2"><a href="editPost.php?board_id=<?php echo $row2['board_id']?>">
-					<i class="fa fa-caret-down">Edit Post</i></a>
-					</button>
-					<?php }?>
 					<div class="dropdown">
 					<button class="btn" style="border-left:1px solid #0d8bf2">
 					<i class="fa fa-caret-down">Report</i>
@@ -247,6 +273,7 @@ function myFunction() {
 					<?php }?>
 					</tr>
 						</tr>
+
 				<?php
 					}
 				}
@@ -270,7 +297,7 @@ function myFunction() {
 			<?php if(isset($_SESSION['username'])) {
 			?>
 			<div class="post">
-			<table class="tpost" style="border: none;>
+			<table class="tpost" style="border: none;">
 			<form action="newpost.php" method="POST" enctype="multipart/form-data">
 			<tr><th><label>Leave you experience here!</label></th></tr>
 			<tr>
