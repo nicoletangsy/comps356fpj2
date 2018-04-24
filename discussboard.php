@@ -79,46 +79,56 @@ session_start();
 					}
 			   </style>
 <style>
-.btn {
-    background-color: #777777;
+ .btn {
+     background-color: #f1f1f1;
+     min-width: 250px;
+     z-index: 1;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    border-radius:8px;
+ }
+ 
+ .dropdown-content a {
+     color: black;
+    padding: 2px 4px;
+     text-decoration: none;
+     display: block;
+ 	font-size: 12px;
+	border-radius:8px;
+ }
+ 
+ .dropdown-content a:hover {background-color: #ddd}
+    display: block;
+ 	color: white;
+ }	
+ 
+ .btn:hover, .dropdown:hover .btn {
+     background-color: #222222;
+ }
+ 
+input[type=submit] {
+	float: right;
+    width: 100px;
+    background-color: #fb6e14;
     color: white;
-    padding: 10px;
-    font-size: 12px;
+    padding: 10px 20px;
+    margin: 8px 0;
     border: none;
+    border-radius: 8px;
+    cursor: pointer;
 }
 
-.dropdown {
-    position: absolute;
-    display: inline-block;
+textarea{
+	border-radius: 8px;
+	height: 150px;
+	width: 400px;
 }
 
-.dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: #f1f1f1;
-    min-width: 250px;
-    z-index: 1;
+.tpost{
+	border-bottom: 3px;
+	width: 100%;
 }
 
-.dropdown-content a {
-    color: black;
-    padding: 1px 2px;
-    text-decoration: none;
-    display: block;
-	font-size: 12px;
-}
-
-.dropdown-content a:hover {background-color: #ddd}
-
-.dropdown:hover .dropdown-content {
-    display: block;
-	color: white;
-}
-
-.btn:hover, .dropdown:hover .btn {
-    background-color: #222222;
-}
-</style>
+ </style>
 			   <script>
 // When the user clicks on div, open the popup
 function myFunction() {
@@ -244,7 +254,7 @@ function myFunction() {
 				<tr>
 				<td colspan=2>
 				<form action="replypost.php?postid=<?php echo $row2['board_id']?>" method="POST" enctype="multipart/form-data">
-				<input name="reply" placeholder="Leave your reply here..."/>
+				<input name="reply" placeholder="Leave your reply here..." style="color: black;"/>
 				<input type="submit" value = "Reply">
 				</form>
 				</td>
@@ -260,15 +270,15 @@ function myFunction() {
 			<?php if(isset($_SESSION['username'])) {
 			?>
 			<div class="post">
-			<table class="tpost">
+			<table class="tpost" style="border: none;>
 			<form action="newpost.php" method="POST" enctype="multipart/form-data">
 			<tr><th><label>Leave you experience here!</label></th></tr>
 			<tr>
 			<td>
-			<textarea name="content" placeholder="Enter text here..."></textarea><br>
+			<textarea name="content" placeholder="Enter text here..." style="color: black;"></textarea><br>
 			<label for="image">Upload Picture: </label>
 			<input name="image" type="file">
-			<input type="submit" value = "Post">
+			<input type="submit" value = "Post" style="float: left;">
 			</td>
 			</tr>
 			</form>
