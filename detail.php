@@ -3,8 +3,9 @@ require_once("database.php");
 session_start();
 ?>
 <?php
+	require_once('database.php');
 	if (!isset($_GET['id'])){
-		header("Location: index.php");
+		header("Location: index.html");
 	}
 	$id = $_GET["id"];
 	$sth = $conn->prepare("SELECT Title,Content,Image,DateTime,likeNo FROM Post where Id=$id ORDER BY likeNo desc");
@@ -119,7 +120,7 @@ session_start();
 		<div id="content">
 			<div class="title">
 				<h2><?=$result['Title']?></h2>
-				<span class="byline"><?=$myDateTime->format('Y-m-d H:i');?></span> <i class="am-icon-thumbs-up" id="postLike" onclick="like(<?=$_GET['id']?>,'Post')">  <?=$result["likeNo"]?></i>
+				<span class="byline"><?=$myDateTime->format('Y-m-d H:i');?></span>
 
 				<div class="star-rating">
 						Rate this news:
@@ -171,7 +172,7 @@ session_start();
     $sc->execute();
     $scs = $sc->fetchAll(); foreach($scs as $sc){?><blockquote><?=$sc["IP"]?>: <?=$sc["Content"]?></blockquote><?php } ?>
     <br>
-      <i class="am-icon-thumbs-up" id="Comment<?=$comment["Id"]?>" onclick="like(<?=$comment["Id"]?>,'Comment')"> <?=$comment["likeNo"]?></i><a onclick="reply(<?=$comment["Id"]?>)">reply</a>
+      <a onclick="reply(<?=$comment["Id"]?>)">reply</a>
       <span style="display:none" id="Comment<?=$comment["Id"]?>ReplyBox"><input type="text" id="replytext<?=$comment["Id"]?>"><input type="submit" class="am-btn am-btn-secondary" value="Reply" onclick="saveReplay(<?=$comment["Id"]?>,document.getElementById('replytext<?=$comment["Id"]?>').value)"></span>
     </div>
   </div>
@@ -180,11 +181,11 @@ session_start();
 	}
   ?>
   
-  <form class="am-form" action="addComment.php" method="post">
+  <form class="am-form" action="addComment.php" method="POST">
   	<p></p>
   	<textarea style="margin-left: 63px; width:635px" rows="5" id="doc-ta-1" name="comment"></textarea>
   	<input type="hidden" value="<?=$id?>" name="id">
-  	<input type="submit" class="am-btn am-btn-secondary" style="margin-left: 550px;" value="Add Comment">
+  	<input type="submit" name="addComment" class="am-btn am-btn-secondary" style="margin-left: 550px;" value="Add Comment">
   </form>
 </article>
 		</div>
