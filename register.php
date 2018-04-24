@@ -55,6 +55,16 @@
 	<script src="js/respond.min.js"></script>
 	<![endif]-->
   
+  <style>
+    .container{
+      padding: 50px;
+    }
+
+    .form-control{
+      font-size: 15px;
+    }
+  </style>
+  
 </head>
 	<?php require("navbar.php");?>
 	
@@ -66,7 +76,7 @@
         <form action="comfirmregister.php" method="post">
 		<div class="form-group">
             <label for="exampleUsername">Username</label>
-            <input class="form-control" id="exampleUsername" name="username" type="username" aria-describedby="" placeholder="4-16 characters, contains only a-z, A-Z, 0-9">
+            <input class="form-control" id="exampleUsername" name="username" type="username" aria-describedby="" placeholder="4-16 characters">
         </div>
 		<div class="form-group">
             <div class="form-row">
