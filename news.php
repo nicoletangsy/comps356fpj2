@@ -1,7 +1,7 @@
 <?php
 	require_once('database.php');
 	session_start();
-	$sth = $conn->prepare("SELECT Id,Title,Introduction,Image,type FROM Post where Image <> 'data:image/;base64,' ORDER BY likeNo desc");
+	$sth = $conn->prepare("SELECT Id,Title,Introduction,Image,type, avg_rate from post where Image <> 'data:image/;base64,' ORDER BY avg_rate desc");
     $sth->execute();
     $result = $sth->fetchAll();
 ?>
@@ -138,7 +138,7 @@
 							<h2 class="fh5co-drinks">Accident</h2>
 							<ul>
 								<?php
-									$postC = $conn->prepare("SELECT Id,Title,Introduction,Image,type FROM Post where type='Accident' ORDER BY likeNo desc");
+									$postC = $conn->prepare("SELECT Id,Title,Introduction,Image,type, avg_rate from post where type='Accident' ORDER BY avg_rate desc");
 	    							$postC->execute();
 	    							$posts = $postC->fetchAll();
 									for($i=0;$i<count($posts);$i++){
@@ -165,7 +165,7 @@
 							<h2 class="fh5co-dishes">Health</h2>
 							<ul>
 								<?php
-									$postC = $conn->prepare("SELECT Id,Title,Introduction,Image,type FROM Post where type='Health' ORDER BY likeNo desc");
+									$postC = $conn->prepare("SELECT Id,Title,Introduction,Image,type, avg_rate from post where type='Health' ORDER BY avg_rate desc");
 	    							$postC->execute();
 	    							$posts = $postC->fetchAll();
 									for($i=0;$i<count($posts);$i++){
@@ -192,7 +192,7 @@
 							<h2 class="fh5co-drinks">Mobile Addiction</h2>
 							<ul>
 								<?php
-									$postC = $conn->prepare("SELECT Id,Title,Introduction,Image,type FROM Post where type='Mobile Addiction' ORDER BY likeNo desc");
+									$postC = $conn->prepare("SELECT Id,Title,Introduction,Image,type, avg_rate from post where type='Mobile Addiction' ORDER BY avg_rate desc");
 	    							$postC->execute();
 	    							$posts = $postC->fetchAll();
 									for($i=0;$i<count($posts);$i++){
@@ -219,7 +219,7 @@
 							<h2 class="fh5co-dishes">Patients</h2>
 							<ul>
 								<?php
-									$postC = $conn->prepare("SELECT Id,Title,Introduction,Image,type FROM Post where type='Patients' ORDER BY likeNo desc");
+									$postC = $conn->prepare("SELECT Id,Title,Introduction,Image,type, avg_rate from post where type='Patients' ORDER BY avg_rate desc");
 	    							$postC->execute();
 	    							$posts = $postC->fetchAll();
 									for($i=0;$i<count($posts);$i++){

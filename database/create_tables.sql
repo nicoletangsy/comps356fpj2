@@ -40,6 +40,7 @@ CREATE TABLE Post (
   Introduction text NOT NULL,
   Image longtext NOT NULL,
   likeNo int(20) NOT NULL,
+  avg_rate decimal(8,2) default 0,
   DateTime datetime NOT NULL,
   type varchar(30) NOT NULL,
   PRIMARY KEY (Id)
@@ -96,11 +97,11 @@ CREATE TABLE board (
 -- create table for holding users rating news data
 
 CREATE TABLE rating (
-  id int(11) NOT NULL AUTO_INCREMENT,
+  rate_id int(11) NOT NULL AUTO_INCREMENT,
   post_id int(11) NOT NULL,
   rating int(11) NOT NULL,
   username varchar(20) NOT NULL,
-  PRIMARY KEY (id), 
+  PRIMARY KEY (rate_id), 
   FOREIGN KEY (username) references members(username)
 );
 

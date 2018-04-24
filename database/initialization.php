@@ -37,7 +37,7 @@ function strip_sql_comments($string)
 
 function execute_query($query_string)
 {
-    $mysqli = new mysqli('localhost', 'root', 'root', 'Cellfish');
+    $mysqli = new mysqli('localhost', 'root', '', 'Cellfish');
     $mysqli->query($query_string);
 
     if ($mysqli->errno === 0) {
@@ -57,7 +57,7 @@ function execute_queries($queries)
 
 function initialize_database()
 {
-    $mysqli = new mysqli('localhost', 'root', 'root');
+    $mysqli = new mysqli('localhost', 'root', '');
     if ($mysqli->connect_errno) {
         die('Connect Error ' . $mysqli->connect_errno . ': ' . $mysqli->connect_error);
     }
