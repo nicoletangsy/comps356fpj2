@@ -54,9 +54,17 @@
 	<!--[if lt IE 9]>
 	<script src="js/respond.min.js"></script>
 	<![endif]-->
-  
+    <style>
+    .container{
+      padding: 50px;
+    }
+
+    .form-control{
+      font-size: 15px;
+    }
+  </style>
 </head>
-<? require ("navbar.php");?>
+<?php require ("navbar.php");?>
 
 <body class="bg-dark">
   <div class="container">
@@ -113,4 +121,4 @@
   <!-- Core plugin JavaScript-->
   <script src="admin/vendor/jquery-easing/jquery.easing.min.js"></script>
  
-<? require ("footer.php");?>
+<?php require ("footer.php");?>

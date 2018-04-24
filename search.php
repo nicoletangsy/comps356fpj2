@@ -58,7 +58,7 @@
 	<!-- FOR IE9 below -->
 	<!--[if lt IE 9]>
 	<script src="js/respond.min.js"></script>
-	<![endif]-->	
+	<![endif]-->
 	<style>
 		.container{
 			padding: 50px;
@@ -80,17 +80,17 @@
             <label for="exampleUsername">Search for News</label>
         </div>
 		<div class="form-group">
-            <input type="text" name="title" placeholder="Search here..">
+            <input class="form-control" type="text" name="title" placeholder="Search here..">
         </div>
-				<input type="submit"  value="Search" name="submit-search">
+				<input class="btn btn-primary btn-block" type="submit" value="Search" name="submit-search">
 				<br><br>
 				<div class="form-group">
             <label for="exampleUsername">Search for Discuss posts</label>
         </div>
 		<div class="form-group">
-            <input type="text" name="post" placeholder="Search here..">
+            <input class="form-control" type="text" name="post" placeholder="Search here..">
         </div>
-				<input type="submit"  value="Search" name="submit-searchpost">
+				<input class="btn btn-primary btn-block" type="submit"  value="Search" name="submit-searchpost">
         </form>
         
       </div>
