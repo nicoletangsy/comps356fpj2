@@ -54,7 +54,15 @@
 	<!--[if lt IE 9]>
 	<script src="js/respond.min.js"></script>
 	<![endif]-->
-  
+  <style>
+    .container{
+      padding: 50px;
+    }
+
+    .form-control{
+      font-size: 15px;
+    }
+  </style>
 </head>
 	<?php require("navbar.php");?>
 	

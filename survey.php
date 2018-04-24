@@ -100,7 +100,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
   <title>Survey</title>
 </head>
 <body>
-  <h1>Here is a set of questions to test how cellfish you are.</h1>
+  <h1 style="padding-top: 20px; font-weight: 300;">Here is a set of questions to test how cellfish you are.</h1>
   <font color="red"><?php echo $question_empty;?></font>
   <form action="survey.php" method="post">
     <h3>Question 1: How many social media are you using? (Like Facebook, Twitter, WeChat, Whatsapp)</h3>
