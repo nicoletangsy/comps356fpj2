@@ -114,7 +114,7 @@
           <a href="index.html">Post</a>
         </li>
         <li class="breadcrumb-item active">List All Post</li>
-        <li class="breadcrumb-item active">Edit Post</li>
+        <li class="breadcrumb-item active">Post Details</li>
       </ol>
 <br>
         	<div class="form-style-3">
@@ -122,7 +122,15 @@
 							<fieldset>
 							<legend>Post Details</legend>
 					    <form onsubmit="return up()" action="Check.php" method="POST" enctype="multipart/form-data">
-                        <label for="Id"><span>Id <span class="required">*</span></span><input type="text" class="input-field" name="Id" value=<?=$result[0]["Id"]?> /></label>
+                         <label for="Type"><span>Type <span class="required">*</span></span>
+						<select class="input-field" name="Id">
+							<option value="Accident">Accident</option>
+							<option value="Health">Health</option>
+							<option value="Patients">Patients</option>
+							<option value="Mobile Addiction">Mobile Addiction</option>
+							<option value="Other">Other</option>
+						</select>
+						</label>
                         <label for="Title"><span>Title <span class="required">*</span></span><textarea name="Title" class="textarea-field "><?=$result[0]["Title"]?></textarea></label>
 						<label for="Content"><span>Content <span class="required">*</span></span><textarea  name="Content" class="textarea-field aaa" style="height=250px"><?=$result[0]["Content"]?></textarea></label>
 						<label for="Introduction"><span>Introduction <span class="required">*</span></span><textarea name="Introduction" class="textarea-field"><?=$result[0]["Introduction"]?></textarea></label>
@@ -130,9 +138,8 @@
                    		  
 					
                    		   
-					<br><fieldset>	<label for="likeNo"><span>likeNo <span class="required">*</span></span><input type="text" class="input-field" name="likeNo" value=<?=$result[0]["likeNo"]?> /></label>
+					<br><fieldset>
 						<label for="DateTime"><span>DateTime <span class="required">*</span></span><input type="text" class="input-field" name="DateTime" value=<?=$result[0]["DateTime"]?> /></label>
-						<label for="type"><span>type <span class="required">*</span></span><input type="text" class="input-field" name="type" value=<?=$result[0]["type"]?> /></label>
          
 					<br><br>
 					
@@ -140,7 +147,7 @@
 			                     
 			                     <label for="Image"><span>Image <span class="required">*</span></span><img  src="data:image/png;base64,<?=base64_encode($result[0]["Image"])?>" class="img-responsive" width="524" height="350">
 										    </figure><input type="file" onchange="change()" name="Image" /> </label>
-										    </fieldset><input type="submit" class="am-btn am-btn-secondary" value="Edit"/> <input type="Reset" class="am-btn am-btn-secondary" value="Reset"/>
+										    </fieldset>
 			                      </div>
 			                      
 			                      </form>
