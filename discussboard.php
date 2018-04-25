@@ -288,12 +288,14 @@ function myFunction() {
 				}
 				?>
 				<tr>
+				<?php if (isset($_SESSION['username'])) { ?>
 				<td colspan=2>
-				<form action="replypost.php?postid=<?php echo $row2['board_id']?>" method="POST" enctype="multipart/form-data">
+				<form action="replyboardpost.php?postid=<?php echo $row2['board_id']?>" method="POST" enctype="multipart/form-data">
 				<input name="reply" placeholder="Leave your reply here..." style="color: black;"/>
 				<input type="submit" value = "Reply">
 				</form>
 				</td>
+				<?php } ?>
 				</tr>
 						</table>
 						<br>
