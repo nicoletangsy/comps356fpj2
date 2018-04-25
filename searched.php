@@ -1,5 +1,5 @@
 <?php
- $connection = mysqli_connect("localhost","root","root","cellfish");
+ $connection = mysqli_connect("localhost","root","","cellfish");
  ?>
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
@@ -112,7 +112,7 @@
 		}
 		 } else if(isset($_POST['submit-searchpost']))
 			{
-				if(trim($_POST['post'] != '')){
+				if(trim($_POST['post']) != ''){
 				$search = mysqli_real_escape_string($connection, trim($_POST['post']));
 				$sql = "SELECT * FROM board WHERE content LIKE '%$search%' OR post_user LIKE '%$search%' ORDER BY post_date";
 				$result = mysqli_query($connection, $sql);

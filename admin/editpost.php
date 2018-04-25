@@ -116,7 +116,7 @@
         <li class="breadcrumb-item active">List All Post</li>
         <li class="breadcrumb-item active">Edit Post</li>
       </ol>
-      <input type="button" onclick="window.history.back();" class=" am-btn-secondary" value="Preview"><br><br>
+<br>
         	<div class="form-style-3">
           <fieldset>
 							<fieldset>

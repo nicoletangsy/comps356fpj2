@@ -19,22 +19,21 @@ $image5 = read_as_dataurl(__DIR__ . '/assets/image5.jpg');
 $image8 = read_as_dataurl(__DIR__ . '/assets/image8.jpg');
 $image9 = read_as_dataurl(__DIR__ . '/assets/image9.jpg');
 $image10 = read_as_dataurl(__DIR__ . '/assets/image10.jpg');
-$image12121 = read_as_dataurl(__DIR__ . '/assets/image12121.png');
+$image11 = read_as_dataurl(__DIR__ . '/assets/image12121.png');
 
 $cellfish = read_as_dataurl(__DIR__ . '/assets/cellfish.png');
 $board3 = read_as_dataurl(__DIR__ . '/assets/board3.jpg');
 
 return "
 INSERT INTO `Comment` (`Id`, `ip`, `Content`, `Post_id`, `DateTime`, `likeNo`) VALUES
-(5, '202.40.137.201', 'Is good.', 2, '2017-11-24 06:48:41', 1),
-(6, '202.40.137.201', 'hi', 2, '2017-11-24 06:52:20', 0),
-(7, '183.179.42.195', '43242', 5, '2017-11-27 03:49:32', 0),
-(8, '183.179.42.195', '434', 5, '2017-11-27 03:49:42', 0),
-(13, '202.40.157.7', 'hi', 7, '2017-11-30 08:10:56', 0),
-(14, '202.40.157.7', 'hi', 7, '2017-11-30 08:11:12', 0),
-(16, '202.40.157.7', 'Good news!', 3, '2017-11-30 09:06:10', 0),
-(17, '202.40.157.7', 'asd', 12121, '2017-12-04 11:33:51', 0),
-(19, '202.125.234.10', 'Good news!', 3, '2017-12-07 09:47:31', 0);
+(5, 'guest', 'Is good.', 2, '2017-11-24 06:48:41', 1),
+(6, 'guest', 'hi', 2, '2017-11-24 06:52:20', 0),
+(7, 'guest', '43242', 5, '2017-11-27 03:49:32', 0),
+(8, 'guest', '434', 5, '2017-11-27 03:49:42', 0),
+(13, 'guest', 'hi', 7, '2017-11-30 08:10:56', 0),
+(14, 'user', 'hi', 7, '2017-11-30 08:11:12', 0),
+(16, 'admin', 'Good news!', 3, '2017-11-30 09:06:10', 0),
+(19, 'guest', 'Good news!', 3, '2017-12-07 09:47:31', 0);
 
 INSERT INTO `Contact` (`Id`, `Name`, `Email`, `Subject`, `Message`) VALUES
 (6, 'asd', 'asd@asd.asd', 'asd', 'asd'),
@@ -75,17 +74,17 @@ INSERT INTO `Post` (`Id`, `Title`, `Content`, `Introduction`, `Image`, `likeNo`,
 INSERT INTO `Post` (`Id`, `Title`, `Content`, `Introduction`, `Image`, `likeNo`, `DateTime`, `type`) VALUES
 (11, 'Do not be Cellfish (and Other Mobile Device Etiquette You Should be Following)', 'We have all been there. Everyone is sitting around and talking quietly, maybe eating, maybe studying, maybe trying to get some work done. Then out of nowhere, someoneï¿½s phone rings, and instead of getting up and taking their phone outside, they proceed to take the call, and speak loudly, right there in the midst of everyone. Nobody wants to hear the details of your personal life, or about your medical problems, dude. Take it outsideï¿½ quietly.\r\n\r\nTo avoid being that person, you might want to observe the following rules of cell phone etiquette:\r\n\r\nTake it outside. Nobody wants to hear your side of the phone call. If youï¿½re out in the desert or forest with nobody around, you take that call. Thereï¿½s nobody out there to annoy but some pronghorns or some squirrels. But if youï¿½re near a fixed group of people, be considerate and remove yourself from the group. Your colleagues, friends, and/or the people nearby will thank you.\r\nBe quiet. Along the lines of being considerate is being quiet. If you do take a call and donï¿½t remove yourself from the room, at least make your voice as low as possible. Walking through a public space, itï¿½s perfectly acceptable to take your phone calls. But we donï¿½t want to hear your conversation from three aisles over in the grocery store.\r\nLeave it. Unless someoneï¿½s dying or giving birth, is that text so important that you have to interrupt the person youï¿½re spending time with to check your messages? This is especially true when youï¿½re out with someone. You immediately devalue the person youï¿½re with when you check your phone or scan through your Facebook news feed when youï¿½re with them. (That being said, there are situations when itï¿½s perfectly fine to be on your phone when youï¿½re with someone.) But, for the love of God, please donï¿½t check your phone or scroll through your Instagram while youï¿½re on a date. Nothing screams ï¿½youï¿½re not interesting enoughï¿½ than to be more interested in what your latest notification says than what your date is saying. RUDE.\r\nThink twiceï¿½ and maybe a third time also. We live in an age of connectivity. Not only wireless connectivity, but of social network connectivity. Our online personas are just as real and representative of who we are as our real-life personas. So when youï¿½re out with someone and want to post about it, think twiceï¿½ or maybe three times about tagging them. Now more than ever, current and potential employers are using social media to research job applicants and existing employees. Think, would you want your boss to see that picture of you? If that was you in the picture, would you want to be tagged? This is not only a liability with personal relationships, but itï¿½s also one in professional circles as well. Just remember, keep it classy, folks. If you donï¿½t think your boss or grandma would approve, donï¿½t tag it.\r\nSilent & vibrate modes were created for a reason. In school, at work, at the theater, in a restaurant, on a date, in a meeting, during the nightï¿½ the list of places where people donï¿½t want to hear your device ringing or bleeping goes on. Besides it being rude, itï¿½s just annoying. And inconsiderate. And rude.\r\nLet private information remain private. Donï¿½t forward a secret that someone just shared with you, so you and your friends can snicker over it or make fun of that person. A photo meant for private viewing should not be sent on for your friends to enjoy too. When in doubtï¿½ donï¿½t share. NOTE: There are popular ephemeral messaging apps, like Snapchat, where the message ï¿½disappearsï¿½ after viewing. Screenshots happen. If you donï¿½t explicitly trust that person, even on a non-permanent app, sending highly personal information and photos might not be the best idea.\r\nDid anyone notice a pattern there? What was the common theme in all of those etiquette points? In case you missed it, Iï¿½ll spell it out for you: 1) Be considerate, and 2) Donï¿½t be rude. \r\n\r\n', 'Weï¿½ve all been there. Everyoneï¿½s sitting around and talking quietly, maybe eating, maybe studying, maybe trying to get some work done. ', '', 0, '2017-07-03 00:00:00', 'Health');
 INSERT INTO `Post` (`Id`, `Title`, `Content`, `Introduction`, `Image`, `likeNo`, `DateTime`, `type`) VALUES
-(12121, '32323', '3232', '32323', '$image12121', 32, '2017-11-23 00:00:00', '323');
+(15, 'Patient', 'I am a Patient', 'I hate Cellfish', '$image11', 32, '2017-11-23 00:00:00', '323');
 
 INSERT INTO `Staff` (`Id`, `Password`) VALUES
 ('admin', 'admin');
 
 
 INSERT INTO `SubComment` (`Id`, `IP`, `Content`, `DateTime`, `comment_Id`) VALUES
-(8, '183.179.42.195', '43434', '2017-11-27 03:49:37', 7),
-(11, '202.40.157.7', '43424342', '2017-11-28 08:15:12', 5),
-(14, '123.15.20.110', 'Totally agree!', '2017-11-30 09:09:48', 16),
-(16, '202.125.234.10', 'totally agree!', '2017-12-07 09:48:12', 19);
+(8, 'guest', '43434', '2017-11-27 03:49:37', 7),
+(11, 'guest', '43424342', '2017-11-28 08:15:12', 5),
+(14, 'guest', 'Totally agree!', '2017-11-30 09:09:48', 16),
+(16, 'guest', 'totally agree!', '2017-12-07 09:48:12', 19);
 
 INSERT INTO board (content, post_user, post_date, board_avatar_base64) VALUES
 ('Welcome to Cellfish Discuss Board!<br> You can leave your dailylife experience about Cellfish!', 'admin', '2017-11-23 00:00:00', '$cellfish'), 
@@ -98,4 +97,18 @@ INSERT INTO replyboard (reply_user, reply_date, reply_to, reply_content) VALUES
 ('hot2', '2018-04-22 10:30:50', 3, 'Nah! Theyre just sons of Bxxxx! They sucks!'), 
 ('hot2', '2018-04-23 11:01:35', 2, 'Hi, rubbish!=)');
 
+INSERT INTO rating (post_id, rating, username) values
+(1, 2, 'admin'), 
+(2, 4, 'admin'), 
+(3, 3, 'admin'), 
+(4, 2, 'admin'), 
+(5, 5, 'admin'), 
+(6, 4, 'admin'), 
+(7, 3, 'admin'), 
+(8, 1, 'admin'), 
+(9, 1, 'admin'), 
+(2, 5, 'nict'), 
+(4, 3, 'nict')
+;
 ";
+

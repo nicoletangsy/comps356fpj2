@@ -5,7 +5,7 @@ session_start();
 <?php
 	require_once('database.php');
 	if (!isset($_GET['id'])){
-		header("Location: index.html");
+		header("Location: index.php");
 	}
 	$id = $_GET["id"];
 	$sth = $conn->prepare("SELECT Title,Content,Image,DateTime,likeNo FROM Post where Id=$id ORDER BY likeNo desc");
@@ -172,9 +172,12 @@ session_start();
     $sc->execute();
     $scs = $sc->fetchAll(); foreach($scs as $sc){?><blockquote><?=$sc["IP"]?>: <?=$sc["Content"]?></blockquote><?php } ?>
     <br>
-      <a onclick="reply(<?=$comment["Id"]?>)">reply</a>
-      <span style="display:none" id="Comment<?=$comment["Id"]?>ReplyBox"><input type="text" id="replytext<?=$comment["Id"]?>"><input type="submit" class="am-btn am-btn-secondary" value="Reply" onclick="saveReplay(<?=$comment["Id"]?>,document.getElementById('replytext<?=$comment["Id"]?>').value)"></span>
-    </div>
+	<form class="am-form" action="replypost.php?Id=<?=$comment["Id"]?>" method="POST">
+		<input type="text" placeholder="reply here.." name="reply">
+		<input type="hidden" value="<?=$id?>" name="id">
+		<input type="submit" name="addreply"  class="am-btn am-btn-secondary" style="margin-left: 550px; " value="reply">
+		</form>			
+	  </div>
   </div>
 
   <?php
@@ -329,23 +332,5 @@ function like(id,type){
 	}
 	http.send(params);
 }
-function reply(id){
-	document.getElementById('Comment'+id+'ReplyBox').style.display = "inline";
-}
-function saveReplay(id,reply){
-	var http = new XMLHttpRequest();
-	var url = "saveReplay.php";
-	var params = "id="+id+"&reply="+reply;
-	http.open("POST", url, true);
-	
-	//Send the proper header information along with the request
-	http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-	
-	http.onreadystatechange = function() {//Call a function when the state changes.
-	    if(http.readyState == 4 && http.status == 200) {
-	    	location.href = "detail.php?id=<?=$id?>";
-	    }
-	}
-	http.send(params);
-}
+
 </script>
