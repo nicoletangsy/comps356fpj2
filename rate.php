@@ -1,5 +1,6 @@
 <?php
-$conn = new mysqli('localhost','root','','cellfish');
+<<<<<<< HEAD
+require_once("database2.php");
 session_start();
 
 if (isset($_SESSION['username'])){

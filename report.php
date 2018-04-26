@@ -1,5 +1,6 @@
 <?php
-$conn = new mysqli('localhost','root','','cellfish');
+<<<<<<< HEAD
+require_once("database2.php");
 session_start();
 $d=strtotime("+8 Hours");
 $date=date('Y-m-d H:i:s', $d);

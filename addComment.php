@@ -1,5 +1,5 @@
 <?php
-    $conn = new mysqli('localhost','root','','cellfish');
+    require_once("database2.php");
     session_start();
     
     

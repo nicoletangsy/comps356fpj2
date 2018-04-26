@@ -3,7 +3,6 @@ require_once("database.php");
 session_start();
 ?>
 <?php
-	require_once('database.php');
 	if (!isset($_GET['id'])){
 		header("Location: index.php");
 	}
@@ -121,13 +120,14 @@ session_start();
 			<div class="title">
 				<h2><?=$result['Title']?></h2>
 				<span class="byline"><?=$myDateTime->format('Y-m-d H:i');?></span>
-
+				<?php if(isset($_SESSION['username'])){ ?>
 				<div class="star-rating">
 						Rate this news:
 					<?php foreach(range(1, 5) as $rating): ?>
 						<a href ="rate.php?post_id=<?php echo $id?>&rating=<?php echo $rating;?>"> <?php echo $rating; ?> </a>
 					<?php endforeach; ?>Star
 		</div>
+				<?php } ?>
 		
 		<div class="therate">
 						Rate:

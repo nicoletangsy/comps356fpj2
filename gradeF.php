@@ -71,7 +71,7 @@ session_start();
 			   <br><br>
 <div style="margin: auto;width: 50%;padding: 10px;"><font color="FFFFFF">
   <h2 color="white">OH! You got a grade F! You just failed the test, you are too outdated!</h2>
-  <p>Comment: Looked like you seldom use you phone for anything. Come on! Tt's
+  <p>Comment: Looked like you seldom use you phone for anything. Come on! It's
      21st century now. Technology now is quite powerful and helps a lot if you use it properly!
      Come visit our website
      often and read some helpful articles about the convinience of cellphone.

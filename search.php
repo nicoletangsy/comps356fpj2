@@ -1,5 +1,5 @@
 <?php
- $connection = mysqli_connect("localhost","root","","cellfish");
+require_once("database2.php");
  session_start();
  ?>
 <!DOCTYPE html>
