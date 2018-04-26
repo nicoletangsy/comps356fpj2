@@ -4,7 +4,7 @@ session_start();
 ?>
 <?php
 	$id = $_GET["id"];
-	$sth = $conn->prepare("SELECT Title,Content,Image,DateTime,likeNo FROM Post where Id=$id ORDER BY likeNo desc");
+	$sth = $conn->prepare("SELECT Title,Content,Image,DateTime,avg_rate FROM Post where Id=$id ORDER BY avg_rate desc");
     $sth->execute();
     $postCom = $conn->prepare("SELECT Id,Title,Introduction FROM Post ORDER BY RAND()");
     $postCom->execute();
@@ -105,7 +105,7 @@ session_start();
     $sc->execute();
     $scs = $sc->fetchAll(); foreach($scs as $sc){?><blockquote><?=$sc["IP"]?>: <?=$sc["Content"]?></blockquote><?php } ?>
     <br>
-      <i class="am-icon-thumbs-up" id="Comment<?=$comment["Id"]?>" onclick="like(<?=$comment["Id"]?>,'Comment')"> <?=$comment["likeNo"]?></i><a onclick="reply(<?=$comment["Id"]?>)">reply</a>
+      <i class="am-icon-thumbs-up" id="Comment<?=$comment["Id"]?>" onclick="like(<?=$comment["Id"]?>,'Comment')"> <?=$comment["avg_rate"]?></i><a onclick="reply(<?=$comment["Id"]?>)">reply</a>
       <span style="display:none" id="Comment<?=$comment["Id"]?>ReplyBox"><input type="text" id="replytext<?=$comment["Id"]?>"><input type="submit" class="am-btn am-btn-secondary" value="Reply" onclick="saveReplay(<?=$comment["Id"]?>,document.getElementById('replytext<?=$comment["Id"]?>').value)"></span>
     </div>
   </div>
@@ -175,14 +175,14 @@ function like(id,type){
 	    if(http.readyState == 4 && http.status == 200) {
 	    	var myArr = JSON.parse(this.responseText);
 	    	console.log(myArr);
-	    	var likeNo = myArr["likeNo"];
+	    	var avg_rate = myArr["avg_rate"];
 	    	var ip = myArr["ip"];
 	    	var type = myArr["type"];
 	    	
 	    	if(type == "Comment"){
-	    		document.getElementById('Comment'+id).innerHTML = myArr["likeNo"];
+	    		document.getElementById('Comment'+id).innerHTML = myArr["avg_rate"];
 	    	}else{
-	    		document.getElementById('postLike').innerHTML = myArr["likeNo"];
+	    		document.getElementById('postLike').innerHTML = myArr["avg_rate"];
 	    	}
 	    }
 	}

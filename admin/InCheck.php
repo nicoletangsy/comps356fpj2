@@ -1,12 +1,12 @@
 <?php
 	require_once('../database.php');
-	$aaa = "Insert into Post (Type,Title,Content,Introduction,likeNo, DateTime,Image) Values(" ;
+	$aaa = "Insert into Post (Type,Title,Content,Introduction, DateTime,Image) Values(" ;
 
 	foreach($_POST as $key => $value){
 	    $aaa .= "'".$value."',";
 	}	
 	$date = date("Y-m-d h:i:s");
-	$aaa .= "0, '".$date."'";
+	$aaa .= "'".$date."'";
 	if(isset($_FILES['image'])){
 			$errors=array();
 			$allowed_ext= array('jpg','jpeg','png','gif');

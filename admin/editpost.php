@@ -1,14 +1,16 @@
 <?php
 	include("header.php"); 
-	$sth = $conn->prepare("SELECT * FROM Post where Id =".$_GET["Id"]);
-	$sth->execute();
-    $result = $sth->fetchAll();
-    $comment = $conn->prepare("SELECT * FROM Comment WHERE Post_id =".$_GET["Id"]." ORDER BY DateTime;");
+	$id = $_GET['Id'];
+	$sql = "select * from post where Id =".$id;
+	$stat = $conn->prepare($sql);
+	$stat-> execute();
+	$result = $stat->fetch();
+	
+	$comment = $conn->prepare("SELECT * FROM Comment WHERE Post_id =".$_GET["Id"]." ORDER BY DateTime;");
     $comment->execute();
     $comments =  $comment->fetchAll();
-    $myDateTime = new DateTime($result[0]['DateTime'], new DateTimeZone('GMT'));
+    $myDateTime = new DateTime($result['DateTime'], new DateTimeZone('GMT'));
 	$myDateTime->setTimezone(new DateTimeZone('Asia/Hong_Kong'));
-    
 ?>
 <style>
 .form-style-3{
@@ -116,38 +118,31 @@
         <li class="breadcrumb-item active">List All Post</li>
         <li class="breadcrumb-item active">Post Details and Edit Post</li>
       </ol>
-<br>
         	<div class="form-style-3">
           <fieldset>
 							<fieldset>
 							<legend>Post Details and Edit</legend>
-					    <form onsubmit="return up()" action="Check.php" method="POST" enctype="multipart/form-data">
+					    <form onsubmit="return up()" action="Check.php?ID=<?php echo $id;?>" method="POST" enctype="multipart/form-data">
                          <label for="Type"><span>Type <span class="required">*</span></span>
-						<select class="input-field" name="Id">
-							<option value="Accident">Accident</option>
-							<option value="Health">Health</option>
-							<option value="Patients">Patients</option>
-							<option value="Mobile Addiction">Mobile Addiction</option>
-							<option value="Other">Other</option>
+						<select class="input-field" name="Type">
+							<option value="Accident" <?php if($result['type']=="Accident") {echo "selected";}?> >Accident</option>
+							<option value="Health" <?php if($result['type']=="Health") {echo "selected";}?> >Health</option>
+							<option value="Patients" <?php if($result['type']=="Patients") {echo "selected";}?> >Patients</option>
+							<option value="Mobile Addiction" <?php if($result['type']=="Mobile Addiction") {echo "selected";}?> >Mobile Addiction</option>
+							<option value="Other" <?php if($result['type']=="Other") {echo "selected";}?> >Other</option>
 						</select>
 						</label>
-                        <label for="Title"><span>Title <span class="required">*</span></span><textarea name="Title" class="textarea-field "><?=$result[0]["Title"]?></textarea></label>
-						<label for="Content"><span>Content <span class="required">*</span></span><textarea  name="Content" class="textarea-field aaa" style="height=250px"><?=$result[0]["Content"]?></textarea></label>
-						<label for="Introduction"><span>Introduction <span class="required">*</span></span><textarea name="Introduction" class="textarea-field"><?=$result[0]["Introduction"]?></textarea></label>
-                   		   </fieldset> 
-                   		  
-					
-                   		   
-					<br><fieldset>
-						<label for="DateTime"><span>DateTime <span class="required">*</span></span><input type="text" class="input-field" name="DateTime" value=<?=$result[0]["DateTime"]?> /></label>
-         
-					<br><br>
-					
-								    
+                        <label for="Title"><span>Title <span class="required">*</span></span><textarea name="Title" class="textarea-field "><?php echo $result['Title']; ?></textarea></label>
+						<label for="Content"><span>Content <span class="required">*</span></span><textarea  name="Content" class="textarea-field aaa" style="height=250px"><?php echo $result['Content']; ?></textarea></label>
+						<label for="Introduction"><span>Introduction <span class="required">*</span></span><textarea name="Introduction" class="textarea-field"><?php echo $result['Introduction']; ?></textarea></label>
+
+						<label for="DateTime"><span>Upload DateTime <span class="required">*</span></span><input type="text" class="input-field" name="DateTime" value="<?php echo $result['DateTime']; ?>" /></label>
+							<label for="LastModified"><span>Last Modified <span class="required">*</span></span><input type="text" class="input-field" name="LastModified" value="<?php if (isset($result['last_modified']) || $result['last_modified']!='') {echo $result['last_modified'];} else {echo $result['DateTime'];} ?>" /></label>
 			                     
-			                     <label for="Image"><span>Image <span class="required">*</span></span><img  src="data:image/png;base64,<?=base64_encode($result[0]["Image"])?>" class="img-responsive" width="524" height="350">
-										    </figure><input type="file" onchange="change()" name="Image" /> </label>
+			                     <label for="Image"><span>Image <span class="required">*</span></span><img src="<?php echo $result['Image']; ?>" class="img-responsive" width="524" height="350">
+										    </figure><input type="file" onchange="change()" name="image" /> </label>
 										    </fieldset>
+											<input type="submit" class="am-btn am-btn-secondary" value="Edit"/> <input type="Reset" class="am-btn am-btn-secondary" value="Reset"/>
 			                      </div>
 			                      
 			                      </form>

@@ -1,27 +1,34 @@
 <?php
 	require_once('../database.php');
-	$sth = $conn->prepare("SELECT * FROM Staff where Id ='".$_GET["id"]."' and Password ='".$_GET["password"]."'");
-    $sth->execute();
-    $result = $sth->fetchAll();
-   if(!empty($result)){
-   	   session_start();
-	   $_SESSION['admin'] = true;
-       header('Location: addpost.php');
-   }else{
-       echo "<script type='text/javascript'>alert('Sorry!	Please input correct Id and Password!');window.history.back();</script>";
-       
-   }
+	$id = $_GET['ID'];
+	$newstype = $_POST['Type'];
+	$title = $_POST['Title'];
+	$content = $_POST['Content'];
+	$intro = $_POST['Introduction'];
+	$d=strtotime("+8 Hours");
+	$date=date('Y-m-d H:i:s', $d);
+	if(isset($_FILES['image'])){
+			$errors=array();
+			$allowed_ext= array('jpg','jpeg','png','gif');
+			$file_name =$_FILES['image']['name'];
+			$file_ext = strtolower( end(explode('.',$file_name)));
+			$file_size=$_FILES['image']['size'];
+			$file_tmp= $_FILES['image']['tmp_name'];
+			$type = pathinfo($file_tmp, PATHINFO_EXTENSION);
+			$data = file_get_contents($file_tmp);
+			$base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
+	} 
+	if ($base64=="data:image/;base64,") {
+		$sql = "UPDATE Post SET type = '".$newstype."', Title = '".$title."', Content = '".$content."', Introduction = '".$intro."', last_modified = '".$date."' where Id = ".$id;
+	} else {
+		$sql = "UPDATE Post SET Type = '".$newstype."', Title = '".$title."', Content = '".$content."', Introduction = '".$intro."', last_modified = '".$date."', Image = '".$base64."' where Id = ".$id;
+	}
+	
+	$stat = $conn->prepare($sql);
+	//echo $sql."<br>";
+	//echo $type;
+    print_r($stat->execute()); 
+	header("Location: editpost.php?Id=".$id);
     
 ?>
-<?php
-require_once '../database.php';
-session_start();
-if (isset($_SESSION['username']) && $_SESSION['username']=="admin") {
-	$sth = $conn->prepare("SELECT * FROM Staff where Id ='".$_GET["id"]."' and Password ='".$_GET["password"]."'");
-    $sth->execute();
-    $result = $sth->fetchAll();
-	header('Location: addnews.php');
-  } else {
-	  echo "<script type='text/javascript'>alert('Sorry, You have no permission!');window.history.back();</script>";
-  }
-?>
+    

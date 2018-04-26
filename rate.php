@@ -1,5 +1,4 @@
 <?php
-<<<<<<< HEAD
 require_once("database2.php");
 session_start();
 

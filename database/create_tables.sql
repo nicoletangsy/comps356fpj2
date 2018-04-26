@@ -25,21 +25,13 @@ CREATE TABLE Contact (
   PRIMARY KEY (Id)
 );
 
-CREATE TABLE Liked (
-  Id int(30) NOT NULL AUTO_INCREMENT,
-  LikeIP varchar(30) DEFAULT NULL,
-  LikeId int(30) DEFAULT NULL,
-  Type varchar(30) DEFAULT NULL,
-  PRIMARY KEY (Id)
-);
-
 CREATE TABLE Post (
   Id int(11) NOT NULL AUTO_INCREMENT,
   Title varchar(100) NOT NULL,
   Content text NOT NULL,
   Introduction text NOT NULL,
   Image longtext NOT NULL,
-  likeNo int(20) NOT NULL,
+  last_modified datetime,
   avg_rate decimal(8,2) default 0,
   DateTime datetime NOT NULL,
   type varchar(30) NOT NULL,

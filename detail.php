@@ -7,7 +7,7 @@ session_start();
 		header("Location: index.php");
 	}
 	$id = $_GET["id"];
-	$sth = $conn->prepare("SELECT Title,Content,Image,DateTime,likeNo FROM Post where Id=$id ORDER BY likeNo desc");
+	$sth = $conn->prepare("SELECT Title,Content,Image,DateTime,avg_rate, last_modified FROM Post where Id=$id ORDER BY avg_rate desc");
     $sth->execute();
     $postCom = $conn->prepare("SELECT Id,Title,Introduction FROM Post ORDER BY RAND()");
     $postCom->execute();
@@ -130,6 +130,7 @@ session_start();
 				<?php } ?>
 		
 		<div class="therate">
+						<?php if (isset($result['last_modified']) || $result['last_modified']!='') {echo "Last Modified: ".$result['last_modified']."&nbsp;&nbsp;&nbsp;";} ?>
 						Rate:
 						<?php for($x = 0; $x<5 ; $x++){
 							if(floor(ROUND($posttest['rate'],1)) -$x >=1){
@@ -319,14 +320,14 @@ function like(id,type){
 	    if(http.readyState == 4 && http.status == 200) {
 	    	var myArr = JSON.parse(this.responseText);
 	    	console.log(myArr);
-	    	var likeNo = myArr["likeNo"];
+	    	var avg_rate = myArr["avg_rate"];
 	    	var ip = myArr["ip"];
 	    	var type = myArr["type"];
 	    	
 	    	if(type == "Comment"){
-	    		document.getElementById('Comment'+id).innerHTML = myArr["likeNo"];
+	    		document.getElementById('Comment'+id).innerHTML = myArr["avg_rate"];
 	    	}else{
-	    		document.getElementById('postLike').innerHTML = myArr["likeNo"];
+	    		document.getElementById('postLike').innerHTML = myArr["avg_rate"];
 	    	}
 	    }
 	}
