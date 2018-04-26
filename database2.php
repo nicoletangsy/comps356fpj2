@@ -1,3 +1,3 @@
 <?php
-$conn = new mysqli('localhost','root','root','cellfish');
+$conn = new mysqli('localhost','root','','cellfish');
  ?>

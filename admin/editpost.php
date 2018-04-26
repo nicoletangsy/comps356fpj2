@@ -114,13 +114,13 @@
           <a href="index.html">Post</a>
         </li>
         <li class="breadcrumb-item active">List All Post</li>
-        <li class="breadcrumb-item active">Post Details</li>
+        <li class="breadcrumb-item active">Post Details and Edit Post</li>
       </ol>
 <br>
         	<div class="form-style-3">
           <fieldset>
 							<fieldset>
-							<legend>Post Details</legend>
+							<legend>Post Details and Edit</legend>
 					    <form onsubmit="return up()" action="Check.php" method="POST" enctype="multipart/form-data">
                          <label for="Type"><span>Type <span class="required">*</span></span>
 						<select class="input-field" name="Id">
