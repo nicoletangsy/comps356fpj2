@@ -57,6 +57,13 @@
 	<script src="js/respond.min.js"></script>
 	<![endif]-->
 
+	
+	<style>
+		.container{
+			padding: 50px;
+		}
+	</style>
+
 	</head>
 	<body>
 	<?php require("navbar.php");?>

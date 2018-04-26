@@ -1,24 +1,25 @@
 <?php
-  require_once("database.php");
-  session_start();
-  
-  if (isset($_SESSION['username'])) {
-	  try{
-		$username = $_SESSION['username'];
-		$postid = $_GET['postid'];
-		$reply = $_POST['reply'];
-		$d=strtotime("+8 Hours");
-		$date=date('Y-m-d H:i:s', $d);
-		echo "postid = $postid<br>";
-		$sql = "insert into replyboard (reply_user, reply_date, reply_to, reply_content) values ('" .$username. "', '" .$date. "', " .$postid. ", '" .$reply. "')";
-		$conn->exec($sql);
-		echo $sql;
-		} catch(PDOException $e)
-		{
-			echo $sql . "<br>" . $e->getMessage();
-		}
-	header("Location: discussboard.php");
-  }  else {
-	die ("You must login first!  <br><br>Return to <a href=\"login.html\">Login</a>.");
-  }
+    require_once("database2.php");
+    session_start();
+    
+    
+
+    if(isset($_POST['addreply'])){
+        $comment = $_POST['reply'];
+				$id = $_POST['id'];
+				$commentid = $_GET['Id'];
+        
+
+    if (isset($_SESSION['username'])){
+            $user = (string)$_SESSION['username'];
+            $conn->query("INSERT INTO SubComment (ip, Content,comment_Id,DateTime) VALUES ('{$user}', '{$comment}',{$commentid},now())");
+            header("Location: detail.php?id=$id");
+            }
+        else{
+                $conn->query("INSERT INTO SubComment (ip, Content,Post_id,DateTime) VALUES ('guest', '{$comment}',{$commentid},now())");
+                header("Location: detail.php?id=$id");
+        }
+    }
+    header("Location: detail.php?id=$id");
+
 ?>

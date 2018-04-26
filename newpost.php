@@ -1,7 +1,9 @@
 <?php
-  require_once("database.php");
-  session_start();
-  
+require_once("database.php");
+session_start();
+?>
+<?php
+
   if (isset($_SESSION['username']) && isset($_FILES['image'])) {
 	  try{
 		if (isset($_FILES['image'])) {
@@ -18,7 +20,7 @@
 				$base64 = "";
 			}
 		$username = $_SESSION['username'];
-		$content = $_POST['content'];
+		$content = nl2br($_POST['content']);
 		$d=strtotime("+8 Hours");
 		$date=date('Y-m-d H:i:s', $d);
 		
@@ -30,6 +32,6 @@
 		}
 	header("Location: discussboard.php");
   }  else {
-	die ("You must login first!  <br><br>Return to <a href=\"login.html\">Login</a>.");
+	echo ("You must login first!  <br><br>Return to <a href=\"login.php\">Login</a>.");
   }
 ?>

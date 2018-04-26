@@ -40,6 +40,7 @@ CREATE TABLE Post (
   Introduction text NOT NULL,
   Image longtext NOT NULL,
   likeNo int(20) NOT NULL,
+  avg_rate decimal(8,2) default 0,
   DateTime datetime NOT NULL,
   type varchar(30) NOT NULL,
   PRIMARY KEY (Id)
@@ -83,24 +84,25 @@ CREATE TABLE members (
 
 -- create table for holding discuss board's comment
 CREATE TABLE board (
-    id INT UNSIGNED NOT NULL AUTO_INCREMENT, 
+    board_id INT UNSIGNED NOT NULL AUTO_INCREMENT, 
 	content LONGTEXT NOT NULL,
 	post_user VARCHAR(20) NOT NULL,
 	post_date datetime NOT NULL, 
-	last_modified datetime, 
+	last_modifies datetime, 
 	board_avatar_base64 LONGTEXT, 
-	PRIMARY KEY (id), 
+	PRIMARY KEY (board_id), 
 	FOREIGN KEY (post_user) references members(username)
 );
 
 -- create table for holding users rating news data
 
 CREATE TABLE rating (
-  id int(11) NOT NULL AUTO_INCREMENT,
+  rate_id int(11) NOT NULL AUTO_INCREMENT,
   post_id int(11) NOT NULL,
   rating int(11) NOT NULL,
   username varchar(20) NOT NULL,
-  PRIMARY KEY (id)
+  PRIMARY KEY (rate_id), 
+  FOREIGN KEY (username) references members(username)
 );
 
 -- create table for holding replys in discuss board, reply content with a maximun length of 255 characters
@@ -112,7 +114,7 @@ CREATE TABLE replyboard (
 	reply_to INT UNSIGNED NOT NULL,
 	PRIMARY KEY (reply_id), 
 	FOREIGN KEY (reply_user) references members(username), 
-	FOREIGN KEY (reply_to) references board(id)
+	FOREIGN KEY (reply_to) references board(board_id)
 );
 
 
@@ -125,7 +127,7 @@ CREATE TABLE reportpost (
 	reason CHAR(1) NOT NULL, 
 	PRIMARY KEY (report_id), 
 	FOREIGN KEY (report_user) references members(username), 
-	FOREIGN KEY (reportpost_id) references board(id)
+	FOREIGN KEY (reportpost_id) references board(board_id)
 );
 
 -- create table for holding reports of comments in discuss board

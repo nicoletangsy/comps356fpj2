@@ -1,7 +1,7 @@
 <?php
 	require_once('database.php');
 	session_start();
-	$sth = $conn->prepare("SELECT Id,Title,Introduction,Image,type FROM Post ORDER BY likeNo desc");
+	$sth = $conn->prepare("SELECT Id,Title,Introduction,Image,type, avg_rate from post where Image <> 'data:image/;base64,' ORDER BY avg_rate desc");
     $sth->execute();
     $result = $sth->fetchAll();
 ?>
@@ -65,6 +65,7 @@
 			<div class="container">
 				<div class="row text-center fh5co-heading row-padded">
 					<div class="col-md-8 col-md-offset-2">
+						<p><a href="allnews.php">All News</a></p>
 						<h2 class="heading to-animate">Hot News of Cellfish</h2>
 						
 					</div>
@@ -103,7 +104,6 @@
 							<div class="fh5co-h-row-2 to-animate-2">
 								<div class="fh5co-v-col-2 fh5co-bg-img" style="background-image: url(<?=$result[4]['Image']?>)"></div>
 								<div class="fh5co-v-col-2 fh5co-text arrow-left">
-									<h2>Salad with Crispy Chicken</h2>
 									<h2><?=$result[4]['Title'] ?></h2>
 									<p><?=$result[4]['Introduction'] ?></p>
 									<a href="detail.php?id=<?=$result[4]['Id']?>"><input type="submit" class="am-btn am-btn-secondary" value="More Details"></a>
@@ -124,129 +124,5 @@
 
 			</div>
 		</div>
-<div id="fh5co-menus" >
-			<div class="container">
-				<div class="row text-center fh5co-heading row-padded">
-					<div class="col-md-8 col-md-offset-2">
-						<h2 class="heading to-animate">News</h2>
-					</div>
-				</div>
-				<div class="row row-padded">
-					<div class="col-md-6">
-						<div class="fh5co-food-menu to-animate-2">
-							<h2 class="fh5co-drinks">Accident</h2>
-							<ul>
-								<?php
-									$postC = $conn->prepare("SELECT Id,Title,Introduction,Image,type FROM Post where type='Accident' ORDER BY likeNo desc");
-	    							$postC->execute();
-	    							$posts = $postC->fetchAll();
-									for($i=0;$i<count($posts);$i++){
-										
-									
-								?>
-								<li>
-									<div class="fh5co-food-desc">
-										<figure>
-											<img src="data:image/png;base64,<?=base64_encode($posts[$i]["Image"])?>" class="img-responsive" width="524" height="350">
-										</figure>
-										<div>
-											<h3><a href="detail.php?id=<?=$posts[$i]["Id"]?>"><?=$posts[$i]["Title"]?></a></h3>
-										</div>
-									</div>
-								</li>
-								<?php
-									}
-								?>
-							</ul>
-						</div>
-					</div>
-					<div class="col-md-6">
-						<div class="fh5co-food-menu to-animate-2">
-							<h2 class="fh5co-dishes">Health</h2>
-							<ul>
-								<?php
-									$postC = $conn->prepare("SELECT Id,Title,Introduction,Image,type FROM Post where type='Health' ORDER BY likeNo desc");
-	    							$postC->execute();
-	    							$posts = $postC->fetchAll();
-									for($i=0;$i<count($posts);$i++){
-										
-									
-								?>
-								<li>
-									<div class="fh5co-food-desc">
-										<figure>
-											<img src="data:image/png;base64,<?=base64_encode($posts[$i]["Image"])?>" class="img-responsive" width="524" height="350">
-										</figure>
-										<div>
-											<h3><a href="detail.php?id=<?=$posts[$i]["Id"]?>"><?=$posts[$i]["Title"]?></a></h3>
-										</div>
-									</div>
-								</li>
-								<?php
-									}
-								?>
-							</ul>
-						</div>
-					</div>
-					<div class="col-md-6">
-						<div class="fh5co-food-menu to-animate-2">
-							<h2 class="fh5co-drinks">Mobile Addiction</h2>
-							<ul>
-								<?php
-									$postC = $conn->prepare("SELECT Id,Title,Introduction,Image,type FROM Post where type='Mobile Addiction' ORDER BY likeNo desc");
-	    							$postC->execute();
-	    							$posts = $postC->fetchAll();
-									for($i=0;$i<count($posts);$i++){
-										
-									
-								?>
-								<li>
-									<div class="fh5co-food-desc">
-										<figure>
-											<img src="data:image/png;base64,<?=base64_encode($posts[$i]["Image"])?>" class="img-responsive" width="524" height="350">
-										</figure>
-										<div>
-											<h3><a href="detail.php?id=<?=$posts[$i]["Id"]?>"><?=$posts[$i]["Title"]?></a></h3>
-										</div>
-									</div>
-								</li>
-								<?php
-									}
-								?>
-							</ul>
-						</div>
-					</div>
-					<div class="col-md-6">
-						<div class="fh5co-food-menu to-animate-2">
-							<h2 class="fh5co-dishes">Patients</h2>
-							<ul>
-								<?php
-									$postC = $conn->prepare("SELECT Id,Title,Introduction,Image,type FROM Post where type='Patients' ORDER BY likeNo desc");
-	    							$postC->execute();
-	    							$posts = $postC->fetchAll();
-									for($i=0;$i<count($posts);$i++){
-										
-									
-								?>
-								<li>
-									<div class="fh5co-food-desc">
-										<figure>
-											<img src="data:image/png;base64,<?=base64_encode($posts[$i]["Image"])?>" class="img-responsive" width="524" height="350">
-										</figure>
-										<div>
-											<h3><a href="detail.php?id=<?=$posts[$i]["Id"]?>"><?=$posts[$i]["Title"]?></a></h3>
-										</div>
-									</div>
-								</li>
-								<?php
-									}
-								?>
-							</ul>
-						</div>
-					</div>
-				</div>
-			</div>
 
-		
-	</div>
 <?php require("footer.php");?>

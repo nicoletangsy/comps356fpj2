@@ -1,5 +1,6 @@
 <?php
- $connection = mysqli_connect("localhost","root","root","cellfish");
+require_once("database2.php");
+session_start();
  ?>
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
@@ -9,7 +10,7 @@
 	<head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Cellfish &mdash; Login</title>
+	<title>Cellfish &mdash; Search Results</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="description" content="Free HTML5 Template by FREEHTML5.CO" />
 	<meta name="keywords" content="free html5, free template, free bootstrap, html5, css3, mobile first, responsive" />
@@ -92,16 +93,16 @@
 	<?php
 		if(isset($_POST['submit-search'])){
 			if(trim($_POST['title']) != ''){
-			$search = mysqli_real_escape_string($connection, trim($_POST['title']));
+			$search = mysqli_real_escape_string($conn, trim($_POST['title']));
 			$sql = "SELECT * FROM Post WHERE Title LIKE '%$search%' OR Introduction LIKE '%$search%' OR Content LIKE '%$search%'";
-			$result = mysqli_query($connection, $sql);
+			$result = mysqli_query($conn, $sql);
 			$queryResult = mysqli_num_rows($result);
 
 			echo "<h2>There are ".$queryResult." results!</h2> ";
 			if($queryResult > 0){
 				while($row = mysqli_fetch_assoc($result)){
 					echo "<div id='result'>
-					<a href ='../comps356fpj2/detail.php?id=".$row['Id']."'> <h3>".$row['Title']."</h3></a>
+					<a href ='detail.php?id=".$row['Id']."'> <h3>".$row['Title']."</h3></a>
 					<p>".$row['Introduction']."</p>
 					</div>";
 				}
@@ -112,10 +113,10 @@
 		}
 		 } else if(isset($_POST['submit-searchpost']))
 			{
-				if(trim($_POST['post'] != '')){
-				$search = mysqli_real_escape_string($connection, trim($_POST['post']));
+				if(trim($_POST['post']) != ''){
+				$search = mysqli_real_escape_string($conn, trim($_POST['post']));
 				$sql = "SELECT * FROM board WHERE content LIKE '%$search%' OR post_user LIKE '%$search%' ORDER BY post_date";
-				$result = mysqli_query($connection, $sql);
+				$result = mysqli_query($conn, $sql);
 				$queryResult = mysqli_num_rows($result);
 
 				echo "<h2>There are ".$queryResult." results!</h2>";

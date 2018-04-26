@@ -1,5 +1,5 @@
 <?php
- $connection = mysqli_connect("localhost","root","root","cellfish");
+require_once("database2.php");
  ?>
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
@@ -92,9 +92,9 @@
 	<?php
 		if(isset($_POST['submit-search'])){
 			if(trim($_POST['title']) != ''){
-			$search = mysqli_real_escape_string($connection, trim($_POST['title']));
+			$search = mysqli_real_escape_string($conn, trim($_POST['title']));
 			$sql = "SELECT * FROM Post WHERE Title LIKE '%$search%' OR Introduction LIKE '%$search%' OR Content LIKE '%$search%'";
-			$result = mysqli_query($connection, $sql);
+			$result = mysqli_query($connion, $sql);
 			$queryResult = mysqli_num_rows($result);
 
 			echo "<h2>There are ".$queryResult." results!</h2> ";
@@ -113,9 +113,9 @@
 		 } else if(isset($_POST['submit-searchpost']))
 			{
 				if(trim($_POST['post'] != '')){
-				$search = mysqli_real_escape_string($connection, trim($_POST['post']));
+				$search = mysqli_real_escape_string($conn, trim($_POST['post']));
 				$sql = "SELECT * FROM board WHERE content LIKE '%$search%' OR post_user LIKE '%$search%' ORDER BY post_date";
-				$result = mysqli_query($connection, $sql);
+				$result = mysqli_query($conn, $sql);
 				$queryResult = mysqli_num_rows($result);
 
 				echo "<h2>There are ".$queryResult." results!</h2>";

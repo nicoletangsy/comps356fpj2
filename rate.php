@@ -1,5 +1,5 @@
 <?php
-$conn = new mysqli('localhost','root','root','cellfish');
+require_once("database2.php");
 session_start();
 
 if (isset($_SESSION['username'])){
@@ -17,6 +17,7 @@ if(isset($_GET['post_id'], $_GET['rating'])){
         if($existsusername){
             if($exists){
             $conn->query("UPDATE rating SET rating = {$rating} WHERE username = '{$user}' AND post_id = {$post_id}");
+			$conn->query("update post set avg_rate = (select AVG(rating) from rating where post_id={$post_id}) where Id={$post_id}");
             header('Location: detail.php?id=' .$post_id);
             }
         }else{

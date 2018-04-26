@@ -5,7 +5,7 @@ session_start();
 <?php
 	require_once('database.php');
 	if (!isset($_GET['id'])){
-		header("Location: index.html");
+		header("Location: index.php");
 	}
 	$id = $_GET["id"];
 	$sth = $conn->prepare("SELECT Title,Content,Image,DateTime,likeNo FROM Post where Id=$id ORDER BY likeNo desc");
@@ -113,60 +113,22 @@ session_start();
 
 	</head>
 	<body>
-
-	<div id="fh5co-container">
-		<div class="js-sticky">
-			<div class="fh5co-main-nav">
-				<div class="container-fluid">
-					<div class="fh5co-menu-1">
-						<a href="index.php" data-nav-section="home">Home</a>
-						<a href="about.php" data-nav-section="about">About</a>
-						<a href="news.php" data-nav-section="menu">News</a>
-					</div>
-					<div class="fh5co-logo">
-						<a href="index.php">Cellfish</a>
-					</div>
-					<div class="fh5co-menu-2">
-						<a href="discussboard.php" data-nav-section="menu">Discuss Board</a>
-						<a href="games.php" data-nav-section="menu">Game</a>
-						<a href="<?php if (isset($_SESSION['username'])) {
-							echo "logout.php";
-						} else {
-							echo "login.html";
-						}?>" data-nav-section="menu"><?php if (isset($_SESSION['username'])) {
-							echo "Logout";
-						} else {
-							echo "Login";
-						}?></a>
-						
-						<a href="<?php if (isset($_SESSION['username'])) {
-							echo "profile.php";
-						} else {
-							echo "register.html";
-						}?>" data-nav-section="menu"><?php if (isset($_SESSION['username'])) {
-							echo $_SESSION['username'];
-						} else {
-							echo "Register";
-						}?></a>
-					</div>
-				</div>
-				
-			</div>
-		</div>
+<?php require ("navbar.php");?>
 
 		<div id="wrapper">
 	<div id="page" class="container">
 		<div id="content">
 			<div class="title">
 				<h2><?=$result['Title']?></h2>
-				<span class="byline"><?=$myDateTime->format('Y-m-d H:i');?></span> <i class="am-icon-thumbs-up" id="postLike" onclick="like(<?=$_GET['id']?>,'Post')">  <?=$result["likeNo"]?></i>
-
+				<span class="byline"><?=$myDateTime->format('Y-m-d H:i');?></span>
+				<?php if(isset($_SESSION['username'])){ ?>
 				<div class="star-rating">
 						Rate this news:
 					<?php foreach(range(1, 5) as $rating): ?>
 						<a href ="rate.php?post_id=<?php echo $id?>&rating=<?php echo $rating;?>"> <?php echo $rating; ?> </a>
 					<?php endforeach; ?>Star
 		</div>
+				<?php } ?>
 		
 		<div class="therate">
 						Rate:
@@ -211,20 +173,23 @@ session_start();
     $sc->execute();
     $scs = $sc->fetchAll(); foreach($scs as $sc){?><blockquote><?=$sc["IP"]?>: <?=$sc["Content"]?></blockquote><?php } ?>
     <br>
-      <i class="am-icon-thumbs-up" id="Comment<?=$comment["Id"]?>" onclick="like(<?=$comment["Id"]?>,'Comment')"> <?=$comment["likeNo"]?></i><a onclick="reply(<?=$comment["Id"]?>)">reply</a>
-      <span style="display:none" id="Comment<?=$comment["Id"]?>ReplyBox"><input type="text" id="replytext<?=$comment["Id"]?>"><input type="submit" class="am-btn am-btn-secondary" value="Reply" onclick="saveReplay(<?=$comment["Id"]?>,document.getElementById('replytext<?=$comment["Id"]?>').value)"></span>
-    </div>
+	<form class="am-form" action="replypost.php?Id=<?=$comment["Id"]?>" method="POST">
+		<input type="text" placeholder="reply here.." name="reply">
+		<input type="hidden" value="<?=$id?>" name="id">
+		<input type="submit" name="addreply"  class="am-btn am-btn-secondary" style="margin-left: 550px; " value="reply">
+		</form>			
+	  </div>
   </div>
 
   <?php
 	}
   ?>
   
-  <form class="am-form" action="addComment.php" method="post">
+  <form class="am-form" action="addComment.php" method="POST">
   	<p></p>
   	<textarea style="margin-left: 63px; width:635px" rows="5" id="doc-ta-1" name="comment"></textarea>
   	<input type="hidden" value="<?=$id?>" name="id">
-  	<input type="submit" class="am-btn am-btn-secondary" style="margin-left: 550px;" value="Add Comment">
+  	<input type="submit" name="addComment" class="am-btn am-btn-secondary" style="margin-left: 550px;" value="Add Comment">
   </form>
 </article>
 		</div>
@@ -368,23 +333,5 @@ function like(id,type){
 	}
 	http.send(params);
 }
-function reply(id){
-	document.getElementById('Comment'+id+'ReplyBox').style.display = "inline";
-}
-function saveReplay(id,reply){
-	var http = new XMLHttpRequest();
-	var url = "saveReplay.php";
-	var params = "id="+id+"&reply="+reply;
-	http.open("POST", url, true);
-	
-	//Send the proper header information along with the request
-	http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-	
-	http.onreadystatechange = function() {//Call a function when the state changes.
-	    if(http.readyState == 4 && http.status == 200) {
-	    	location.href = "detail.php?id=<?=$id?>";
-	    }
-	}
-	http.send(params);
-}
+
 </script>

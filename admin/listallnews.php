@@ -1,31 +1,22 @@
+<?php include("header.php"); ?>
 <?php
-	require_once('../database.php');
-		session_start();
-	if (isset($_GET['logout'])) {
-     unset($_SESSION['admin']);
-    }
-	if(!$_SESSION['admin']){
-		header('Location: login.html');
-	}
 	$sth = $conn->prepare("SELECT Id,Title,type,DateTime FROM Post");
 	$sth->execute();
     $result = $sth->fetchAll();
-
 ?>
-<?php include("header.php"); ?>
   <div class="content-wrapper">
     <div class="container-fluid">
       <!-- Breadcrumbs-->
       <ol class="breadcrumb">
         <li class="breadcrumb-item">
-          <a href="#">Post</a>
+          <a href="#">News</a>
         </li>
-        <li class="breadcrumb-item active">List All Post</li>
+        <li class="breadcrumb-item active">List All News</li>
       </ol>
       <!-- Example DataTables Card-->
       <div class="card mb-3">
         <div class="card-header">
-          <i class="fa fa-table"></i> Post Table</div>
+          <i class="fa fa-table"></i> All News</div>
         <div class="card-body">
           <div class="table-responsive">
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -48,7 +39,6 @@
             </table>
           </div>
         </div>
-        <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
       </div>
     </div>
     <!-- /.container-fluid-->
@@ -77,7 +67,7 @@
           <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
           <div class="modal-footer">
             <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-            <a class="btn btn-primary" href="listpost.php?logout">Logout</a>
+            <a class="btn btn-primary" href="listallnews.php?logout">Logout</a>
           </div>
         </div>
       </div>

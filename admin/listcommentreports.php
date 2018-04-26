@@ -1,40 +1,55 @@
 <?php include("header.php"); ?>
 <?php
-	$sth = $conn->prepare("SELECT Id,Name, Email,Subject,Message FROM Contact");
+	$sth = $conn->prepare("SELECT * FROM reportcomment, replyboard where reportcomment_id=reply_id");
 	$sth->execute();
     $result = $sth->fetchAll();
-
 ?>
   <div class="content-wrapper">
     <div class="container-fluid">
       <!-- Breadcrumbs-->
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <a href="#">Discuss Board</a>
+        </li>
+        <li class="breadcrumb-item active">Manage Comment Reports</li>
+      </ol>
       <!-- Example DataTables Card-->
       <div class="card mb-3">
         <div class="card-header">
-          <i class="fa fa-table"></i> Feedback </div>
+          <i class="fa fa-table"></i> All Comment Reports</div>
         <div class="card-body">
           <div class="table-responsive">
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
               <thead>
                 <tr>
-                  <th>Id</th>
-                  <th>Name</th>
-                  <th>Email</th>
-                  <th>Subject</th>
-                  <th>Message</th>
+                  <th>Report Content</th>
+				  <th>Reply By</th>
+				  <th>Report Reason</th>
+                  <th>Report User</th>
+                  <th>Report DateTime</th>
+                  <th>Delete Comment</th>
+                  <th>Ignore Report</th>
                 </tr>
               </thead>
               <tbody>
                 <?php 
   							foreach ($result as $aa){
-  								echo "<tr><td>".$aa['Id']."</td><td>".$aa["Name"]."</td><td>".$aa['Email']."</td><td>".$aa['Subject']."</td><td>".$aa['Message']."</td></tr>";
+								if ($aa['reason']=="1") {
+									$reason = "Violence";
+								} else if ($aa['reason']=="2") {
+									$reason = "Pornography";
+								} else {
+									$reason = "Others";
+								}
+  								echo "<td>".$aa["reply_content"].
+								"</td><td><a href='../profile.php?username=".$aa['reply_user']."'>".$aa['reply_user']."</a></td><td>".$reason."</td><td><a href='../profile.php?username=".$aa['report_user']."'>".$aa['report_user']."</a></td><td>".$aa['report_date'].
+								"</td><td><a style='cursor: pointer;'  onclick='confirmdeletecomment(".$aa['report_id'].")'>&times</a></td><td><a style='cursor: pointer;'  onclick='deletereportcomment(".$aa['report_id'].")'>&times</a></td></tr>";
 							  }
 						    ?>
               </tbody>
             </table>
           </div>
         </div>
-        <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
       </div>
     </div>
     <!-- /.container-fluid-->
@@ -83,7 +98,7 @@
   </div>
 </body>
     <script>
-      if(getCookie("theme") != "dark"){
+  if(getCookie("theme") != "dark"){
       $('nav').attr('class', 'navbar navbar-expand-lg  bg-light fixed-top navbar-light');
       $('body').attr('class', 'fixed-nav sticky-footer bg-light');
     }
@@ -102,9 +117,14 @@ function getCookie(cname) {
     }
     return "";
 }
-      	function del(a){
+      	function deletereportcomment(a){
 	       if(confirm("Are are sure?")){
-	      window.location = 'del.php?Id='+a;
+	      window.location = 'deletereportcomment.php?Id='+a;
+	       }
+	   }
+	   function confirmdeletecomment(a){
+	       if(confirm("Are are sure?")){
+	      window.location = 'confirmdeletecomment.php?Id='+a;
 	       }
 	   }
     </script>

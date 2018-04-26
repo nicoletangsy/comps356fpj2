@@ -1,40 +1,46 @@
 <?php include("header.php"); ?>
 <?php
-	$sth = $conn->prepare("SELECT Id,Name, Email,Subject,Message FROM Contact");
+	$sth = $conn->prepare("SELECT * FROM board");
 	$sth->execute();
     $result = $sth->fetchAll();
-
 ?>
   <div class="content-wrapper">
     <div class="container-fluid">
       <!-- Breadcrumbs-->
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <a href="#">Discuss Board</a>
+        </li>
+        <li class="breadcrumb-item active">List All Posts</li>
+      </ol>
       <!-- Example DataTables Card-->
       <div class="card mb-3">
         <div class="card-header">
-          <i class="fa fa-table"></i> Feedback </div>
+          <i class="fa fa-table"></i> All Posts</div>
         <div class="card-body">
           <div class="table-responsive">
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
               <thead>
                 <tr>
                   <th>Id</th>
-                  <th>Name</th>
-                  <th>Email</th>
-                  <th>Subject</th>
-                  <th>Message</th>
+                  <th>Content</th>
+                  <th>Posted By</th>
+                  <th>DateTime</th>
+                  <th>Delete Post</th>
                 </tr>
               </thead>
               <tbody>
                 <?php 
   							foreach ($result as $aa){
-  								echo "<tr><td>".$aa['Id']."</td><td>".$aa["Name"]."</td><td>".$aa['Email']."</td><td>".$aa['Subject']."</td><td>".$aa['Message']."</td></tr>";
+  								echo "<tr><td>".$aa['board_id'].
+								"</td><td><a href='viewpost.php?Id=".$aa["board_id"]."'>"
+								.$aa["content"]."</a></td><td>".$aa['post_user']."</td><td>".$aa['post_date']."</td><td><a style='cursor: pointer;'  onclick='deletepost(".$aa['board_id'].")'>&times</a></td></tr>";
 							  }
 						    ?>
               </tbody>
             </table>
           </div>
         </div>
-        <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
       </div>
     </div>
     <!-- /.container-fluid-->
@@ -83,7 +89,7 @@
   </div>
 </body>
     <script>
-      if(getCookie("theme") != "dark"){
+  if(getCookie("theme") != "dark"){
       $('nav').attr('class', 'navbar navbar-expand-lg  bg-light fixed-top navbar-light');
       $('body').attr('class', 'fixed-nav sticky-footer bg-light');
     }
@@ -102,9 +108,9 @@ function getCookie(cname) {
     }
     return "";
 }
-      	function del(a){
+      	function deletepost(a){
 	       if(confirm("Are are sure?")){
-	      window.location = 'del.php?Id='+a;
+	      window.location = 'deletepost.php?Id='+a;
 	       }
 	   }
     </script>

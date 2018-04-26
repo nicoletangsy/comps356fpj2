@@ -1,7 +1,7 @@
 <?php 
+
 require_once("database2.php");
 session_start();
-
 ?>
 <!DOCTYPE html>
 <!--[if lt IE 7]>      
@@ -159,62 +159,14 @@ function myFunction() {
 			<div class="post">
 			<br>
 			<?php 
-				$sql = "select * from board, members where post_user=username and board.board_id=1";
-				$result = $conn->query($sql);
-				if ($result->num_rows > 0) {
-					While ($row = $result->fetch_assoc()) {
-						?>
-						<table class="tpost"><tr><td><?php echo "Post: ". $row['board_id'];?></td>
-						<td>
-						<?php if(isset($_SESSION['username']) && $_SESSION['username']==$row['post_user'] ) {?>
-					<div class="dropdown">
-					<button class="btn" style="border-left:1px solid #0d8bf2"><a href="editPost.php?board_id=<?php echo $row['board_id']?>">
-					<i class="fa fa-caret-down">Edit Post</i></a>
-					</button></div><br>
-					<?php }?>
-						</td></tr>
-				<tr>
-				<td>
-					<img src="<?php if (($row['avatar_base64']=='') || ($row['avatar_base64']=='data:image/;base64,')) { echo "user.png";} else
-				{ echo $row['avatar_base64'];}?>" height=120 width=120></img><br>
-					User: <a href="profile.php?username=<?php echo $row['post_user'];?>"><?php echo $row['post_user'];?></a>
-				</td>
-					<td><?php 
-					if (!(($row['board_avatar_base64']=='') || ($row['board_avatar_base64']=='data:image/;base64,'))) {
-						?>
-						<img class="ipost" src="<?php echo $row['board_avatar_base64']?>"/><br>
-					<?php }
-					echo $row['content'];?><br>
-					Post At: <?php echo $row['post_date'];?>
-					<?php if (isset($row['last_modifies'])) { ?>
-						
-					<br> Last Modified At: <?php echo $row['last_modifies'];?>
-					<?php } ?>
-					</td>
-				</tr>
-						</table>
-						<br>
-			<?php
-				}
-				}
-			?>
-				
-			<?php 
-				$sql2 = "select * from board, members where post_user=username and board_id>1 order by post_date desc";
+			$bid = (int)$_GET['board_id'];
+				$sql2 = "select * from board, members where post_user=username and board.board_id=".$bid;
 				$result2 = $conn->query($sql2);
 				if ($result2->num_rows > 0) {
 					While ($row2 = $result2->fetch_assoc()) {
-						$i = $row2['board_id'];
 						?>
-						<table class="tpost"><tr><td><?php echo "Post: ".$row2['board_id'];?></td>
-						<td>
-						<?php if(isset($_SESSION['username']) && $_SESSION['username']==$row2['post_user'] ) {?>
-					<div class="dropdown">
-					<button class="btn" style="border-left:1px solid #0d8bf2"><a href="editPost.php?board_id=<?php echo $row2['board_id']?>">
-					<i class="fa fa-caret-down">Edit Post</i></a>
-					</button></div><br>
-					<?php }?>
-						</td></tr>
+						<table class="tpost"><thead><tr><th colspan="2"><?php echo "Post: ". $bid;?></th></tr>
+						</thead>
 				<tr>
 				<td>
 					<img src="<?php if (($row2['avatar_base64']=='') || ($row2['avatar_base64']=='data:image/;base64,')) { echo "user.png";} else
@@ -226,100 +178,22 @@ function myFunction() {
 					if (!(($row2['board_avatar_base64']=='') || ($row2['board_avatar_base64']=='data:image/;base64,'))) {
 						?>
 						<img class="ipost" src="<?php echo $row2['board_avatar_base64']?>"/><br>
-					<?php }
-					echo $row2['content'];?><br>
-					Post At: <?php echo $row2['post_date'];?>
-					<?php if (isset($row2['last_modifies'])) { ?>
-						
-					<br> Last Modified At: <?php echo $row2['last_modifies'];?>
-					<?php } ?>
+					<?php }?>
+					<form action="comfirmEditPost.php?board_id=<?php echo $row2['board_id']?>"" method="POST" enctype="multipart/form-data">
+					<textarea name="content" placeholder="Enter text here..."><?php 
+					echo $row2['content'];?></textarea><br>
+					<label for="image">Upload Picture: </label><input name="image" type="file">
+					<input type="submit" value = "Post" style="float: left;">
+					</form>
 					</td>
 					<td>
-					<?php if (isset($_SESSION['username'])) { ?>
-					<div class="dropdown">
-					<button class="btn" style="border-left:1px solid #0d8bf2">
-					<i class="fa fa-caret-down">Report</i>
-					</button>
-					<div class="dropdown-content">
-					<a href="report.php?reid=1&board_id=<?php echo $row2['board_id']?>">This content contains violent message.</a>
-					<a href="report.php?reid=2&board_id=<?php echo $row2['board_id']?>">This content contains pornography.</a>
-					<a href="report.php?reid=3&board_id=<?php echo $row2['board_id']?>">Other inappropriate content.</a>
-					</div>
-					</div>
-					</td>
-					<?php } ?>
-
-				</tr>
-				<?php
-				$sql3 = "select reply_id, reply_to, reply_user, reply_date, reply_content from board, replyboard where board.board_id=reply_to and board.board_id = " .$row2['board_id']. " order by reply_date";
-				//echo "<tr><td>The current i = $row2['board_id'] </td></tr>";
-				$result3 = $conn->query($sql3);
-				if ($result3->num_rows>0) {
-					while ($row3 = $result3->fetch_assoc()) {
-						$j = $row3['reply_id'];
-						?>
-						<tr>
-						<td></td>
-						<td><br><a href="profile.php?username=<?php echo $row3['reply_user'];?>"><?php echo $row3['reply_user'];?></a>'s reply : <?php echo $row3['reply_content'];?><br>
-						Replied At: <?php echo $row3['reply_date']?>
-						</td>
-						<td>
-					
-						<?php if (isset($_SESSION['username'])) { ?>
-					<div class="dropdown">
-					<button class="btn" style="border-left:1px solid #0d8bf2">
-					<i class="fa fa-caret-down">Report</i>
-					</button>
-					<div class="dropdown-content">
-					<a href="reportcomment.php?reid=1&reply_id=<?php echo $j?>">This content contains violent message.</a>
-					<a href="reportcomment.php?reid=2&reply_id=<?php echo $j?>">This content contains pornography.</a>
-					<a href="reportcomment.php?reid=3&reply_id=<?php echo $j?>">Other inappropriate content.</a>
-					</div>
-					</div>
-					</td>
-
-					<?php }?>
-					</tr>
-						</tr>
-
-				<?php
-					}
-				}
-				?>
-				<tr>
-				<?php if (isset($_SESSION['username'])) { ?>
-				<td colspan=2>
-				<form action="replyboardpost.php?postid=<?php echo $row2['board_id']?>" method="POST" enctype="multipart/form-data">
-				<input name="reply" placeholder="Leave your reply here..." style="color: black;"/>
-				<input type="submit" value = "Reply">
-				</form>
-				</td>
-				<?php } ?>
 				</tr>
 						</table>
 						<br>
 			<?php
 				}
-				}
 			?>
 			<br>
-			</div>
-			<?php if(isset($_SESSION['username'])) {
-			?>
-			<div class="post">
-			<table class="tpost" style="border: none;">
-			<form action="newpost.php" method="POST" enctype="multipart/form-data">
-			<tr><th><label>Leave you experience here!</label></th></tr>
-			<tr>
-			<td>
-			<textarea name="content" placeholder="Enter text here..." style="color: black;"></textarea><br>
-			<label for="image">Upload Picture: </label>
-			<input name="image" type="file">
-			<input type="submit" value = "Post" style="float: left;">
-			</td>
-			</tr>
-			</form>
-			</table>
 			</div>
 			<?php }
   ?>
