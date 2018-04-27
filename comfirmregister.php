@@ -102,7 +102,7 @@
 		//insert new member into members
 		$sql = "insert into members (username, password, firstname, lastname, email, question, answer) values ('".$username."', '".$password."', '".$fname."', '".$lname."', '".$email."', '".$question."', '".$answer."')";
 		$conn->exec($sql);
-		echo "New record created successfully";
+		echo "Your registration is successful! <br><br>Please <a href='login.php'>Login</a>.";
 	}
 	catch(PDOException $e)
     {
